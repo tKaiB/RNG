@@ -1,5 +1,5 @@
-import NavBar from './components/navbar';
-import SignUp from './components/signup';
+import NavBar from './Navbar';
+import SignUp from './Signup';
 
 
 function App() {
