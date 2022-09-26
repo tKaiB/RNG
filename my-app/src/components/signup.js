@@ -20,9 +20,9 @@ function SignUp(){
                             
                             />
                             <TextField 
-                            label= 'Username' 
+                            label= 'Name' 
                             margin ='normal'
-                            defaultValue= "Enter your User name"
+                            defaultValue= "Enter your name"
                             InputProps={{startAdornment: (<InputAdornment position = "start"> <AccountCircleOutlined /></InputAdornment>),}}
                             
                             
