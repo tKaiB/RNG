@@ -1,6 +1,7 @@
-import React , {useRef} from 'react'
-import { Button, Checkbox, FormGroup, Grid , TextField , FormControlLabel, InputAdornment} from '@material-ui/core'
+import React , {useRef, useState} from 'react'
+import { Button, Grid , TextField , InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
+import { Box , Alert } from '@mui/material'
 import { useAuth } from "../contexts/AuthContext"
 
 
@@ -10,14 +11,34 @@ function SignUp(){
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
     const nameRef = useRef()
+    const {signup} = useAuth()
+    const [error,setError] = useState('')
+    const [loading,setLoading] = useState(false)
 
-    // const {signup} = useAuth()
+    async function handleSubmit(e){
+        e.preventDefault()
 
-    // function handledubmit(e){
-    //     e.preventDefault()
+        if(passwordRef.current.value !== confirmPasswordRef.current.value){
+            return setError("Passwords do not match")
+        }
 
-    //     signup(emailRef.current.value , passwordRef.current.value)
-    // }
+        try{
+            setError('')
+            setLoading(true)
+            await signup(emailRef.current.value , passwordRef.current.value)
+
+        } catch {
+            setError("Failed to create an account")
+        }
+        setLoading(false)
+
+        return
+
+
+
+
+        
+    }
 
     return(
         <div>
@@ -46,51 +67,56 @@ function SignUp(){
                         
                     </div>
 
-                    <div style ={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop : 30 , paddingBottom: 20}} >
-                            <TextField 
-                            label= 'Email' 
-                            margin ='normal'
-                            defaultValue= "Enter your Email Address"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <EmailOutlined /></InputAdornment>),}}
-                            inputRef={emailRef}
-                            
-                            
-                            />
-                            <TextField 
-                            label= 'Name' 
-                            margin ='normal'
-                            defaultValue= "Enter your name"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <AccountCircleOutlined /></InputAdornment>),}}
-                            inputRef={nameRef}
-                            
-                            
-                            />
+                    <Box onSubmit= {handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop : 30 , paddingBottom: 20 , paddingRight :0}} >
+                            {error &&  <Alert severity = "error"> This is an error</Alert>}
+                            <Grid item xs={12}>
+                                <TextField 
+                                label= 'Email' 
+                                margin ='normal'
+                                placeholder = "Enter your Email Address"
+                                InputProps={{startAdornment: (<InputAdornment position = "start"> <EmailOutlined /></InputAdornment>),}}
+                                inputRef={emailRef}
+                                fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField 
+                                label= 'Name' 
+                                margin ='normal'
+                                placeholder= "Enter your name"
+                                InputProps={{startAdornment: (<InputAdornment position = "start"> <AccountCircleOutlined /></InputAdornment>),}}
+                                inputRef={nameRef}
+                                fullWidth
+                                />
+                            </Grid>
 
-                            
-                            <TextField 
-                            label= 'Password'
-                            margin ='normal'
-                            defaultValue= "Enter your Password"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
-                            inputRef={passwordRef}         
-                            />
+                            <Grid item xs={12}>
+                                <TextField 
+                                label= 'Password'
+                                margin ='normal'
+                                placeholder= "Enter your Password"
+                                InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
+                                inputRef={passwordRef}     
+                                fullWidth    
+                                />
+                            </Grid>
 
-                            <TextField 
-                            label= 'Confirm Password'
-                            margin ='normal'
-                            defaultValue= "Confirm your Password"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
-                            inputRef={confirmPasswordRef}         
-                            />
-                    </div>
+                            <Grid item xs={12}>
+                                <TextField 
+                                label= 'Confirm Password'
+                                margin ='normal'
+                                placeholder= "Confirm your Password"
+                                InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
+                                inputRef={confirmPasswordRef}   
+                                fullWidth    
+                                />
+                            </Grid>
 
-
-                    <div style={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop:10}}>
-                        <Button  variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
+                        <Button disabled={loading} variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
                             Register 
                         </Button>
+                    </Box>
 
-                    </div>
 
                 </Grid>
 
