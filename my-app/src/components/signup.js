@@ -24,6 +24,28 @@ function SignUp(){
             <Grid container style ={{minHeight: '100vh'}}>
 
                 <Grid item xs={12} sm ={6} alignItems="left" direction ="column"  justify = "space-between" style = {{paddingLeft :0}}>
+
+                <div style ={{alignItems: "left"}}>
+                        <Grid container direction = "column">
+                            <Grid item xs={4}>
+                                <h2 style={{padding:10 , paddingLeft :0}}>Sign Up</h2>
+                            </Grid>
+
+                            <Grid item xs={4}>
+                                <p style={{margin: 0 , paddingBottom:7}}>If you already have an account</p>
+                            </Grid>
+
+                            <Grid item xs={4}>
+                                <p style={{margin: 0}}>You can <a style={{fontWeight: 'bold', color: "#0C21C1"}}>Login here!</a></p>
+                            </Grid>
+
+                        </Grid>
+    
+
+
+                        
+                    </div>
+
                     <div style ={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop : 30 , paddingBottom: 20}} >
                             <TextField 
                             label= 'Email' 
@@ -59,8 +81,8 @@ function SignUp(){
                     </div>
 
 
-                    <div style={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400}}>
-                        <Button  variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"}}>
+                    <div style={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop:10}}>
+                        <Button  variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
                             Register 
                         </Button>
 
