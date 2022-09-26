@@ -1,18 +1,15 @@
 import React from 'react'
-import NavBar from './Navbar';
-import SignUp from './Signup';
-import { AuthProvider } from "../contexts/AuthContext"
+import NavBar from '../src/components/Navbar';
+import SignUp from '../src/components/Signup';
 
 
 function App() {
   return (
-    <AuthProvider>
       <div className="App">
         <NavBar />
         <SignUp />
       </div>
 
-    </AuthProvider>
 
   );
 }
