@@ -83,7 +83,7 @@ function SignIn(){
          
 
                     <div style={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300}}>
-                        <Button  variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"  ,borderRadius:"50px" , padding: "1rem"}}>
+                        <Button  variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"}}>
                             Login 
                         </Button>
 
