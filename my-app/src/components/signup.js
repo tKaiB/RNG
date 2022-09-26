@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useRef} from 'react'
 import { Button, Checkbox, FormGroup, Grid , TextField , FormControlLabel, InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
 import { useAuth } from "../contexts/AuthContext"
@@ -11,13 +11,13 @@ function SignUp(){
     const confirmPasswordRef = useRef()
     const nameRef = useRef()
 
-    const {signup} = useAuth()
+    // const {signup} = useAuth()
 
-    function handledubmit(e){
-        e.preventDefault()
+    // function handledubmit(e){
+    //     e.preventDefault()
 
-        signup(emailRef.current.value , passwordRef.current.value)
-    }
+    //     signup(emailRef.current.value , passwordRef.current.value)
+    // }
 
     return(
         <div>
@@ -52,6 +52,7 @@ function SignUp(){
                             margin ='normal'
                             defaultValue= "Enter your Email Address"
                             InputProps={{startAdornment: (<InputAdornment position = "start"> <EmailOutlined /></InputAdornment>),}}
+                            inputRef={emailRef}
                             
                             
                             />
@@ -60,6 +61,7 @@ function SignUp(){
                             margin ='normal'
                             defaultValue= "Enter your name"
                             InputProps={{startAdornment: (<InputAdornment position = "start"> <AccountCircleOutlined /></InputAdornment>),}}
+                            inputRef={nameRef}
                             
                             
                             />
@@ -69,14 +71,16 @@ function SignUp(){
                             label= 'Password'
                             margin ='normal'
                             defaultValue= "Enter your Password"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}            
+                            InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
+                            inputRef={passwordRef}         
                             />
 
                             <TextField 
                             label= 'Confirm Password'
                             margin ='normal'
                             defaultValue= "Confirm your Password"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}            
+                            InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
+                            inputRef={confirmPasswordRef}         
                             />
                     </div>
 

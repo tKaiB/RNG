@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import{ auth } from "../firebase"
 
 
-const AuthContext = React. createContext()
+const AuthContext = React.createContext()
 
 export function useAuth(){
     return useContext(AuthContext)
@@ -31,11 +31,11 @@ export function AuthProvider({children}){
 
     const value ={
         currentUser,
-        signin
+        signup
     }
     return(
-        <AuthContext.provider value = {value}>
+        <AuthContext.Provider value = {value}>
             {children}
-        </AuthContext.provider>
+        </AuthContext.Provider>
     )
 }
