@@ -1,6 +1,7 @@
 import React , {useRef} from 'react'
 import { Button, Checkbox, FormGroup, Grid , TextField , FormControlLabel, InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
+import { useAuth } from "../contexts/AuthContext"
 
 
 function SignUp(){
@@ -9,6 +10,14 @@ function SignUp(){
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
     const nameRef = useRef()
+
+    const {signup} = useAuth()
+
+    function handledubmit(e){
+        e.preventDefault()
+
+        signup(emailRef.current.value , passwordRef.current.value)
+    }
 
     return(
         <div>
