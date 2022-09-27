@@ -1,4 +1,5 @@
 import React , {useRef, useState} from 'react'
+import {Link , useNaviagte} from 'react-router-dom'
 import { Button, Grid , TextField , InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
 import { Box } from '@mui/material'
@@ -15,13 +16,13 @@ function SignUp(){
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
-    // const {createUser} = UserAuth();
+    const {createUser} = UserAuth();
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
         setError('')
         try {
-            // await createUser(email , password)
+            await createUser(emailRef.current.value , passwordRef.current.value)
             
         } catch (e) {
             setError(e.message)
