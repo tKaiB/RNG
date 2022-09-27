@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button, Checkbox, FormGroup, Grid , TextField , FormControlLabel, InputAdornment} from '@material-ui/core'
 import {AccountCircle , LockRounded} from '@material-ui/icons'
+import { Link } from "react-router-dom"
+import NavBar from './Navbar'
 
 
 
@@ -8,6 +10,7 @@ function SignIn(){
 
     return(
         <div>
+            <NavBar />
             <Grid container style ={{minHeight: '100vh'}}>
                 <Grid item xs={12} sm={6}>
                     <img 
@@ -30,7 +33,7 @@ function SignIn(){
                             </Grid>
 
                             <Grid item xs={4}>
-                                <p style={{margin: 0}}>You can register here</p>
+                                <p style={{margin: 0}}>You can <Link to ="/signup">register here</Link> </p>
                             </Grid>
 
                         </Grid>

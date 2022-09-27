@@ -4,6 +4,7 @@ import { Button, Grid , TextField , InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
 import { Box } from '@mui/material'
 import {UserAuth} from "../contexts/AuthContext"
+import NavBar from './Navbar'
 
 
 function SignUp(){
@@ -38,6 +39,7 @@ function SignUp(){
 
     return(
         <div>
+            <NavBar />
             <Grid container style ={{minHeight: '100vh'}}>
 
                 <Grid item xs={12} sm ={6} alignItems="left" direction ="column"  justify = "space-between" style = {{paddingLeft :0}}>
@@ -53,7 +55,7 @@ function SignUp(){
                             </Grid>
 
                             <Grid item xs={4}>
-                                <p style={{margin: 0}}>You can <a style={{fontWeight: 'bold', color: "#0C21C1"}}>Login here!</a></p>
+                                <p style={{margin: 0}}>You can <Link to ="/">Login here</Link></p>
                             </Grid>
 
                         </Grid>
