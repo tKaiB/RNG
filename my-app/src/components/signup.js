@@ -1,8 +1,8 @@
 import React , {useRef, useState} from 'react'
 import { Button, Grid , TextField , InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
-import { Box , Alert } from '@mui/material'
-import { useAuth } from "../contexts/AuthContext"
+import { Box } from '@mui/material'
+import {UserAuth} from "../contexts/AuthContext"
 
 
 function SignUp(){
@@ -11,34 +11,29 @@ function SignUp(){
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
     const nameRef = useRef()
-    const {signup} = useAuth()
-    const [error,setError] = useState('')
-    const [loading,setLoading] = useState(false)
+    const [error,setError] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
 
-    async function handleSubmit(e){
+    // const {createUser} = UserAuth();
+
+    const handleSubmit = async(e) =>{
         e.preventDefault()
-
-        if(passwordRef.current.value !== confirmPasswordRef.current.value){
-            return setError("Passwords do not match")
+        setError('')
+        try {
+            // await createUser(email , password)
+            
+        } catch (e) {
+            setError(e.message)
+            console.log(e.message)
+            
         }
-
-        try{
-            setError('')
-            setLoading(true)
-            await signup(emailRef.current.value , passwordRef.current.value)
-
-        } catch {
-            setError("Failed to create an account")
-        }
-        setLoading(false)
-
-        return
-
-
-
-
         
     }
+
+
+
+
 
     return(
         <div>
@@ -67,8 +62,7 @@ function SignUp(){
                         
                     </div>
 
-                    <Box onSubmit= {handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop : 30 , paddingBottom: 20 , paddingRight :0}} >
-                            {error &&  <Alert severity = "error"> This is an error</Alert>}
+                    <Box onSubmit={handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop : 30 , paddingBottom: 20 , paddingRight :0}} >
                             <Grid item xs={12}>
                                 <TextField 
                                 label= 'Email' 
@@ -77,6 +71,7 @@ function SignUp(){
                                 InputProps={{startAdornment: (<InputAdornment position = "start"> <EmailOutlined /></InputAdornment>),}}
                                 inputRef={emailRef}
                                 fullWidth
+                                onChange={(e) => setEmail(e.target.value)}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -94,9 +89,12 @@ function SignUp(){
                                 <TextField 
                                 label= 'Password'
                                 margin ='normal'
+                                type= 'password'
                                 placeholder= "Enter your Password"
                                 InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
-                                inputRef={passwordRef}     
+                                inputRef={passwordRef}
+                                onChange={(e) => setPassword(e.target.value)}
+                                     
                                 fullWidth    
                                 />
                             </Grid>
@@ -104,6 +102,7 @@ function SignUp(){
                             <Grid item xs={12}>
                                 <TextField 
                                 label= 'Confirm Password'
+                                type = 'password'
                                 margin ='normal'
                                 placeholder= "Confirm your Password"
                                 InputProps={{startAdornment: (<InputAdornment position = "start"> <HttpsOutlined /></InputAdornment>),}}   
@@ -112,7 +111,7 @@ function SignUp(){
                                 />
                             </Grid>
 
-                        <Button disabled={loading} variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
+                        <Button type="submit" variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
                             Register 
                         </Button>
                     </Box>
