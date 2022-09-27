@@ -1,12 +1,36 @@
-import React from 'react'
+import React ,{ useState , useRef} from 'react'
 import { Button, Checkbox, FormGroup, Grid , TextField , FormControlLabel, InputAdornment} from '@material-ui/core'
+import { Box } from '@mui/material'
 import {AccountCircle , LockRounded} from '@material-ui/icons'
-import { Link } from "react-router-dom"
+import { Link , useNavigate } from "react-router-dom"
+import { UserAuth } from '../contexts/AuthContext'
 import NavBar from './Navbar'
 
 
 
 function SignIn(){
+
+    const {signIn} = UserAuth();
+    const [error,setError] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const navigate = useNavigate()
+
+    const handleSubmit = async(e) =>{
+        e.preventDefault()
+        setError('')
+        try {
+            await signIn(emailRef.current.value, passwordRef.current.value)
+            navigate('/acccount')
+            
+        } catch (e) {
+            setError(e.message)
+            console.log(e.message)
+        }
+
+    }
 
     return(
         <div>
@@ -33,7 +57,7 @@ function SignIn(){
                             </Grid>
 
                             <Grid item xs={4}>
-                                <p style={{margin: 0}}>You can <Link to ="/signup">register here</Link> </p>
+                                <p style={{margin: 0}}>You can <Link to ="/">register here</Link> </p>
                             </Grid>
 
                         </Grid>
@@ -44,12 +68,13 @@ function SignIn(){
                     </div>
 
 
-                    <div style ={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300 , paddingTop : 30 , paddingBottom: 20}} >
+                    <Box onSubmit={handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300 , paddingTop : 30 , paddingBottom: 20}} >
                         <TextField 
                         label= 'Email' 
                         margin ='normal'
-                        defaultValue= "Enter your Email Address"
+                        placeholder= "Enter your Email Address"
                         InputProps={{startAdornment: (<InputAdornment position = "start"> <AccountCircle /></InputAdornment>),}}
+                        inputRef={emailRef}
                         
                         
                         />
@@ -58,8 +83,10 @@ function SignIn(){
                         <TextField 
                         label= 'Password'
                          margin ='normal'
-                         defaultValue= "Enter your Password"
+                         placeholder= "Enter your Password"
+                         type = "password"
                          InputProps={{startAdornment: (<InputAdornment position = "start"> <LockRounded /></InputAdornment>),}}
+                         inputRef={passwordRef}
                         
                          
                          />
@@ -81,16 +108,18 @@ function SignIn(){
     
                         
 
-                    </div>
+                    
 
          
 
                     <div style={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300}}>
-                        <Button  variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"  ,borderRadius:"50px" , padding: "1rem"}}>
+                        <Button  variant = "contained" type = "submit" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"  ,borderRadius:"50px" , padding: "1rem"}}>
                             Login 
                         </Button>
 
                     </div>
+
+                    </Box>
 
     
 

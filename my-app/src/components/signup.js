@@ -1,10 +1,12 @@
 import React , {useRef, useState} from 'react'
-import {Link , useNaviagte} from 'react-router-dom'
+import {Link , useNavigate} from 'react-router-dom'
 import { Button, Grid , TextField , InputAdornment} from '@material-ui/core'
 import {AccountCircleOutlined , EmailOutlined , HttpsOutlined} from '@material-ui/icons'
 import { Box } from '@mui/material'
 import {UserAuth} from "../contexts/AuthContext"
+import { app, db } from "../firebase"
 import NavBar from './Navbar'
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 
 
 function SignUp(){
@@ -16,14 +18,38 @@ function SignUp(){
     const [error,setError] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-
     const {createUser} = UserAuth();
+
+    const navigate = useNavigate()
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
         setError('')
         try {
             await createUser(emailRef.current.value , passwordRef.current.value)
+            .then(async (user) => {
+                try{
+                    console.log(user)
+                    await setDoc(doc(db, "users", user.user.uid), {
+                        email: email,
+                        name: nameRef.current.value
+                    });
+                }
+                catch(e){
+                    setError(e.message)
+                    console.log("first")
+                    console.log(e.message)
+                }
+
+            }).catch((e) =>{
+                setError(e.message)
+                console.log("second")
+                console.log(e.message)
+            })
+
+
+
+            navigate('/')
             
         } catch (e) {
             setError(e.message)
@@ -55,7 +81,7 @@ function SignUp(){
                             </Grid>
 
                             <Grid item xs={4}>
-                                <p style={{margin: 0}}>You can <Link to ="/">Login here</Link></p>
+                                <p style={{margin: 0}}>You can <Link to ="/signin">Login here</Link></p>
                             </Grid>
 
                         </Grid>
