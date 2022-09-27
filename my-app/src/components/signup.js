@@ -29,11 +29,12 @@ function SignUp(){
             await createUser(emailRef.current.value , passwordRef.current.value)
             .then(async (user) => {
                 try{
-                    console.log(user)
+                    
                     await setDoc(doc(db, "users", user.user.uid), {
                         email: email,
                         name: nameRef.current.value
                     });
+                    
                 }
                 catch(e){
                     setError(e.message)
@@ -46,10 +47,8 @@ function SignUp(){
                 console.log("second")
                 console.log(e.message)
             })
-
-
-
-            navigate('/')
+            navigate('/signin')
+            
             
         } catch (e) {
             setError(e.message)

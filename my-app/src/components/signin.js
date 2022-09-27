@@ -23,7 +23,7 @@ function SignIn(){
         setError('')
         try {
             await signIn(emailRef.current.value, passwordRef.current.value)
-            navigate('/acccount')
+            navigate('/account')
             
         } catch (e) {
             setError(e.message)
