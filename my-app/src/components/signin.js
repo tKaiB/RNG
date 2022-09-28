@@ -45,9 +45,9 @@ function SignIn(){
                 </Grid>
 
 
-                <Grid item xs={12} sm={6} alignItems= "left" direction = "column" justify = "space-between" style = {{paddingLeft :50}}>
+                <Grid item xs={12} sm={6}   style = {{paddingLeft :50}}>
                     <div style ={{alignItems: "left"}}>
-                        <Grid container direction = "column">
+                        <Grid container direction = "column" alignItems= "flex-start">
                             <Grid item xs={4}>
                                 <h2 style={{padding:10 , paddingLeft :0}}>Sign in</h2>
                             </Grid>
@@ -90,14 +90,14 @@ function SignIn(){
                         
                          
                          />
-                        <Grid container style={{paddingTop:10}}>
+                        <Grid container alignItems = "flex-end" style={{paddingTop:10}}>
                             <Grid item xs={8}>
                                 <FormGroup>
                                 <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me " />
                                 </FormGroup>
                             </Grid>
 
-                            <Grid item xs={4} alignItems = "end" >
+                            <Grid item xs={4}  >
                                 <Button component = {Link} to='/forgetpassword' style={{fontFamily :"Inter" , fontSize: "15px" , textTransform : "none" , paddingRight : 0 , textAlign:"right"}}>
                                     Forgot your Password
                                 </Button>

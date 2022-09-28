@@ -67,10 +67,10 @@ function SignUp(){
             <NavBar />
             <Grid container style ={{minHeight: '100vh'}}>
 
-                <Grid item xs={12} sm ={6} alignItems="left" direction ="column"  justify = "space-between" style = {{paddingLeft :0}}>
+                <Grid item xs={8} sm ={4} direction ="column"  justify = "space-between" style = {{paddingLeft :0}}>
 
                 <div style ={{alignItems: "left"}}>
-                        <Grid container direction = "column">
+                        <Grid container direction = "column" alignItems="left">
                             <Grid item xs={4}>
                                 <h2 style={{padding:10 , paddingLeft :0}}>Sign Up</h2>
                             </Grid>
@@ -90,7 +90,7 @@ function SignUp(){
                         
                     </div>
 
-                    <Box onSubmit={handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :650 , minWidth: 400 , paddingTop : 30 , paddingBottom: 20 , paddingRight :0}} >
+                    <Box onSubmit={handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :650, padding:0}} >
                             <Grid item xs={12}>
                                 <TextField 
                                 label= 'Email' 
@@ -150,7 +150,7 @@ function SignUp(){
                 <Grid item xs={12} sm={6} >
                     <img 
                     src='https://source.unsplash.com/random' 
-                    style = {{width :'100%', height : '100%' , objectFit: 'cover'}}
+                    style = {{paddingLeft : 200 ,width :'100%', height : '100%' , objectFit: 'cover'}}
                     alt = 'brand'/>
 
                 </Grid>
