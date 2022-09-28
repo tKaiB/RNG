@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from '../src/components/Navbar';
+import ForgetPassword from './components/ForgetPassword'
 import SignUp from './components/Signup';
 import SignIn from './components/Signin'
 import { AuthContextProvider } from './contexts/AuthContext';
@@ -17,6 +18,7 @@ function App() {
           <Route path ='/' element={<SignUp />} />
           <Route path ='/signin' element={<SignIn />} />
           <Route path ='/account' element={<Account />} />
+          <Route path ='/forgetpassword' element={<ForgetPassword />} />
         </Routes>
 
 

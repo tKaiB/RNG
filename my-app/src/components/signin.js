@@ -68,7 +68,7 @@ function SignIn(){
                     </div>
 
 
-                    <Box onSubmit={handleSubmit} component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300 , paddingTop : 30 , paddingBottom: 20}} >
+                    <Box  component = "form" style ={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300 , paddingTop : 30 , paddingBottom: 20}} >
                         <TextField 
                         label= 'Email' 
                         margin ='normal'
@@ -98,7 +98,9 @@ function SignIn(){
                             </Grid>
 
                             <Grid item xs={4} alignItems = "end" >
-                                <Button style={{fontFamily :"Inter" , fontSize: "15px" , textTransform : "none" , paddingRight : 0 , textAlign:"right"}}>Forgot your Password</Button>
+                                <Button component = {Link} to='/forgetpassword' style={{fontFamily :"Inter" , fontSize: "15px" , textTransform : "none" , paddingRight : 0 , textAlign:"right"}}>
+                                    Forgot your Password
+                                </Button>
                             </Grid>
                            
                            
@@ -113,7 +115,7 @@ function SignIn(){
          
 
                     <div style={{display : "flex" , flexDirection : "column" , maxWidth :500 , minWidth: 300}}>
-                        <Button  variant = "contained" type = "submit" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"  ,borderRadius:"50px" , padding: "1rem"}}>
+                        <Button onClick={handleSubmit}  variant = "contained" type = "submit" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff"  ,borderRadius:"50px" , padding: "1rem"}}>
                             Login 
                         </Button>
 
