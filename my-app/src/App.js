@@ -12,7 +12,7 @@ import Account from './components/Account';
 
 function App() {
   return (
-    <div>
+    <div style={{backgroundColor:'#FFEAEA'}}>
       <AuthContextProvider> 
         <Routes>
           <Route path ='/' element={<SignUp />} />
