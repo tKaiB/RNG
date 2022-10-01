@@ -33,13 +33,13 @@ function NavBar(){
             <li>
                 <Link to="/FAQ">FAQ</Link>
             </li>
-            <li>
+            <div>
                 <button className="btn" onClick = {() => navigate('/')}>Sign Up</button>
-            </li>
-            <li>
+            </div>
+            <div>
                 <button className="btn" onClick = {() => navigate('/Signin')}>Sign In</button>
                 
-            </li>
+            </div>
           </ul>
     
     </nav>
