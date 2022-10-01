@@ -28,7 +28,7 @@ function NavBar(){
           <a onClick={handleSubmit} className="site-title">RNG</a>
           <ul>
             <li>
-                <Link to="/Aboutus">About Us</Link>
+                <Link to="/aboutus">About Us</Link>
             </li>
             <li>
                 <Link to="/FAQ">FAQ</Link>

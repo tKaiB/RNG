@@ -55,3 +55,19 @@ body {
 .nav button:hover {
     background-color: slateblue;
 }
+
+.about-section {
+    padding: 5% 25%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.about-section p {
+    font-size: 1.25rem;
+}
+
+.Our-Team {
+    padding: 0 25% 25% 25%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
