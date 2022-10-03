@@ -13,11 +13,15 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
+import { Link, useNavigate } from "react-router-dom";
+
 const settings = ["Profile", "Logout"];
+
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,8 +56,9 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Typography
             variant="h6"
-            component="a"
-            href="/AccountAboutus"
+            component={Link}
+            to='/aboutus'
+            
             sx={{
               color: "black",
               textDecoration: "none",
@@ -66,8 +71,8 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Typography
             variant="h6"
-            component="a"
-            href="/AccountFaq"
+            component={Link}
+            to ='/faq'
             sx={{
               color: "black",
               textDecoration: "none",
