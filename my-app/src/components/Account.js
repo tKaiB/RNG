@@ -27,13 +27,28 @@ function Account() {
         <ResponsiveAppBar />
       </div>
       <div>
-        <Grid container direction = {'row'} alignItems="flex-start" justify = 'flex-start' spacing={1}>
-            <Grid xs = {4} sm ={4} style={{ padding: 0 , maxWidth:240}}>
+        <Grid container alignItems="flex-start" justify = 'flex-start' spacing={1} style ={{minHeight:"100vh"}}>
+            <Grid xs = {2} sm ={6} style={{ padding: 0 , maxWidth:240 }}>
               <SideBar />
             </Grid>
+            <Grid xs={5}>
+              <div>
+                <img
+                src="https://source.unsplash.com/random"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                alt="brand"
+              />
+              </div>
+                <h1 style ={{ position: 'absolute' , right: '50%',left: '30%', bottom: '50%', color :'white' }}>Monthly BMI Chart</h1>
 
-            <Grid xs={6} sm ={4}>
-              <h1>user email : {user && user.uid}</h1>
+
+            </Grid>
+            <Grid xs = {5}>
+              <img
+              src="https://source.unsplash.com/random"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              alt="brand"
+            />
             </Grid>
 
         </Grid>
