@@ -14,11 +14,10 @@ export const AuthContextProvider =({children}) => {
     }
 
     const signIn =  (email, password) =>{
-        return signInWithEmailAndPassword (auth, email,password).catch(error => {
-            console.log(error)
-        })
+        return signInWithEmailAndPassword (auth, email,password)
+        }
 
-    }
+    
 
     const logout =() =>{
         return signOut(auth)

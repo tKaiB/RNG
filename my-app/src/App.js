@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../src/components/Navbar";
+import NavBar from "./components/Navbar";
 import ForgetPassword from "./components/ForgetPassword";
 import SignUp from "./components/Signup";
 import SignIn from "./components/Signin";
