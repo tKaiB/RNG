@@ -14,8 +14,8 @@ function App() {
     <div style={{ backgroundColor: "#FFEAEA" }}>
       <AuthContextProvider>
         <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/aboutus" element={<Aboutus />} />
