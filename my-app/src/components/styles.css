@@ -71,3 +71,62 @@ body {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
 }
+
+.container {
+    max-width: 970px;
+    margin: 0 auto;
+  }
+
+.container p {
+    text-align: center;
+}
+  
+.faq-heading {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    font-size: 2.5rem;
+}
+  
+.faq-card {
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 2% 2%;
+    margin-bottom: 1%;
+    list-style: none;
+    position: relative;
+    cursor: pointer;
+}
+.faq-card summary {
+    font-size: 1.5rem;
+}
+.faq-open-icon {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 25%;
+    right: 2%;
+}
+.faq-aftertext {
+    text-align: center;
+    color: #8b8b9a;
+    padding-bottom: 30%;
+}
+details[open] .faq-open-icon {
+    top: 15%;
+    right: 1.5%;
+}
+  
+details > summary {
+    list-style: none;
+}
+  
+details > summary::-webkit-details-marker {
+    display: none;
+}
+  
+details[open] .faq-card-spoiler {
+    display: inline-block;
+    padding-top: 2%;
+    color: #8b8b9a;
+}
+  
