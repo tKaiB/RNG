@@ -62,7 +62,7 @@ function SignIn() {
 
               <Grid item xs={4}>
                 <p style={{ margin: 0 }}>
-                  You can <Link to="/signUp">register here</Link>{" "}
+                  You can <Link to="/">register here</Link>
                 </p>
               </Grid>
             </Grid>

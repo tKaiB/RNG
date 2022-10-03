@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -52,7 +54,8 @@ export default function NavBar() {
           </Typography>
           <Button
             color="inherit"
-            href="/SignUp"
+            component={Link}
+            to='/'
             sx={{
               backgroundColor: "deepskyblue",
               borderRadius: "25px",
@@ -69,7 +72,8 @@ export default function NavBar() {
           </Button>
           <Button
             color="inherit"
-            href="/"
+            component ={Link}
+            to='/signin'
             sx={{
               backgroundColor: "deepskyblue",
               borderRadius: "25px",

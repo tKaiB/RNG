@@ -37,13 +37,11 @@ function SignUp() {
             });
           } catch (e) {
             setError(e.message);
-            console.log("first");
             console.log(e.message);
           }
         })
         .catch((e) => {
           setError(e.message);
-          console.log("second");
           console.log(e.message);
         });
       navigate("/");
@@ -79,7 +77,7 @@ function SignUp() {
 
               <Grid item xs={4}>
                 <p style={{ margin: 0 }}>
-                  You can <Link to="/">Login here</Link>
+                  You can <Link to="/signin">Login here</Link>
                 </p>
               </Grid>
             </Grid>
