@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
-import NavBar from "./Navbar";
+import ResponsiveAppBar from "./AccountNavBar";
 import SideBar from "./Sidebar";
 import { Grid } from "@material-ui/core";
 
@@ -24,7 +24,7 @@ function Account() {
   return (
     <div>
       <div>
-        <NavBar />
+        <ResponsiveAppBar />
       </div>
       <div>
         <Grid container>
