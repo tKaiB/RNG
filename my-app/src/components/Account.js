@@ -28,7 +28,7 @@ function Account() {
       </div>
       <div>
         <Grid container direction = {'row'} alignItems="flex-start" justify = 'flex-start' spacing={1}>
-            <Grid xs = {4} sm ={4} style={{ padding: 0 }}>
+            <Grid xs = {4} sm ={4} style={{ padding: 0 , maxWidth:240}}>
               <SideBar />
             </Grid>
 
