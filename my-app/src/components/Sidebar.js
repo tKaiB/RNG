@@ -15,64 +15,48 @@ import HomeIcon from '@mui/icons-material/Home';
 const drawerWidth = 240;
 export default function SideBar() {
   return (
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
 
-        <AppBar
-          position="fixed"
-          sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-        >
-        </AppBar>
-        <Drawer
-          sx={{
+      <AppBar
+        position="fixed"
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+      >
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              boxSizing: 'border-box',
-            },
-          }}
-          variant="permanent"
-          anchor="left"
-        >
-          <Toolbar />
-          <Divider />
-          <List>
-            <ListItem  >
-              <ToggleButton value="Home" aria-label="Home">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Home'} />
-              </ToggleButton>
-            </ListItem>
-            <ListItem>
-              <ToggleButton value="Calorie Intake" aria-label="Calorie Intake">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Calorie Intake'} />
-              </ToggleButton>
-            </ListItem>
-            <ListItem >
-              <ToggleButton value="Recipe Generator" aria-label="Recipe Generator">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Recipe Generator'} />
-              </ToggleButton>
-            </ListItem>
-            <ListItem >
-              <ToggleButton value="BMI Input" aria-label="BMI Input">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={'BMI Input'} />
-              </ToggleButton>
-            </ListItem>
-          </List>
-          <Divider />
-        </Drawer>
-      </Box>
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <Toolbar />
+        <Divider />
+        <Box>
+          <ToggleButton value="Home" aria-label="Home">
+            <HomeIcon />
+            <ListItemText primary={'Home'} />
+          </ToggleButton>
+          <ToggleButton value="Calorie Intake" aria-label="Calorie Intake">
+            <HomeIcon />
+            <ListItemText primary={'Calorie Intake'} />
+          </ToggleButton>
+          <ToggleButton value="Recipe Generator" aria-label="Recipe Generator">
+            <HomeIcon />
+            <ListItemText primary={'Recipe Generator'} />
+          </ToggleButton>
+          <ToggleButton value="BMI Input" aria-label="BMI Input">
+            <HomeIcon />
+            <ListItemText primary={'BMI Input'} />
+          </ToggleButton>
+        </Box>
+        <Divider />
+      </Drawer>
+    </Box>
   )
 }
