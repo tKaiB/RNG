@@ -1,121 +1,42 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import ToggleButton from "@mui/material/ToggleButton";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
+import HomeIcon from '@mui/icons-material/Home';
+import { ListItem, ListItemButton, ListItemText } from '@mui/material';
+import List from '@mui/material/List';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import InputIcon from '@mui/icons-material/Input';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+function SideBar() {
+  const [view, setView] = React.useState('Home');
 
-const drawerWidth = 240;
-export default function SideBar() {
-  return (
-<<<<<<< HEAD
-    <Box sx={{ display: "flex" }}>
-=======
-    <Box sx={{ display: 'flex' }}>
->>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
-      <CssBaseline />
-
-      <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-<<<<<<< HEAD
-      ></AppBar>
-=======
-      >
-      </AppBar>
->>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-<<<<<<< HEAD
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            marginTop: 15,
-            boxSizing: "border-box",
-=======
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
->>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar />
-        <Divider />
-<<<<<<< HEAD
-        <List>
-          <ListItem>
-            <ToggleButton value="Home" aria-label="Home">
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Home"} />
-            </ToggleButton>
-          </ListItem>
-          <ListItem>
-            <ToggleButton value="Calorie Intake" aria-label="Calorie Intake">
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Calorie Intake"} />
-            </ToggleButton>
-          </ListItem>
-          <ListItem>
-            <ToggleButton
-              value="Recipe Generator"
-              aria-label="Recipe Generator"
-            >
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Recipe Generator"} />
-            </ToggleButton>
-          </ListItem>
-          <ListItem>
-            <ToggleButton value="BMI Input" aria-label="BMI Input">
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={"BMI Input"} />
-            </ToggleButton>
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-    </Box>
-  );
-=======
-        <Box>
-          <ToggleButton value="Home" aria-label="Home">
-            <HomeIcon />
-            <ListItemText primary={'Home'} />
+  const handleChange = (event, nextView) => {
+    setView(nextView);
+  };
+  return(
+    <Grid>
+        <ToggleButtonGroup
+          orientation="vertical"
+          value={view}
+          exclusive
+          onChange={handleChange}
+          fullWidth
+        >
+          <ToggleButton value="Home">
+            <HomeIcon />Home
           </ToggleButton>
-          <ToggleButton value="Calorie Intake" aria-label="Calorie Intake">
-            <HomeIcon />
-            <ListItemText primary={'Calorie Intake'} />
+          <ToggleButton value="Calorie Intake">
+            <AnalyticsIcon />Calorie Intake
           </ToggleButton>
-          <ToggleButton value="Recipe Generator" aria-label="Recipe Generator">
-            <HomeIcon />
-            <ListItemText primary={'Recipe Generator'} />
+          <ToggleButton value="Recipe Generator">
+            <FormatListNumberedIcon />Recipe Generator
           </ToggleButton>
-          <ToggleButton value="BMI Input" aria-label="BMI Input">
-            <HomeIcon />
-            <ListItemText primary={'BMI Input'} />
+          <ToggleButton value="BMI Input">
+            <InputIcon />BMI Input
           </ToggleButton>
-        </Box>
-        <Divider />
-      </Drawer>
-    </Box>
+        </ToggleButtonGroup>
+    </Grid>
   )
->>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
 }
+export default SideBar
