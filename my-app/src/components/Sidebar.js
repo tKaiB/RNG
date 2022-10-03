@@ -15,21 +15,36 @@ import HomeIcon from "@mui/icons-material/Home";
 const drawerWidth = 240;
 export default function SideBar() {
   return (
+<<<<<<< HEAD
     <Box sx={{ display: "flex" }}>
+=======
+    <Box sx={{ display: 'flex' }}>
+>>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
       <CssBaseline />
 
       <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+<<<<<<< HEAD
       ></AppBar>
+=======
+      >
+      </AppBar>
+>>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
       <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
+<<<<<<< HEAD
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             marginTop: 15,
             boxSizing: "border-box",
+=======
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+>>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
           },
         }}
         variant="permanent"
@@ -37,6 +52,7 @@ export default function SideBar() {
       >
         <Toolbar />
         <Divider />
+<<<<<<< HEAD
         <List>
           <ListItem>
             <ToggleButton value="Home" aria-label="Home">
@@ -78,4 +94,28 @@ export default function SideBar() {
       </Drawer>
     </Box>
   );
+=======
+        <Box>
+          <ToggleButton value="Home" aria-label="Home">
+            <HomeIcon />
+            <ListItemText primary={'Home'} />
+          </ToggleButton>
+          <ToggleButton value="Calorie Intake" aria-label="Calorie Intake">
+            <HomeIcon />
+            <ListItemText primary={'Calorie Intake'} />
+          </ToggleButton>
+          <ToggleButton value="Recipe Generator" aria-label="Recipe Generator">
+            <HomeIcon />
+            <ListItemText primary={'Recipe Generator'} />
+          </ToggleButton>
+          <ToggleButton value="BMI Input" aria-label="BMI Input">
+            <HomeIcon />
+            <ListItemText primary={'BMI Input'} />
+          </ToggleButton>
+        </Box>
+        <Divider />
+      </Drawer>
+    </Box>
+  )
+>>>>>>> 6e0fa8fb783632b265c6f6ac8caa6bfffed00ace
 }
