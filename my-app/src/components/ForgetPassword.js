@@ -53,9 +53,7 @@ function ForgetPassword(){
                         <Button onClick={handleSubmit} type="submit" variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
                         Reset password 
                         </Button>
-
-
-
+                    
                     </Box>
                 </Grid>
 
