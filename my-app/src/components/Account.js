@@ -2,6 +2,8 @@ import React from 'react'
 import { Button} from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../contexts/AuthContext'
+import NavBar from './Navbar';
+import SideBar from './Sidebar';
 
 function Account(){
 
@@ -21,6 +23,7 @@ function Account(){
 
     return (
         <div>
+            <SideBar/>
             <h1>Successfully Loggged in </h1>
             <Button onClick = {handleLogout} type="submit">
                 Log out 
