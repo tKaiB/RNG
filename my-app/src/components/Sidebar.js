@@ -5,7 +5,9 @@ import { ListItem, ListItemButton, ListItemText } from '@mui/material';
 import List from '@mui/material/List';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import InputIcon from '@mui/icons-material/Input';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 function SideBar() {
   const [view, setView] = React.useState('Home');
 
@@ -25,13 +27,13 @@ function SideBar() {
             <HomeIcon />Home
           </ToggleButton>
           <ToggleButton value="Calorie Intake">
-            <HomeIcon />Calorie Intake
+            <AnalyticsIcon />Calorie Intake
           </ToggleButton>
           <ToggleButton value="Recipe Generator">
-            <HomeIcon />Recipe Generator
+            <FormatListNumberedIcon />Recipe Generator
           </ToggleButton>
           <ToggleButton value="BMI Input">
-            <HomeIcon />BMI Input
+            <InputIcon />BMI Input
           </ToggleButton>
         </ToggleButtonGroup>
     </Grid>
