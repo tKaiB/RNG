@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -53,7 +53,7 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h6"
             component="a"
-            href="/Aboutus"
+            href="/AccountAboutus"
             sx={{
               color: "black",
               textDecoration: "none",
@@ -67,7 +67,7 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h6"
             component="a"
-            href="/Faq"
+            href="/AccountFaq"
             sx={{
               color: "black",
               textDecoration: "none",

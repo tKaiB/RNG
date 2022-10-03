@@ -8,12 +8,16 @@ import { Routes, Route } from "react-router-dom";
 import Account from "./components/Account";
 import Aboutus from "./components/Aboutus";
 import FAQ from "./components/Faq";
+import AccountAboutus from "./components/AccountAboutus";
+import AccountFaq from "./components/AccountFaq";
 
 function App() {
   return (
     <div style={{ backgroundColor: "#FFEAEA" }}>
       <AuthContextProvider>
         <Routes>
+          <Route path="/AccountAboutus" element={<AccountAboutus />} />
+          <Route path="/AccountFaq" element={<AccountFaq />} />
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account />} />
