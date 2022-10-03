@@ -30,7 +30,7 @@ function ForgetPassword() {
   return (
     <div>
       <NavBar />
-      <Grid container direction="column" alignItems="flex-start">gtyb
+      <Grid container direction="column" alignItems="flex-start">
         <Grid item xs={12} xm={6}>
           <p
             style={{
@@ -43,7 +43,6 @@ function ForgetPassword() {
             Forget Password?
           </p>
         </Grid>
-
         <Grid item xs={12} xm={6}>
           <p
             style={{
@@ -56,7 +55,6 @@ function ForgetPassword() {
             your password.
           </p>
         </Grid>
-
         <Grid item xs={12} xm={6}>
           <Box
             component="form"
@@ -78,35 +76,52 @@ function ForgetPassword() {
               style={{ paddingBottom: 15 }}
             />
 
-                <Grid item xs={12} xm = {6}>
-                    <Box component ='form' style ={{display : "flex" , flexDirection : "column" , minWidth :570}}>
-                        <TextField 
-                            label= 'Email' 
-                            margin ='normal'
-                            placeholder= "Enter your Email Address"
-                            InputProps={{startAdornment: (<InputAdornment position = "start"> <EmailOutlined /></InputAdornment>),}}
-                            inputRef={emailRef}
-                            style = {{paddingBottom:15}}
-                            />
-                        
-                        <Button onClick={handleSubmit} type="submit" variant = "contained" style={{textTransform :"none" , backgroundColor: "#000000" , color:"#ffffff", padding: "1rem", borderRadius:"50px"}}>
-                        Reset password 
-                        </Button>
-                    
-                    </Box>
-                </Grid>
+            <Grid item xs={12} xm={6}>
+              <Box
+                component="form"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  minWidth: 570,
+                }}
+              >
+                <TextField
+                  label="Email"
+                  margin="normal"
+                  placeholder="Enter your Email Address"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        {" "}
+                        <EmailOutlined />
+                      </InputAdornment>
+                    ),
+                  }}
+                  inputRef={emailRef}
+                  style={{ paddingBottom: 15 }}
+                />
 
-
-
-
-
-
-
+                <Button
+                  onClick={handleSubmit}
+                  type="submit"
+                  variant="contained"
+                  style={{
+                    textTransform: "none",
+                    backgroundColor: "#000000",
+                    color: "#ffffff",
+                    padding: "1rem",
+                    borderRadius: "50px",
+                  }}
+                >
+                  Reset password
+                </Button>
+              </Box>
             </Grid>
-
-
-        </div>
-    )
+          </Box>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 
 export default ForgetPassword;
