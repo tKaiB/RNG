@@ -4,8 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
 import NavBar from "./Navbar";
 import SideBar from "./Sidebar";
-
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 import { Grid } from "@material-ui/core";
+
+const drawerWidth = 240;
 
 function Account() {
   const { user, logout } = UserAuth();
@@ -22,17 +37,22 @@ function Account() {
 
   return (
     <div>
-      <NavBar />
-      <Grid container>
-        <Grid>
-          <SideBar />
+      <div>
+        <NavBar />
+      </div>
+      <div>
+        <Grid container>
+          <div>
+            <Grid style={{ padding: 0 }}>
+              <SideBar />
+            </Grid>
+          </div>
         </Grid>
-      </Grid>
 
-      <h1>Successfully Loggged in </h1>
-      <Button onClick={handleLogout} type="submit">
+        {/* <Button onClick={handleLogout} type="submit">
         Log out
-      </Button>
+      </Button> */}
+      </div>
     </div>
   );
 }
