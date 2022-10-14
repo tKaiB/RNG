@@ -44,11 +44,15 @@ function Account() {
 
             </Grid>
             <Grid xs = {5}>
+              <div>
               <img
               src="https://source.unsplash.com/random"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt="brand"
             />
+            </div>
+            <h1 style={{position: 'absolute' , right :'7.5%' , bottom :'50%' , color :'white' }}>Monthly calorie intake chart</h1>
+            
             </Grid>
 
         </Grid>

@@ -118,8 +118,8 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>Profile</MenuItem>
-              <MenuItem component = {Link} to ='/signin' onclick={handleLogout}> Logout</MenuItem>
+              <MenuItem component= {Link} to ='/profile'>Profile</MenuItem>
+              <MenuItem component = {Link} to ='/signin' onClick={handleLogout}> Logout</MenuItem>
               {/* {settings.map((setting) => (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>

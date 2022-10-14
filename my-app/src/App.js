@@ -8,6 +8,7 @@ import {Routes , Route } from 'react-router-dom'
 import Account from './components/Account';
 import FAQ from './components/Faq';
 import Aboutus from './components/Aboutus';
+import UserProfile from './components/Userprofile';
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path ='/forgetpassword' element={<ForgetPassword />} />
           <Route path ='/faq' element={<FAQ />} />
           <Route path ='/aboutus' element={<Aboutus />} />
+          <Route path = '/profile' element={<UserProfile />} />
         </Routes>
 
 
