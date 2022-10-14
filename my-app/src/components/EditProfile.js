@@ -6,9 +6,15 @@ import { Grid, TextField } from "@material-ui/core";
 
 import {UserAuth} from '../contexts/AuthContext'
 import {db} from '../firebase'
+import { Link, useNavigate } from "react-router-dom";
 
 function EditProfile(){
-    const confirmEmailRef = useRef();
+    const navigate = useNavigate();
+    const EmailRef = useRef();
+    const NameRef = useRef();
+    const AgeRef = useRef();
+    const WeightRef = useRef();
+
     return(
         <div>
             <div style={{paddingBottom:9}}>
@@ -34,12 +40,47 @@ function EditProfile(){
                         <p style={{paddingTop:19 , fontSize:20}}>Email: </p>
                         <TextField
                                 margin="normal"
-                                inputRef={confirmEmailRef}
+                                inputRef={EmailRef}
                                 style={{paddingTop:20, paddingLeft:2}}
                                 
                             />
 
                     </div>
+
+                    <div style={{display: 'flex'}}>
+                        <p style={{paddingTop:19 , fontSize:20}}>Name: </p>
+                        <TextField
+                                margin="normal"
+                                inputRef={NameRef}
+                                style={{paddingTop:20, paddingLeft:2}}
+                                
+                            />
+
+                    </div>
+
+                    <div style={{display: 'flex'}}>
+                        <p style={{paddingTop:19 , fontSize:20}}>Age: </p>
+                        <TextField
+                                margin="normal"
+                                inputRef={AgeRef}
+                                style={{paddingTop:20, paddingLeft:2}}
+                                
+                            />
+
+                    </div>
+
+                    <div style={{display: 'flex'}}>
+                        <p style={{paddingTop:19 , fontSize:20}}>Weight: </p>
+                        <TextField
+                                margin="normal"
+                                inputRef={WeightRef}
+                                style={{paddingTop:20, paddingLeft:2}}
+                                
+                            />
+
+                    </div>
+
+
 
   
 
