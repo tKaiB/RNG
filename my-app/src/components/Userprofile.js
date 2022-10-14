@@ -1,8 +1,11 @@
 import React from "react";
 import ResponsiveAppBar from "./AccountNavBar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SideBar from "./Sidebar";
-import { Grid } from "@material-ui/core";
+import { Grid , Button } from "@material-ui/core";
+import {EditOutlined} from "@material-ui/icons";
+
+
 
 import {UserAuth} from '../contexts/AuthContext'
 import {db} from '../firebase'
@@ -56,12 +59,19 @@ function UserProfile() {
                 </Grid>
 
                 <Grid item >
-                    <h1>My profile</h1>
+                    <p style={{fontFamily:"inter", fontSize:'32px' , fontStyle : "regular" , textDecoration: "underline"}}>My Profile</p>
                     <p>Email : {user && user.email}</p>
                     <p id = 'name'>name: </p>
-                    <p id = 'age'>placeholder</p>
-                    <p id ='weight'>placeholder</p>
+                    <p id = 'age'>Age:</p>
+                    <p id ='weight'>Weight:</p>
                 </Grid>
+
+                <Grid item style={{margin:32}} >
+                    <Button component ={Link} to ='/editprofile' startIcon={<EditOutlined />} >
+                    </Button>
+                </Grid>
+
+
 
             </Grid>
 
