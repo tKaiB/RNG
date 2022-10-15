@@ -1,17 +1,11 @@
 import React from "react";
-import AccountNavBar from "../AccountNavBar";
+import NavBar from "../components/Navbar";
 import "./styles.css";
-import SideBar from "../Sidebar";
-import { Grid } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
-function AccountAboutus() {
+function Aboutus() {
   return (
     <div>
-      <div>
-        <AccountNavBar />
-      </div>
+      <NavBar />
       <div class="about-section">
         <h1>About Us</h1>
         <p>
@@ -32,28 +26,9 @@ function AccountAboutus() {
           Undergraduate
         </p>
         <p>Tan Kai Boon - Year 2 Computer Science Undergraduate</p>
-        <Button
-          color="inherit"
-          component={Link}
-          to="/account"
-          style={{
-            display: "flex",
-            backgroundColor: "deepskyblue",
-            borderRadius: "25px",
-            color: "white",
-            fontFamily: "'Courier New', Courier, monospace",
-            fontSize: "1rem",
-            alignItems: "center",
-            padding: "0.5rem 1rem",
-            border: "none",
-            margin: "1rem",
-          }}
-        >
-          Back
-        </Button>
       </div>
     </div>
   );
 }
 
-export default AccountAboutus;
+export default Aboutus;

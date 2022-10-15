@@ -1,19 +1,19 @@
 import React from "react";
 import NavBar from "./components/Navbar";
-import ForgetPassword from "./components/ForgetPassword";
-import SignUp from "./components/Signup";
-import SignIn from "./components/Signin";
+import ForgetPassword from "./pages/ForgetPassword"
+import SignUp from "./pages/Signup";
+import SignIn from "./pages/Signin";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { Routes, Route } from "react-router-dom";
-import Account from "./components/Account";
-import FAQ from "./components/Faq";
-import Aboutus from "./components/Aboutus";
-import UserProfile from "./components/Userprofile";
-import EditProfile from "./components/EditProfile";
+import Account from "./pages/Account";
+import FAQ from "./pages/Faq";
+import Aboutus from "./pages/Aboutus";
+import UserProfile from "./pages/Userprofile";
+import EditProfile from "./pages/EditProfile";
 import AccountFaq from "./components/AccountFaq";
-import AccountAboutus from "./components/AccountAboutus";
-import CalorieIntake from "./components/CalorieIntake";
-import BmiInput from "./components/BMI";
+import AccountAboutus from "./pages/AccountAboutus";
+import CalorieIntake from "./pages/CalorieIntake";
+import BmiInput from "./pages/BMI";
 
 function App() {
   return (

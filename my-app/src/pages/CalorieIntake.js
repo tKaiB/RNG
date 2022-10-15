@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../../contexts/AuthContext";
-import ResponsiveAppBar from "../AccountNavBar";
-import SideBar from "../Sidebar";
+import { UserAuth } from "../contexts/AuthContext";
+import ResponsiveAppBar from "../components/AccountNavBar";
+import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";

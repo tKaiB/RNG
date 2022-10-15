@@ -1,7 +1,7 @@
 import React from "react";
-import ResponsiveAppBar from "./AccountNavBar";
+import ResponsiveAppBar from "../components/AccountNavBar";
 import { Link, useNavigate } from "react-router-dom";
-import SideBar from "./Sidebar";
+import SideBar from "../components/Sidebar";
 import { Grid , Button } from "@material-ui/core";
 import {EditOutlined} from "@material-ui/icons";
 
