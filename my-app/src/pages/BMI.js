@@ -107,122 +107,124 @@ function BMI() {
             <SideBar />
           </Grid>
 
-          <Grid xs={5}>
-            <div >
-              <h1
-                style={{
-                  fontSize: "3rem",
-                  fontFamily: "'Times New Roman', Times, serif",
-                }}
-              >
-                Calculate Your Body Mass Index
-              </h1>
-              <p
-                style={{
-                  fontSize: "1.5rem",
-                  fontFamily: "'Times New Roman', Times, serif",
-                }}
-              >
-                Calculate Your BMI Using Our Simple Calculator
-              </p>
-              <p>
-                I am a <b>{gender}</b>
-              </p>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "pink" }}
-                onClick={handleCLick1}
-              >
-                Male
-              </Button>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "pink", margin: "1rem" }}
-                onClick={handleCLick2}
-              >
-                Female
-              </Button>
-              <FormControl sx={{ display: "block" }} variant="outlined">
-                <p> My Weight </p>
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  value={weight}
-                  endAdornment={
-                    <InputAdornment position="end">kg</InputAdornment>
-                  }
-                  aria-describedby="outlined-weight-helper-text"
-                  inputProps={{
-                    "aria-label": "weight",
+          <Grid xs={5} >
+            <div style={{paddingLeft:15}}>
+              <div >
+                <h1
+                  style={{
+                    fontSize: "3rem",
+                    fontFamily: "'Times New Roman', Times, serif",
                   }}
-                  onChange={handleChange1}
-                />
-                <FormHelperText id="outlined-weight-helper-text">
-                </FormHelperText>
-                <Slider
-                  style={{ width: "15rem" }}
-                  size="small"
-                  defaultValue={50}
-                  aria-label="Small"
-                  valueLabelDisplay="auto"
-                  value={weight}
-                  onChange={handleChange1}
-                  max={200}
-                />
-
-                <p> My Height </p>
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  value={height}
-                  endAdornment={
-                    <InputAdornment position="end">cm</InputAdornment>
-                  }
-                  aria-describedby="outlined-weight-helper-text"
-                  inputProps={{
-                    "aria-label": "weight",
-                  }}
-                  onChange={handleChange2}
-                />
-                <FormHelperText id="outlined-weight-helper-text">
-                </FormHelperText>
-                <Slider
-                  style={{ width: "15rem" }}
-                  size="small"
-                  defaultValue={50}
-                  aria-label="Small"
-                  valueLabelDisplay="auto"
-                  value={height}
-                  onChange={handleChange2}
-                  max={200}
-                />
-              </FormControl>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "Pink" , display:'flex' }}
-                fullWidth
-              >
-                Calculate BMI
-              </Button>
-              <p>
-                Enter BMI Value
-                <FormControl
-                  sx={{ display: "flex",  width: "25ch" }}
-                  variant="outlined"
                 >
+                  Calculate Your Body Mass Index
+                </h1>
+                <p
+                  style={{
+                    fontSize: "1.5rem",
+                    fontFamily: "'Times New Roman', Times, serif",
+                  }}
+                >
+                  Calculate Your BMI Using Our Simple Calculator
+                </p>
+                <p>
+                  I am a <b>{gender}</b>
+                </p>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "pink" }}
+                  onClick={handleCLick1}
+                >
+                  Male
+                </Button>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "pink", margin: "1rem" }}
+                  onClick={handleCLick2}
+                >
+                  Female
+                </Button>
+                <FormControl sx={{ display: "block" }} variant="outlined">
+                  <p> My Weight </p>
                   <OutlinedInput
-                    id="outlined-adornment-BMI"
-                    defaultValue="0"
-                    aria-describedby="outlined-BMI-helper-text"
+                    id="outlined-adornment-weight"
+                    value={weight}
+                    endAdornment={
+                      <InputAdornment position="end">kg</InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
+                    onChange={handleChange1}
+                  />
+                  <FormHelperText id="outlined-weight-helper-text">
+                  </FormHelperText>
+                  <Slider
+                    style={{ width: "15rem" }}
+                    size="small"
+                    defaultValue={50}
+                    aria-label="Small"
+                    valueLabelDisplay="auto"
+                    value={weight}
+                    onChange={handleChange1}
+                    max={200}
+                  />
+
+                  <p> My Height </p>
+                  <OutlinedInput
+                    id="outlined-adornment-weight"
+                    value={height}
+                    endAdornment={
+                      <InputAdornment position="end">cm</InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
+                    onChange={handleChange2}
+                  />
+                  <FormHelperText id="outlined-weight-helper-text">
+                  </FormHelperText>
+                  <Slider
+                    style={{ width: "15rem" }}
+                    size="small"
+                    defaultValue={50}
+                    aria-label="Small"
+                    valueLabelDisplay="auto"
+                    value={height}
+                    onChange={handleChange2}
+                    max={200}
                   />
                 </FormControl>
-              </p>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "Pink" , display:'flex' }}
-                fullWidth
-              >
-                Submit
-              </Button>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "Pink" , display:'flex' }}
+                  fullWidth
+                >
+                  Calculate BMI
+                </Button>
+                <p>
+                  Enter BMI Value
+                  <FormControl
+                    sx={{ display: "flex",  width: "25ch" }}
+                    variant="outlined"
+                  >
+                    <OutlinedInput
+                      id="outlined-adornment-BMI"
+                      defaultValue="0"
+                      aria-describedby="outlined-BMI-helper-text"
+                    />
+                  </FormControl>
+                </p>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "Pink" , display:'flex' }}
+                  fullWidth
+                >
+                  Submit
+                </Button>
 
+              </div>
             </div>
           </Grid>
 
@@ -239,12 +241,16 @@ function BMI() {
                 Your BMI Is
               </h1>
             </div>
-            <BoyIcon
-              style={{ fontSize: "30rem" }}
-              baseClassName="material-icons-boy"
-            >
-              BoyIcon
-            </BoyIcon>
+            <div style={{paddingLeft:65}}>
+              <BoyIcon
+                style={{ fontSize: "30rem"}}
+                baseClassName="material-icons-boy"
+              >
+                BoyIcon
+              </BoyIcon>
+
+            </div>
+
             ;
             <Box>
               <Slider
