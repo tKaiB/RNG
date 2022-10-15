@@ -27,12 +27,16 @@ function BMI() {
     }
   };
   const health = [
-    "Underweight",
-    "Healthy",
-    "Overweight",
-    "Obese",
-    "Extremely Obese",
+    if (marks < 18.5) 
+        health = "Underweight"
+    if (maths >18.5 && marks < 24.9)
+        health= "Healthy"
+    if  (maths >25 && marks < 29.9)
+    health = "Overweight"
+    if (maths >30)
+    health = "Obese"
   ];
+  
   const [value, setHealth] = React.useState("");
 
   const handleChange3 = (event, health) => {
@@ -244,7 +248,7 @@ function BMI() {
                 onChange={handleChange3}
               />
             </Box>
-            <p>YOu are in the {health} range</p>
+            <p>You are in the {health} range</p>
           </Grid>
         </Grid>
       </div>
