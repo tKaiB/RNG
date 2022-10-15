@@ -34,8 +34,8 @@ function SignUp() {
             await setDoc(doc(db, "users", user.user.uid), {
               email: email,
               name: nameRef.current.value,
-              age:0,
-              weight:0
+              age: 0,
+              weight: 0,
             });
           } catch (e) {
             setError(e.message);

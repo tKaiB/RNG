@@ -18,7 +18,6 @@ import { UserAuth } from "../contexts/AuthContext";
 
 const settings = ["Profile", "Logout"];
 
-
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -69,8 +68,7 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h6"
             component={Link}
-            to='/aboutus'
-            
+            to="/accountaboutus"
             sx={{
               color: "black",
               textDecoration: "none",
@@ -84,7 +82,7 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h6"
             component={Link}
-            to ='/faq'
+            to="/accountfaq"
             sx={{
               color: "black",
               textDecoration: "none",
@@ -118,8 +116,13 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem component= {Link} to ='/profile'>Profile</MenuItem>
-              <MenuItem component = {Link} to ='/signin' onClick={handleLogout}> Logout</MenuItem>
+              <MenuItem component={Link} to="/profile">
+                Profile
+              </MenuItem>
+              <MenuItem component={Link} to="/signin" onClick={handleLogout}>
+                {" "}
+                Logout
+              </MenuItem>
               {/* {settings.map((setting) => (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
