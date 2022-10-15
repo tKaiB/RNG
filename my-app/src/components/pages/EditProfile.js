@@ -1,11 +1,11 @@
 import React ,{useRef} from "react";
-import ResponsiveAppBar from "./AccountNavBar";
-import SideBar from "./Sidebar";
+import ResponsiveAppBar from "../AccountNavBar";
+import SideBar from "../Sidebar";
 import { Grid, TextField } from "@material-ui/core";
 
 
-import {UserAuth} from '../contexts/AuthContext'
-import {db} from '../firebase'
+import {UserAuth} from '../../contexts/AuthContext'
+import {db} from '../../firebase'
 import { Link, useNavigate } from "react-router-dom";
 
 function EditProfile(){

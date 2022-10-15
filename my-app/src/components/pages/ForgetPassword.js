@@ -7,9 +7,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { EmailOutlined } from "@material-ui/icons";
-import NavBar from "./Navbar";
+import NavBar from "../Navbar";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../../contexts/AuthContext";
 
 function ForgetPassword() {
   const emailRef = useRef();

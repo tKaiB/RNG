@@ -7,9 +7,9 @@ import {
   HttpsOutlined,
 } from "@material-ui/icons";
 import { Box } from "@mui/material";
-import { UserAuth } from "../contexts/AuthContext";
-import { app, db } from "../firebase";
-import NavBar from "./Navbar";
+import { UserAuth } from "../../contexts/AuthContext";
+import { app, db } from "../../firebase";
+import NavBar from "../Navbar";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
 function SignUp() {

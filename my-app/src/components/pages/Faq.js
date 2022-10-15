@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./Navbar";
+import NavBar from "../Navbar";
 import "./styles.css";
 
 function FAQ() {
