@@ -1,6 +1,6 @@
 import React from "react";
 import AccountNavBar from "./AccountNavBar";
-import "./styles.css";
+import "../pages/styles.css";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
