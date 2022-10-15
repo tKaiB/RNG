@@ -26,19 +26,7 @@ function BMI() {
       console.log(e.message);
     }
   };
-  // const health = [
-  //   {
-  //   if (marks < 18.5) 
-  //       health = "Underweight"
-  //   if (maths >18.5 && marks < 24.9)
-  //       health= "Healthy"
-  //   if  (maths >25 && marks < 29.9)
-  //   health = "Overweight"
-  //   if (maths >30)
-  //   health = "Obese"
-  // }
-  // ];
-  
+
   const [value, setHealth] = React.useState("");
 
   const handleChange3 = (event, health) => {
@@ -108,9 +96,8 @@ function BMI() {
           <Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
             <SideBar />
           </Grid>
-
           <Grid xs={5}>
-            <div >
+            <div style={{ padding: "2rem" }}>
               <h1
                 style={{
                   fontSize: "3rem",
@@ -159,6 +146,7 @@ function BMI() {
                   onChange={handleChange1}
                 />
                 <FormHelperText id="outlined-weight-helper-text">
+                  Weight
                 </FormHelperText>
                 <Slider
                   style={{ width: "15rem" }}
@@ -185,6 +173,7 @@ function BMI() {
                   onChange={handleChange2}
                 />
                 <FormHelperText id="outlined-weight-helper-text">
+                  Height
                 </FormHelperText>
                 <Slider
                   style={{ width: "15rem" }}
@@ -199,15 +188,14 @@ function BMI() {
               </FormControl>
               <Button
                 variant="contained"
-                style={{ backgroundColor: "Pink" , display:'flex' }}
-                fullWidth
+                style={{ marginLeft: "3rem", backgroundColor: "Pink" }}
               >
                 Calculate BMI
               </Button>
               <p>
                 Enter BMI Value
                 <FormControl
-                  sx={{ display: "flex",  width: "25ch" }}
+                  sx={{ display: "flex", m: 1, width: "25ch" }}
                   variant="outlined"
                 >
                   <OutlinedInput
@@ -217,20 +205,10 @@ function BMI() {
                   />
                 </FormControl>
               </p>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "Pink" , display:'flex' }}
-                fullWidth
-              >
-                Submit
-              </Button>
-
             </div>
           </Grid>
-
-          {/* Need throw this into the useState */}
           <Grid xs={5}>
-            <div >
+            <div style={{ padding: "2rem" }}>
               <h1
                 style={{
                   textAlign: "center",
