@@ -25,7 +25,7 @@ function SideBar() {
         onChange={handleChange}
         fullWidth
       >
-        <ToggleButton value="Home">
+        <ToggleButton component={Link} to="/account" value="Home">
           <HomeIcon />
           Home
         </ToggleButton>
@@ -41,7 +41,7 @@ function SideBar() {
           <FormatListNumberedIcon />
           Recipe Generator
         </ToggleButton>
-        <ToggleButton value="BMI Input">
+        <ToggleButton component={Link} to="/BmiInput" value="BMI Input">
           <InputIcon />
           BMI Input
         </ToggleButton>

@@ -13,6 +13,7 @@ import EditProfile from "./components/EditProfile";
 import AccountFaq from "./components/AccountFaq";
 import AccountAboutus from "./components/AccountAboutus";
 import CalorieIntake from "./components/CalorieIntake";
+import BmiInput from "./components/BMI";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/accountfaq" element={<AccountFaq />} />
           <Route path="/accountaboutus" element={<AccountAboutus />} />
           <Route path="/calorieintake" element={<CalorieIntake />} />
+          <Route path="/BmiInput" element={<BmiInput />} />
         </Routes>
       </AuthContextProvider>
     </div>
