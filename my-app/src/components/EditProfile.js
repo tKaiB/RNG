@@ -34,51 +34,62 @@ function EditProfile(){
 
                 </Grid>
 
-                <Grid item >
+                <Grid item xs={8}>
                     <p style={{fontFamily:"inter", fontSize:'32px' , fontStyle : "regular" , textDecoration: "underline"}}>Edit Profile</p>
-                    <div style={{display: 'flex'}}>
-                        <p style={{paddingTop:19 , fontSize:20}}>Email: </p>
+
+
+                    <div style={{display: 'flex' , alignItems:"center", flexDirection:'row'}}>
+                        <p style={{margin: 20 , fontSize:20, textAlign:'center', paddingRight:10}}>Email: </p>
                         <TextField
                                 margin="normal"
                                 inputRef={EmailRef}
-                                style={{paddingTop:20, paddingLeft:2}}
+                                variant='outlined'
+                                placeholder="Enter your new email "
+                                size ='small'
                                 
                             />
 
                     </div>
 
-                    <div style={{display: 'flex'}}>
-                        <p style={{paddingTop:19 , fontSize:20}}>Name: </p>
+                    <div style={{display: 'flex',alignItems:"center"}}>
+                        <p style={{margin:20 , fontSize:20, textAlign:'center', paddingRight:10}}>Name: </p>
                         <TextField
                                 margin="normal"
                                 inputRef={NameRef}
-                                style={{paddingTop:20, paddingLeft:2}}
+                                variant='outlined'
+                                placeholder="Enter your new Name "
+                                size ='small'
                                 
                             />
 
                     </div>
 
-                    <div style={{display: 'flex'}}>
-                        <p style={{paddingTop:19 , fontSize:20}}>Age: </p>
+                    <div style={{display: 'flex',alignItems:"center"}}>
+                        <p style={{margin:20, fontSize:20 , textAlign:'center', paddingRight:25}}>Age: </p>
                         <TextField
                                 margin="normal"
                                 inputRef={AgeRef}
-                                style={{paddingTop:20, paddingLeft:2}}
+                                placeholder="Enter your new Age "
+                                size ='small'
+                                variant = 'outlined'
                                 
                             />
 
                     </div>
 
-                    <div style={{display: 'flex'}}>
-                        <p style={{paddingTop:19 , fontSize:20}}>Weight: </p>
+                    <div style={{display: 'flex',alignItems:"center"}}>
+                        <p style={{margin:20,fontSize:20, textAlign:'center'}}>Weight: </p>
                         <TextField
                                 margin="normal"
                                 inputRef={WeightRef}
-                                style={{paddingTop:20, paddingLeft:2}}
+                                placeholder='Enter your new Weight'
+                                size = 'small'
+                                variant = 'outlined'
+                               
                                 
                             />
-
                     </div>
+          
 
 
 
