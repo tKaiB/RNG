@@ -6,7 +6,7 @@ import { Grid, TextField, Button,Box } from "@material-ui/core";
 
 import { UserAuth } from '../contexts/AuthContext'
 import {db} from '../firebase'
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 function EditProfile(){
@@ -28,7 +28,7 @@ function EditProfile(){
             await setEmail(EmailRef.current.value)
             .then(async () => {
                 try{
-                    await setDoc(doc(db,"users",user.uid),{
+                    await updateDoc(doc(db,"users",user.uid),{
                         email : EmailRef.current.value,
                         name : NameRef.current.value,
                         age : AgeRef.current.value,

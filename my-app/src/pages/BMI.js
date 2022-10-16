@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React ,{useState,useRef} from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -14,11 +14,18 @@ import Slider from "@mui/material/Slider";
 import BoyIcon from "@mui/icons-material/Boy";
 import Box from "@mui/material/Box";
 
+import {db} from '../firebase'
+import { updateDoc, doc } from "firebase/firestore";
+
 function BMI() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
+  const testRef = useRef()
+
+
 
   const [show,setShow] = useState(false)
+  const [error, setError] = useState("");
 
   const handleLogout = async () => {
     try {
@@ -44,6 +51,27 @@ function BMI() {
   const handleChange3 = (event, health) => {
     setHealth(health);
   };
+
+  const handleSubmit2= async(e)=>{
+    e.preventDefault()
+    try{
+      await updateDoc(doc(db,"users",user.uid),
+      {
+        bmi:testRef.current.value
+      })
+    }
+    catch(e){
+      setError(e.message)
+      alert(e.message)
+      
+    }
+
+
+
+
+  }
+
+
 
 
   const marks = [
@@ -96,6 +124,10 @@ function BMI() {
   const handleClick3= () =>{
     setShow(!show)
   }
+
+
+
+  
 
   return (
     <div>
@@ -221,6 +253,7 @@ function BMI() {
                       id="outlined-adornment-BMI"
                       defaultValue="0"
                       aria-describedby="outlined-BMI-helper-text"
+                      inputRef = {testRef}
                     />
                   </FormControl>
                 </p>
@@ -228,6 +261,7 @@ function BMI() {
                   variant="contained"
                   style={{ backgroundColor: "Pink" , display:'flex' }}
                   fullWidth
+                  onClick={handleSubmit2}
                 >
                   Submit
                 </Button>
