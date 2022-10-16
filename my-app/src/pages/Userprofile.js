@@ -24,8 +24,8 @@ function UserProfile() {
         if(docSnap.exists()){
             console.log(docSnap.data())
             document.getElementById('name').innerText = 'Name: ' + docSnap.data().name
-            // document.getElementById('age').innerText = 'Age: ' + docSnap.data().age + " Years Old"
-            // document.getElementById('weight').innerText = 'Weight: ' + docSnap.data().name + " Kg"
+            document.getElementById('age').innerText = 'Age: ' + docSnap.data().age + " Years Old"
+            document.getElementById('weight').innerText = 'Weight: ' + docSnap.data().weight + " Kg"
 
         }
         else{

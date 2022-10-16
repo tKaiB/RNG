@@ -6,6 +6,7 @@ import { Grid, TextField, Button,Box } from "@material-ui/core";
 
 import { UserAuth } from '../contexts/AuthContext'
 import {db} from '../firebase'
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 function EditProfile(){
@@ -16,19 +17,44 @@ function EditProfile(){
     const WeightRef = useRef();
 
     const [error, setError] = useState("");
-    const { setEmail } = UserAuth();
+    const { user,setEmail } = UserAuth();
+
+
+
 
     const handleSubmit = async(e) =>{
+        e.preventDefault()
         try{
             await setEmail(EmailRef.current.value)
+            .then(async () => {
+                try{
+                    await setDoc(doc(db,"users",user.uid),{
+                        email : EmailRef.current.value,
+                        name : NameRef.current.value,
+                        age : AgeRef.current.value,
+                        weight: WeightRef.current.value
+                    });
+                
+                }catch(e){
+                    setError(e.message)
+                    alert(e.message)
+
+                }
+            })
+            .catch((e)=>{
+                setError(e.message)
+                alert(e.message)
+            });
         }
+        
         catch(e){
             setError(e.message)
             alert(e.message)
             console.log(e.message)
         }
-
         navigate('/profile')
+
+        
     }
 
     return(
