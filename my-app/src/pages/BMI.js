@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState} from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -17,6 +17,8 @@ import Box from "@mui/material/Box";
 function BMI() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
+
+  const [show,setShow] = useState(false)
 
   const handleLogout = async () => {
     try {
@@ -42,6 +44,7 @@ function BMI() {
   const handleChange3 = (event, health) => {
     setHealth(health);
   };
+
 
   const marks = [
     {
@@ -89,6 +92,10 @@ function BMI() {
     event.preventDefault();
     setGender("Female");
   };
+
+  const handleClick3= () =>{
+    setShow(!show)
+  }
 
   return (
     <div>
@@ -200,6 +207,7 @@ function BMI() {
                   variant="contained"
                   style={{ backgroundColor: "Pink" , display:'flex' }}
                   fullWidth
+                  onClick ={handleClick3}
                 >
                   Calculate BMI
                 </Button>
@@ -230,42 +238,51 @@ function BMI() {
 
           {/* Need throw this into the useState */}
           <Grid xs={5}>
-            <div >
-              <h1
-                style={{
-                  textAlign: "center",
-                  fontSize: "3rem",
-                  fontFamily: "'Times New Roman', Times, serif",
-                }}
-              >
-                Your BMI Is
-              </h1>
-            </div>
-            <div style={{paddingLeft:65}}>
-              <BoyIcon
-                style={{ fontSize: "30rem"}}
-                baseClassName="material-icons-boy"
-              >
-                BoyIcon
-              </BoyIcon>
+            {show?
+            <div>            
+                <div >
+                  
+                  <h1
+                    style={{
+                      textAlign: "center",
+                      fontSize: "3rem",
+                      fontFamily: "'Times New Roman', Times, serif",
+                    }}
+                  >
+                    Your BMI Is
+                  </h1>
+                  
 
-            </div>
+                </div>
+                <div style={{paddingLeft:65}}>
+                  <BoyIcon
+                    style={{ fontSize: "30rem"}}
+                    baseClassName="material-icons-boy"
+                  >
+                    BoyIcon
+                  </BoyIcon>
 
-            ;
-            <Box>
-              <Slider
-                style={{ marginLeft: "4rem", display: "flex", width: "80%" }}
-                aria-label="Custom marks"
-                defaultValue={20}
-                getAriaValueText={valuetext}
-                valueLabelDisplay="auto"
-                marks={marks}
-                max={40}
-                onChange={handleChange3}
-              />
-            </Box>
-            {/* <p>You are in the {health} range</p> */}
-          </Grid>
+                </div>
+
+                
+                <Box>
+                  <Slider
+                    style={{ marginLeft: "4rem", display: "flex", width: "80%" }}
+                    aria-label="Custom marks"
+                    defaultValue={20}
+                    getAriaValueText={valuetext}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    max={40}
+                    onChange={handleChange3}
+                  />
+                </Box>
+                {/* <p>You are in the {health} range</p> */}
+            
+              </div>
+         
+                  :null}
+            </Grid>
         </Grid>
       </div>
     </div>
