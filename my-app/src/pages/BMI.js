@@ -25,7 +25,7 @@ function BMI() {
       await logout();
       navigate("/");
     } catch (e) {
-      console.log(e.message);
+      console.log(e.message)
     }
   };
   // const health = [

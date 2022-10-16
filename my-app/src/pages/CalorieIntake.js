@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -57,6 +57,12 @@ function CalorieIntake() {
 
   const [values, setValue] = React.useState(30);
 
+  const [show,setShow] = useState(false)
+
+  const handleClick = ()=>{
+    setShow(!show)
+  }
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -95,7 +101,7 @@ function CalorieIntake() {
               >
                 Calculate Your Calories Using Our Simple Calculator
               </p>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+              <FormControl sx={{  width: "25ch" }} variant="outlined">
                 <p> My Weight </p>
                 <OutlinedInput
                   id="outlined-adornment-weight"
@@ -110,7 +116,6 @@ function CalorieIntake() {
                   onChange={handleChange}
                 />
                 <FormHelperText id="outlined-weight-helper-text">
-                  Weight
                 </FormHelperText>
                 <Slider
                   style={{ width: "15rem" }}
@@ -129,7 +134,7 @@ function CalorieIntake() {
                 <FormControlLabel control={<Checkbox />} label="Gain Muscle" />
               </FormGroup>
               <div style={{ padding: "1rem" }}>
-                <Button variant="contained" style={{ backgroundColor: "Pink" }}>
+                <Button variant="contained" style={{ backgroundColor: "Pink" }} onClick={handleClick}>
                   Calculate Daily Calories
                 </Button>
               </div>
@@ -143,7 +148,7 @@ function CalorieIntake() {
                 max={10}
               />
               <p>Enter Daily Calorie Intake</p>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+              <FormControl sx={{width: "25ch" }} variant="outlined">
                 <OutlinedInput
                   id="outlined-adornment-calorieintake"
                   defaultValue="0"
@@ -153,52 +158,56 @@ function CalorieIntake() {
                   aria-describedby="outlined-calorieintake-helper-text"
                 />
                 <FormHelperText id="outlined-calorieintake-helper-text">
-                  Daily Calorie Intake
                 </FormHelperText>
               </FormControl>
             </div>
           </Grid>
           <Grid xs={5}>
-            <div style={{ padding: "2rem" }}>
-              <h1
+            {show?
+            <div>
+              <div style={{ padding: "2rem" }}>
+                <h1
+                  style={{
+                    fontSize: "3rem",
+                    fontFamily: "'Times New Roman', Times, serif",
+                  }}
+                >
+                  Your daily Calorie Goals
+                </h1>
+              </div>
+              <p
                 style={{
-                  fontSize: "3rem",
-                  fontFamily: "'Times New Roman', Times, serif",
+                  marginLeft: "10rem",
+                  marginTop: "5rem",
+                  padding: "6rem 1rem 6rem 1rem",
+                  width: "50%",
+                  outline: "1px solid black",
+                  borderRadius: "80%",
+                  textAlign: "center",
                 }}
               >
-                Your daily Calorie Goals
-              </h1>
-            </div>
-            <p
-              style={{
-                marginLeft: "10rem",
-                marginTop: "5rem",
-                padding: "6rem 1rem 6rem 1rem",
-                width: "50%",
-                outline: "1px solid black",
-                borderRadius: "80%",
-                textAlign: "center",
-              }}
-            >
-              Total xxxx kcal
-            </p>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow
-                      key={row.name}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.value}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                Total xxxx kcal
+              </p>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        key={row.name}
+                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell align="right">{row.value}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              </div>
+
+              :null}
           </Grid>
         </Grid>
       </div>
