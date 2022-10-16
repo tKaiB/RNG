@@ -1,10 +1,10 @@
-import React ,{useRef} from "react";
+import React ,{useRef , useState} from "react";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
-import { Grid, TextField } from "@material-ui/core";
+import { Grid, TextField, Button,Box } from "@material-ui/core";
 
 
-import {UserAuth} from '../contexts/AuthContext'
+import { UserAuth } from '../contexts/AuthContext'
 import {db} from '../firebase'
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,6 +14,22 @@ function EditProfile(){
     const NameRef = useRef();
     const AgeRef = useRef();
     const WeightRef = useRef();
+
+    const [error, setError] = useState("");
+    const { setEmail } = UserAuth();
+
+    const handleSubmit = async(e) =>{
+        try{
+            await setEmail(EmailRef.current.value)
+        }
+        catch(e){
+            setError(e.message)
+            alert(e.message)
+            console.log(e.message)
+        }
+
+        navigate('/profile')
+    }
 
     return(
         <div>
@@ -37,34 +53,35 @@ function EditProfile(){
                 <Grid item xs={8}>
                     <p style={{fontFamily:"inter", fontSize:'32px' , fontStyle : "regular" , textDecoration: "underline"}}>Edit Profile</p>
 
+                    <Box component='form'>
+                        <div style={{display: 'flex' , alignItems:"center", flexDirection:'row'}}>
+                            <p style={{margin: 20 , fontSize:20, textAlign:'center', paddingRight:10}}>Email: </p>
+                            <TextField
+                                    margin="normal"
+                                    inputRef={EmailRef}
+                                    variant='outlined'
+                                    placeholder="Enter your new email "
+                                    size ='small'
+                                    
+                                />
 
-                    <div style={{display: 'flex' , alignItems:"center", flexDirection:'row'}}>
-                        <p style={{margin: 20 , fontSize:20, textAlign:'center', paddingRight:10}}>Email: </p>
-                        <TextField
-                                margin="normal"
-                                inputRef={EmailRef}
-                                variant='outlined'
-                                placeholder="Enter your new email "
-                                size ='small'
-                                
-                            />
+                        </div>
 
-                    </div>
 
-                    <div style={{display: 'flex',alignItems:"center"}}>
-                        <p style={{margin:20 , fontSize:20, textAlign:'center', paddingRight:10}}>Name: </p>
-                        <TextField
-                                margin="normal"
-                                inputRef={NameRef}
-                                variant='outlined'
-                                placeholder="Enter your new Name "
-                                size ='small'
-                                
-                            />
+                        <div style={{display: 'flex',alignItems:"center"}}>
+                            <p style={{margin:20 , fontSize:20, textAlign:'center', paddingRight:10}}>Name: </p>
+                            <TextField
+                                    margin="normal"
+                                    inputRef={NameRef}
+                                    variant='outlined'
+                                    placeholder="Enter your new Name "
+                                    size ='small'
+                                    
+                                />
 
-                    </div>
+                        </div>
 
-                    <div style={{display: 'flex',alignItems:"center"}}>
+                        <div style={{display: 'flex',alignItems:"center"}}>
                         <p style={{margin:20, fontSize:20 , textAlign:'center', paddingRight:25}}>Age: </p>
                         <TextField
                                 margin="normal"
@@ -75,7 +92,8 @@ function EditProfile(){
                                 
                             />
 
-                    </div>
+                        </div>
+
 
                     <div style={{display: 'flex',alignItems:"center"}}>
                         <p style={{margin:20,fontSize:20, textAlign:'center'}}>Weight: </p>
@@ -89,6 +107,24 @@ function EditProfile(){
                                 
                             />
                     </div>
+
+                    <Button onClick={handleSubmit} variant="contained" type="submit" fullWidth style={{maxWidth:300, textTransform:'none' , backgroundColor:'pink'}}>
+                    Submit
+                    </Button>
+
+
+
+
+
+
+
+                        
+                    </Box>
+
+
+
+                  
+
           
 
 
