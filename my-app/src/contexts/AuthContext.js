@@ -1,54 +1,71 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { auth  } from '../firebase'
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut, onAuthStateChanged  , sendPasswordResetEmail , updateEmail} from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
+import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  updateEmail,
+  updateProfile,
+} from "firebase/auth";
 
+const UserContext = React.createContext();
 
-const UserContext = React.createContext()
+export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState({});
 
-export const AuthContextProvider =({children}) => {
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    const [user,setUser] = useState({})
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    const createUser = (email , password) =>{
-        return createUserWithEmailAndPassword(auth,email,password)
-    }
+  const logout = () => {
+    return signOut(auth);
+  };
 
-    const signIn =  (email, password) =>{
-        return signInWithEmailAndPassword (auth, email,password)
-        }
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
-    
+  const setEmail = (newEmail) => {
+    return updateEmail(auth.currentUser, newEmail);
+  };
 
-    const logout =() =>{
-        return signOut(auth)
-    }
+  const updateProfile = (newProfile) => {
+    return updateProfile(auth.currentUser, newProfile);
+  };
 
-    const resetPassword=(email)=>{
-        return sendPasswordResetEmail(auth,email)
-    }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser);
+      setUser(currentUser);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
-    const setEmail = (newEmail) =>{
-        return updateEmail(auth.currentUser,newEmail)
-    }
+  return (
+    <UserContext.Provider
+      value={{
+        createUser,
+        user,
+        logout,
+        signIn,
+        resetPassword,
+        setEmail,
+        updateProfile,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
 
-    useEffect(()=> {
-        const unsubscribe = onAuthStateChanged(auth , (currentUser) => {
-            console.log(currentUser)
-            setUser(currentUser)
-        })
-        return () =>{
-            unsubscribe()
-        }
-    },[])
-
-     return(
-        <UserContext.Provider value ={{createUser ,user ,logout , signIn , resetPassword ,setEmail}}>
-            {children}
-        </UserContext.Provider>
-     )
-}
-
-export const UserAuth =() =>{
-    return useContext(UserContext)
-}
-
+export const UserAuth = () => {
+  return useContext(UserContext);
+};

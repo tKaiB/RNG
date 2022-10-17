@@ -9,11 +9,12 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-import { UserAuth } from "../contexts/AuthContext";
-import { db, upload } from "../firebase";
-
+import { UserAuth, AuthContextProvider } from "../contexts/AuthContext";
+import { db, upload, storage } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { updateProfile } from "firebase/auth";
 
 function UserProfile() {
   const { user } = UserAuth();
@@ -36,6 +37,19 @@ function UserProfile() {
     } else {
       console.log("error");
     }
+  }
+
+  async function upload(file, user, setLoading) {
+    const fileRef = ref(storage, user.uid + ".png");
+    setLoading(true);
+    const snapshot = await uploadBytes(fileRef, file);
+
+    const photolink = await getDownloadURL(fileRef);
+
+    updateProfile(user, { photolink });
+
+    setLoading(false);
+    alert("Uploaded file!");
   }
 
   getRecord();
@@ -123,21 +137,25 @@ function UserProfile() {
           </p>
           <p>
             Email : {user && user.email}
-            <Box
-              component="form"
-              sx={{
-                marginLeft: "2rem",
-                display: "inline-flex",
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                id="outlined-basic"
-                label="Insert Email"
-                variant="standard"
-              />
-            </Box>
+            {user && user.email ? (
+              <box></box>
+            ) : (
+              <Box
+                component="form"
+                sx={{
+                  marginLeft: "2rem",
+                  display: "inline-flex",
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="outlined-basic"
+                  label="Insert Email"
+                  variant="standard"
+                />
+              </Box>
+            )}
           </p>
           <p id="age">
             Age:
