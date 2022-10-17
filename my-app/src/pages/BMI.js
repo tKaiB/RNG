@@ -63,6 +63,8 @@ function BMI() {
     catch(e){
       setError(e.message)
       alert(e.message)
+      console.log(e.message)
+      
       
     }
 
