@@ -142,10 +142,6 @@ function BMI() {
     setShow(!show)
     setValue3(bmi)
 
-
-    
-    
-
   }
 
 

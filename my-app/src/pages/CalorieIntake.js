@@ -132,7 +132,7 @@ function CalorieIntake() {
                 <FormControlLabel control={<Checkbox />} label="Lost Fat" />
                 <FormControlLabel control={<Checkbox />} label="Gain Muscle" />
               </FormGroup>
-              <div style={{ padding: "1rem" }}>
+              <div style={{ paddingTop: 10 , paddingBottom:10 }}>
                 <Button
                   variant="contained"
                   style={{ backgroundColor: "Pink" }}
