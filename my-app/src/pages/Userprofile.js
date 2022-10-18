@@ -44,10 +44,11 @@ function UserProfile() {
     setLoading(true);
     const snapshot = await uploadBytes(fileRef, file);
 
-    const photolink = await getDownloadURL(fileRef);
+    const photoURL = await getDownloadURL(fileRef);
 
-    updateProfile(user, { photolink });
-
+    updateProfile(user, { photoURL });
+    //console.log(photolink);
+    //console.log(user.photoURL);
     setLoading(false);
     alert("Uploaded file!");
   }
@@ -64,8 +65,11 @@ function UserProfile() {
   }
 
   useEffect(() => {
+    //console.log(user.uid);
+    //console.log(user.photoURL);
     if (user?.photoURL) {
       setPhotoURL(user.photoURL);
+      //console.log(user.photoURL);
     }
   }, [user]);
 
