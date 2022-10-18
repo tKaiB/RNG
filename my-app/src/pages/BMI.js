@@ -35,16 +35,7 @@ function BMI() {
       console.log(e.message)
     }
   };
-  // const health = [
-  //   if (marks < 18.5) 
-  //       health = "Underweight"
-  //   if (maths >18.5 && marks < 24.9)
-  //       health= "Healthy"
-  //   if  (maths >25 && marks < 29.9)
-  //   health = "Overweight"
-  //   if (maths >30)
-  //   health = "Obese"
-  // ];
+
   
   const [value, setHealth] = React.useState("");
 
