@@ -133,13 +133,16 @@ function BMI() {
 
   const handleClick3= () =>{
 
-    const bmi = weight/((height/100) * (height/100))
+    let bmi = weight/((height/100) * (height/100))
     console.log(bmi)
-    testRef.current.value = bmi.toFixed(2)
+    bmi = bmi.toFixed(2)
+    testRef.current.value = bmi
     
 
     setShow(!show)
     setValue3(bmi)
+
+
     
     
 
@@ -306,12 +309,18 @@ function BMI() {
                   >
                     Your BMI Is
                   </h1>
+                    
+                  <h1 id= 'bmiOutput' style={{
+                      textAlign: "center",
+                      fontSize: "3rem",
+                      fontFamily: "'Times New Roman', Times, serif",
+                     }}>{bmiInput}</h1>
                   
 
                 </div>
                 <div style={{paddingLeft:65}}>
                   <BoyIcon
-                    style={{ fontSize: "30rem"}}
+                    style={{ fontSize: "30rem" }}
                     baseClassName="material-icons-boy"
                   >
                     BoyIcon
