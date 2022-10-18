@@ -105,6 +105,12 @@ function BMI() {
 
   const [height, setValue2] = React.useState(150);
 
+  const [bmiInput  , setValue3] = React.useState(8)
+  
+
+
+
+
   const handleChange1 = (event, newValue) => {
     setValue1(newValue);
   };
@@ -123,8 +129,20 @@ function BMI() {
     setGender("Female");
   };
 
+  const heightRef = useRef()
+
   const handleClick3= () =>{
+
+    const bmi = weight/((height/100) * (height/100))
+    console.log(bmi)
+    testRef.current.value = bmi.toFixed(2)
+    
+
     setShow(!show)
+    setValue3(bmi)
+    
+    
+
   }
 
 
@@ -235,6 +253,7 @@ function BMI() {
                     value={height}
                     onChange={handleChange2}
                     max={200}
+                    inputRef = {heightRef}
                   />
                 </FormControl>
                 <Button
@@ -309,6 +328,7 @@ function BMI() {
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     marks={marks}
+                    value = {bmiInput}
                     max={40}
                     onChange={handleChange3}
                   />
