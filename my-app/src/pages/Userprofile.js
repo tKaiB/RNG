@@ -20,7 +20,7 @@ function UserProfile() {
   const { user } = UserAuth();
   const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = React.useState(
-    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+    "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
   );
   const [loading, setLoading] = useState(false);
   async function getRecord() {

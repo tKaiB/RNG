@@ -15,6 +15,8 @@ import AdbIcon from "@mui/icons-material/Adb";
 
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
+import { db, upload, storage } from "../firebase";
+import { useEffect, useState } from "react";
 
 const settings = ["Profile", "Logout"];
 
@@ -48,6 +50,17 @@ const ResponsiveAppBar = () => {
       console.log(e.message);
     }
   };
+
+  const [photo, setPhoto] = useState(null);
+  const [photoURL, setPhotoURL] = React.useState(
+    "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+  );
+
+  useEffect(() => {
+    if (user?.photoURL) {
+      setPhotoURL(user.photoURL);
+    }
+  }, [user]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -97,7 +110,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Avatar" src={photoURL} />
               </IconButton>
             </Tooltip>
             <Menu
