@@ -61,6 +61,7 @@ function BMI() {
     }
 
     alert("Data added successfully")
+    console.log("jell0")
    
 
 
