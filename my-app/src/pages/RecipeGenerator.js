@@ -50,11 +50,11 @@ function RecipeGenerator(){
 
                             <CardContent>
                                 <Grid container spacing = {0}>
-                                    <Grid item xs={6} direction ="column">
+                                    <Grid item xs={6} >
                                         <Typography> Nutrition info</Typography>
                                     </Grid>
 
-                                    <Grid item xs = {6} direction ="column">
+                                    <Grid item xs = {6} >
                                         <Typography>Time to prep meals</Typography>
                                     </Grid>
 
@@ -80,11 +80,11 @@ function RecipeGenerator(){
 
                             <CardContent>
                                 <Grid container spacing = {0}>
-                                    <Grid item xs={6} direction ="column">
+                                    <Grid item xs={6} >
                                         <Typography> Nutrition info</Typography>
                                     </Grid>
 
-                                    <Grid item xs = {6} direction ="column">
+                                    <Grid item xs = {6} >
                                         <Typography>Time to prep meals</Typography>
                                     </Grid>
 
@@ -110,11 +110,11 @@ function RecipeGenerator(){
 
                             <CardContent>
                                 <Grid container spacing = {0}>
-                                    <Grid item xs={6} direction ="column">
+                                    <Grid item xs={6} >
                                         <Typography> Nutrition info</Typography>
                                     </Grid>
 
-                                    <Grid item xs = {6} direction ="column">
+                                    <Grid item xs = {6} >
                                         <Typography>Time to prep meals</Typography>
                                     </Grid>
 
