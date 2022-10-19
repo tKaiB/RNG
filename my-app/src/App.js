@@ -14,6 +14,7 @@ import AccountFaq from "./components/AccountFaq";
 import AccountAboutus from "./pages/AccountAboutus";
 import CalorieIntake from "./pages/CalorieIntake";
 import BmiInput from "./pages/BMI";
+import RecipeGenerator from "./pages/RecipeGenerator";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/accountaboutus" element={<AccountAboutus />} />
           <Route path="/calorieintake" element={<CalorieIntake />} />
           <Route path="/BmiInput" element={<BmiInput />} />
+          <Route path ='/recipegenerator' element={<RecipeGenerator />} />
         </Routes>
       </AuthContextProvider>
     </div>
