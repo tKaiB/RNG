@@ -15,7 +15,8 @@ import BoyIcon from "@mui/icons-material/Boy";
 import Box from "@mui/material/Box";
 
 import { db } from "../firebase";
-import { updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc, setDoc,addDoc , collection } from "firebase/firestore";
+
 
 function BMI() {
   const { user, logout } = UserAuth();
@@ -25,14 +26,7 @@ function BMI() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+
 
   const [value, setHealth] = React.useState("");
 
@@ -40,19 +34,38 @@ function BMI() {
     setHealth(health);
   };
 
-  const handleSubmit2 = async (e) => {
-    e.preventDefault();
+  // const handleSubmit2 = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await updateDoc(doc(db, "users", user.uid), {
+  //       bmi: testRef.current.value,
+  //     });
+  //     alert("BMI updated!");
+  //   } catch (e) {
+  //     setError(e.message);
+  //     alert(e.message);
+  //     console.log(e.message);
+  //   }
+  // };
+
+  const handleSubmit2 = async(e) =>{
+    e.preventDefault()
     try {
-      await updateDoc(doc(db, "users", user.uid), {
-        bmi: testRef.current.value,
+      const docRef = await addDoc(collection(db, user.uid), {
+        bmi:testRef.current.value
+
       });
-      alert("BMI updated!");
+
     } catch (e) {
-      setError(e.message);
-      alert(e.message);
-      console.log(e.message);
+      console.error("Error adding document: ", e);
     }
-  };
+
+    alert("Data added successfully")
+   
+
+
+
+  }
 
   const marks = [
     {
