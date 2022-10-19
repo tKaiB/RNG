@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./components/Navbar";
-import ForgetPassword from "./pages/ForgetPassword"
+import ForgetPassword from "./pages/ForgetPassword";
 import SignUp from "./pages/Signup";
 import SignIn from "./pages/Signin";
 import { AuthContextProvider } from "./contexts/AuthContext";
@@ -33,11 +33,11 @@ function App() {
           <Route path="/accountaboutus" element={<AccountAboutus />} />
           <Route path="/calorieintake" element={<CalorieIntake />} />
           <Route path="/BmiInput" element={<BmiInput />} />
-          <Route path ='/recipegenerator' element={<RecipeGenerator />} />
+          <Route path="/recipegenerator" element={<RecipeGenerator />} />
         </Routes>
       </AuthContextProvider>
     </div>
   );
 }
-
+//testing
 export default App;
