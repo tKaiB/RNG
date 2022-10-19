@@ -29,15 +29,11 @@ function SideBar() {
           <HomeIcon />
           Home
         </ToggleButton>
-        <ToggleButton
-          component={Link}
-          to="/CalorieIntake"
-          value="Calorie Intake"
-        >
+        <ToggleButton component={Link} to="/CalorieIntake" value="Calorie Intake">
           <AnalyticsIcon />
           Calorie Intake
         </ToggleButton>
-        <ToggleButton component ={Link} to ='/recipegenerator' value="Recipe Generator">
+        <ToggleButton component={Link} to='/recipegenerator' value="Recipe Generator">
           <FormatListNumberedIcon />
           Recipe Generator
         </ToggleButton>
