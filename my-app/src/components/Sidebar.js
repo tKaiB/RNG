@@ -37,7 +37,7 @@ function SideBar() {
           <AnalyticsIcon />
           Calorie Intake
         </ToggleButton>
-        <ToggleButton value="Recipe Generator">
+        <ToggleButton component ={Link} to ='/recipegenerator' value="Recipe Generator">
           <FormatListNumberedIcon />
           Recipe Generator
         </ToggleButton>
