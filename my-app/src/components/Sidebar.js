@@ -9,6 +9,7 @@ import InputIcon from "@mui/icons-material/Input";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import { Link, useNavigate } from "react-router-dom";
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 
 function SideBar() {
   const [view, setView] = React.useState("Home");
@@ -40,6 +41,10 @@ function SideBar() {
         <ToggleButton component={Link} to="/BmiInput" value="BMI Input">
           <InputIcon />
           BMI Input
+        </ToggleButton>
+        <ToggleButton component={Link} to="/monthlybmichart" value="BMI Chart">
+          <InputIcon />
+          BMI Chart
         </ToggleButton>
       </ToggleButtonGroup>
     </Grid>
