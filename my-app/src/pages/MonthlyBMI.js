@@ -6,7 +6,15 @@ import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
 import { JSCharting } from "jscharting-react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  limit,
+  orderBy,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 const drawerWidth = 240;
@@ -23,21 +31,25 @@ function MonthlyBMI() {
       console.log(e.message);
     }
   };
-  // const docRef = collection(db, "user.uid");
+  const docRef = collection(db, user.uid);
 
-  // const q = query(docRef, where("bmi", "==", 13.33));
-
+  const q = query(docRef, orderBy("date", "asc"));
+  const bmidata = [];
+  const time = [];
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "user.uid"));
-
+    const querySnapshot = await getDocs(q);
+    //console.log(querySnapshot.id);
+    let i = 0;
     querySnapshot.forEach((doc) => {
-      console.log("testing2");
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data(bmi));
+      bmidata[i] = doc.data().bmi;
+      time[i] = doc.data().bmi;
+      i++;
+      //console.log(doc.id, " => ", doc.data().bmi);
     });
   };
-  getData();
 
+  getData();
+  console.log(bmidata);
   const config = {
     type: "Vertical column",
     xAxis: { label_text: "Date" },
@@ -46,9 +58,9 @@ function MonthlyBMI() {
       {
         Name: "Monthly BMI Chart",
         points: [
-          { x: "A", y: 50 },
-          { x: "B", y: 30 },
-          { x: "C", y: 50 },
+          // { X: time[0], Y: bmidata[0] },
+          // { X: time[1], Y: bmidata[1] },
+          // { X: time[2], Y: bmidata[2] },
         ],
       },
     ],
