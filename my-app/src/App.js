@@ -15,6 +15,8 @@ import AccountAboutus from "./pages/AccountAboutus";
 import CalorieIntake from "./pages/CalorieIntake";
 import BmiInput from "./pages/BMI";
 import RecipeGenerator from "./pages/RecipeGenerator";
+import MonthlyBMI from "./pages/MonthlyBMI";
+import MonthlyCalorie from "./pages/MonthlyCalorie";
 
 function App() {
   return (
@@ -34,10 +36,12 @@ function App() {
           <Route path="/calorieintake" element={<CalorieIntake />} />
           <Route path="/BmiInput" element={<BmiInput />} />
           <Route path="/recipegenerator" element={<RecipeGenerator />} />
+          <Route path="/monthlybmichart" element={<MonthlyBMI />} />"
+          <Route path="/monthlycaloriechart" element={<MonthlyCalorie />} />
         </Routes>
       </AuthContextProvider>
     </div>
   );
 }
-//testing
+
 export default App;

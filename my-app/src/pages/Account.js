@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
@@ -37,7 +37,7 @@ function Account() {
           <Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
             <SideBar />
           </Grid>
-          <Grid xs={5}>
+          <Grid component={Link} to="/monthlybmichart" xs={5}>
             <div>
               <img
                 src="https://source.unsplash.com/random"
@@ -57,7 +57,7 @@ function Account() {
               Monthly BMI Chart
             </h1>
           </Grid>
-          <Grid xs={5}>
+          <Grid component={Link} to="/monthlycaloriechart" xs={5}>
             <div>
               <img
                 src="https://source.unsplash.com/random"
