@@ -46,6 +46,7 @@ function CalorieIntake() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
 
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -56,6 +57,7 @@ function CalorieIntake() {
   };
 
   const [values, setValue] = React.useState(30);
+  const [meal, setMeal] = useState(3);
 
   const [show, setShow] = useState(false);
 
@@ -65,6 +67,10 @@ function CalorieIntake() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleChange2 = (event, newValue) => {
+    setMeal(newValue);
   };
 
   return (
@@ -141,7 +147,7 @@ function CalorieIntake() {
                   Calculate Daily Calories
                 </Button>
               </div>
-              <p>I eat X meals a day</p>
+              <p>I eat {meal} meals a day</p>
               <Slider
                 style={{ width: "15rem" }}
                 size="small"
@@ -149,6 +155,8 @@ function CalorieIntake() {
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 max={10}
+                value = {meal}
+                onChange = {handleChange2}
               />
               <p>Enter Daily Calorie Intake</p>
               <FormControl sx={{ width: "25ch" }} variant="outlined">
