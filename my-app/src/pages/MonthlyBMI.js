@@ -34,9 +34,11 @@ function MonthlyBMI() {
   const docRef = collection(db, user.uid);
 
   const q = query(docRef, orderBy("date", "asc"));
-  const bmidata = [];
-  const time = [];
+
   const getData = async () => {
+    const bmidata = [];
+    const time = [];
+
     const querySnapshot = await getDocs(q);
     //console.log(querySnapshot.id);
     let i = 0;
@@ -46,10 +48,14 @@ function MonthlyBMI() {
       i++;
       //console.log(doc.id, " => ", doc.data().bmi);
     });
+
+    return [bmidata,time]
   };
 
-  getData();
-  console.log(bmidata);
+  console.log(getData())
+  const bmidata = getData()[0]
+  const time = getData()[1]
+
   const config = {
     type: "Vertical column",
     xAxis: { label_text: "Date" },
