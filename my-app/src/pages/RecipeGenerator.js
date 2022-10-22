@@ -8,6 +8,8 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
+import {limit, orderBy, doc, collection, query, where, getDocs} from "firebase/firestore";
+import { db } from "../firebase";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -27,6 +29,8 @@ function RecipeGenerator() {
     const [expanded2, setExpanded2] = useState(false)
     const [expanded3, setExpanded3] = useState(false)
 
+    const [steps , setSteps] = useState('')
+
     const handleExpandClick = () => {
         setExpanded(!expanded)
       }
@@ -38,6 +42,44 @@ function RecipeGenerator() {
         setExpanded3(!expanded3)
       }
 
+    const handleClick = async() => {
+
+        const q = query(collection(db, "recipe"), where("minutes", "==", Number(5)));
+
+        try {
+            const querySnapshot = await getDocs(q)
+            let recipe=[]
+            let i=0
+            querySnapshot.forEach((doc)=>{
+                recipe[i] = doc.data()
+                i++
+            })
+
+            const stepArray = recipe[0].steps.split(',')
+            let stepResult = '\n'
+            for(let i = 0; i<stepArray.length;i++){
+                stepResult = stepResult + `${i+1} . ${stepArray[i]} \n` 
+                // stepResult = stepResult + "hello" + "\n"
+            }
+            // stepResult.replace(/\n/g, "<br />")
+            console.log(stepResult)
+            setSteps(stepResult)
+
+          
+
+
+            
+        } catch (e) {
+            alert(e.message)
+            
+        }
+
+        
+
+
+
+    }
+
 
 
     return (
@@ -45,7 +87,8 @@ function RecipeGenerator() {
             <div style={{ paddingBottom: 10 }}>
                 <ResponsiveAppBar />
                 <div style={{ position: 'absolute', right: '40%', padding: '3rem' }}>
-                    <Button>
+                    <Button
+                    onClick = {handleClick}>
                         Generate Recipe
                     </Button>
 
@@ -112,6 +155,7 @@ function RecipeGenerator() {
                                 <CardContent>
                                     <div>
                                         <Typography>How to make it :</Typography>
+                                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{steps}</Typography>
                                     </div>
 
                                     <div style={{paddingTop:10}}>
