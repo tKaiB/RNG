@@ -30,6 +30,9 @@ function RecipeGenerator() {
     const [expanded3, setExpanded3] = useState(false)
 
     const [steps , setSteps] = useState('')
+    const [name , setName] = useState('')
+    const [ingredients, setIngredients] = useState('')
+    const [minutes , setMinutes] = useState('')
 
     const handleExpandClick = () => {
         setExpanded(!expanded)
@@ -64,6 +67,9 @@ function RecipeGenerator() {
             // stepResult.replace(/\n/g, "<br />")
             console.log(stepResult)
             setSteps(stepResult)
+            setName(recipe[0].name)
+            setIngredients(recipe[0].ingredients)
+            setMinutes(recipe[0].minutes)
 
           
 
@@ -119,7 +125,7 @@ function RecipeGenerator() {
                         {/* How to make it dynamic when changing the recipe */}
                         <Card sx={{ maxWidth: 360 }}> 
                             <CardHeader
-                                title="Maggi Goreng"
+                                title={name}
                                 subheader="meal 1"
                             />
 
@@ -131,6 +137,7 @@ function RecipeGenerator() {
 
                                     <Grid item xs={6} >
                                         <Typography>Time to prep meals</Typography>
+                                        <Typography>{minutes}</Typography>
                                     </Grid>
 
                                 </Grid>
@@ -159,7 +166,8 @@ function RecipeGenerator() {
                                     </div>
 
                                     <div style={{paddingTop:10}}>
-                                        <Typography> Ingredients:</Typography>
+                                        <Typography > Ingredients:</Typography>
+                                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{ingredients}</Typography>
                                     </div>
 
                                 </CardContent>
