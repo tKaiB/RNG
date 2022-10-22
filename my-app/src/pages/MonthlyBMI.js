@@ -31,13 +31,14 @@ function MonthlyBMI() {
       console.log(e.message);
     }
   };
-  const docRef = collection(db, user.uid);
-
-  const q = query(docRef, orderBy("date", "asc"));
 
   
 
   const getData = async () => {
+    const docRef = collection(db, user.uid);
+
+    const q = query(docRef, orderBy("date", "asc"));
+  
     const bmidata = [];
     const time = [];
 
@@ -59,11 +60,13 @@ function MonthlyBMI() {
     // declare the data fetching function
     const fetchData = async () => {
       const [bmidata,time] = await getData()
-      return [bmidata,time]
+      console.log(bmidata)
+      
+      
     }
   
     // call the function
-    const [bmidata,time] = fetchData()
+    fetchData()
 
     
 
