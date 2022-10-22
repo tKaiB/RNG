@@ -33,6 +33,7 @@ function RecipeGenerator() {
     const [name , setName] = useState('')
     const [ingredients, setIngredients] = useState('')
     const [minutes , setMinutes] = useState('')
+    const [nutrition , setNutrition] = useState('')
 
     const handleExpandClick = () => {
         setExpanded(!expanded)
@@ -62,10 +63,8 @@ function RecipeGenerator() {
             let stepResult = '\n'
             for(let i = 0; i<stepArray.length;i++){
                 stepResult = stepResult + `${i+1} . ${stepArray[i]} \n` 
-                // stepResult = stepResult + "hello" + "\n"
             }
-            // stepResult.replace(/\n/g, "<br />")
-            console.log(stepResult)
+
             setSteps(stepResult)
             setName(recipe[0].name)
             // setIngredients(recipe[0].ingredients)
@@ -78,6 +77,17 @@ function RecipeGenerator() {
             }
             ingredientResult = ingredientResult.replaceAll(/[']/g,'')
             setIngredients(ingredientResult)
+
+
+            const nutritionArray = recipe[0].nutrition.split(",")
+            let nutritionResult = ''
+
+            for(let i = 0; i<ingredientsArray.length;i++){
+                nutritionResult = nutritionResult + `${(nutritionArray[i])} \n` 
+                
+            }
+            setNutrition(nutritionResult)
+
 
             setMinutes(recipe[0].minutes)
 
@@ -142,12 +152,13 @@ function RecipeGenerator() {
                             <CardContent>
                                 <Grid container spacing={0}>
                                     <Grid item xs={6} >
-                                        <Typography> Nutrition info</Typography>
+                                        <Typography > Nutrition info</Typography>
+                                        <Typography style={{whiteSpace: 'pre-line'}}> {nutrition}</Typography>
                                     </Grid>
 
                                     <Grid item xs={6} >
                                         <Typography>Time to prep meals</Typography>
-                                        <Typography>{minutes}</Typography>
+                                        <Typography align = "center">{minutes}</Typography>
                                     </Grid>
 
                                 </Grid>
