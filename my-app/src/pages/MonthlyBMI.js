@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -35,6 +35,8 @@ function MonthlyBMI() {
 
   const q = query(docRef, orderBy("date", "asc"));
 
+  
+
   const getData = async () => {
     const bmidata = [];
     const time = [];
@@ -52,9 +54,32 @@ function MonthlyBMI() {
     return [bmidata,time]
   };
 
-  console.log(getData())
-  const bmidata = getData()[0]
-  const time = getData()[1]
+
+  useEffect(() => {
+    // declare the data fetching function
+    const fetchData = async () => {
+      const [bmidata,time] = await getData()
+      return [bmidata,time]
+    }
+  
+    // call the function
+    const [bmidata,time] = fetchData()
+
+    
+
+  },)
+
+
+
+
+  
+
+
+  
+
+
+
+
 
   const config = {
     type: "Vertical column",
