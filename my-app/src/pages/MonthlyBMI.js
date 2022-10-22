@@ -46,7 +46,7 @@ function MonthlyBMI() {
     let i = 0;
     querySnapshot.forEach((doc) => {
       bmidata[i] = doc.data().bmi;
-      time[i] = doc.data().time;
+      time[i] = doc.data().date;
       i++;
       //console.log(doc.id, " => ", doc.data().bmi);
     });
@@ -67,7 +67,7 @@ function MonthlyBMI() {
           X: time[i],
           Y: bmidata[i],
         };
-        console.log(time[i], bmidata[i]);
+        //console.log(time[i], bmidata[i]);
         setPoints((points) => [...points, newPoint]);
       }
     };
@@ -77,23 +77,25 @@ function MonthlyBMI() {
   }, []);
   // get first point
 
-  console.log(points);
   const config = {
+    debug: true,
     type: "line",
     xAxis: { scale_type: "time" },
     series: [
       {
         name: "BMI Chart",
         points: [
-          points.map((p) => {
-            return { x: p.X, y: p.Y };
-          }),
-          // ["1/1/2020", 29.9],
-          // ["1/2/2020", 71.5],
-          // ["1/3/2020", 106.4],
-          // ["1/6/2020", 129.2],
-          // ["1/7/2020", 144.0],
-          // ["1/8/2020", 176.0],
+          // points.map((p) => {
+          //   const date = new Date(p.X * 1000);
+          //   console.log(date.toLocaleDateString("en-US"), p.Y);
+          //   return { x: date.toLocaleDateString("en-US"), y: p.Y };
+          // }),
+          ["1/1/2020", 29.9],
+          ["1/2/2020", 71.5],
+          ["1/3/2020", 106.4],
+          ["1/6/2020", 129.2],
+          ["1/7/2020", 144.0],
+          ["1/8/2020", 176.0],
         ],
       },
     ],
