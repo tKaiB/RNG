@@ -68,7 +68,17 @@ function RecipeGenerator() {
             console.log(stepResult)
             setSteps(stepResult)
             setName(recipe[0].name)
-            setIngredients(recipe[0].ingredients)
+            // setIngredients(recipe[0].ingredients)
+
+            const ingredientsArray = recipe[0].ingredients.split(",")
+            let ingredientResult = ''
+            for(let i = 0; i<ingredientsArray.length;i++){
+                ingredientResult = ingredientResult + `${i+1} . ${String(ingredientsArray[i])} \n` 
+                // stepResult = stepResult + "hello" + "\n"
+            }
+            ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+            setIngredients(ingredientResult)
+
             setMinutes(recipe[0].minutes)
 
           
