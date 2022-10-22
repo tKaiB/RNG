@@ -16,6 +16,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import BMI from "./BMI";
 
 const drawerWidth = 240;
 
@@ -32,13 +33,11 @@ function MonthlyBMI() {
     }
   };
 
-  
-
   const getData = async () => {
     const docRef = collection(db, user.uid);
 
     const q = query(docRef, orderBy("date", "asc"));
-  
+
     const bmidata = [];
     const time = [];
 
@@ -47,70 +46,55 @@ function MonthlyBMI() {
     let i = 0;
     querySnapshot.forEach((doc) => {
       bmidata[i] = doc.data().bmi;
-      time[i] = doc.data().bmi;
+      time[i] = doc.data().time;
       i++;
       //console.log(doc.id, " => ", doc.data().bmi);
     });
 
-    return [bmidata,time]
+    return [bmidata, time];
   };
 
-  const [points, setPoints] = useState([])
-
-
-
+  const [points, setPoints] = useState([]);
 
   useEffect(() => {
     // declare the data fetching function
     const fetchData = async () => {
-      const [bmidata,time] = await getData()
-      // set object 
-      for(let i =0 ; i<bmidata.length;i++){
+      const [bmidata, time] = await getData();
+      //console.log(bmidata.length);
+      // set object
+      for (let i = 0; i < bmidata.length; i++) {
         let newPoint = {
-          X: time[i], 
-          Y: bmidata[i]
-          
-        }
-        console.log(time[i],bmidata[i])
-        setPoints(points =>[...points , newPoint])
-
+          X: time[i],
+          Y: bmidata[i],
+        };
+        console.log(time[i], bmidata[i]);
+        setPoints((points) => [...points, newPoint]);
       }
+    };
 
-      
-      
-    }
-  
     // call the function
-    fetchData()
+    fetchData();
+  }, []);
+  // get first point
 
-  },)
-
-
-
-
-  
-
-
-  
-
-
-
-
-
+  console.log(points);
   const config = {
-    type: "Vertical column",
-    xAxis: { label_text: "Date" },
-    yAxis: { label_text: "BMI" },
+    type: "line",
+    xAxis: { scale_type: "time" },
     series: [
       {
-        Name: "Monthly BMI Chart",
-        // points: [
-        //   // { X: time[0], Y: bmidata[0] },
-        //   // { X: time[1], Y: bmidata[1] },
-        //   // { X: time[2], Y: bmidata[2] },
-        // ]
-        
-        points : points,
+        name: "BMI Chart",
+        points: [
+          points.map((p) => {
+            return { x: p.X, y: p.Y };
+          }),
+          // ["1/1/2020", 29.9],
+          // ["1/2/2020", 71.5],
+          // ["1/3/2020", 106.4],
+          // ["1/6/2020", 129.2],
+          // ["1/7/2020", 144.0],
+          // ["1/8/2020", 176.0],
+        ],
       },
     ],
   };
