@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -55,20 +55,33 @@ function MonthlyBMI() {
     return [bmidata,time]
   };
 
+  const [points, setPoints] = useState([])
+
+
+
 
   useEffect(() => {
     // declare the data fetching function
     const fetchData = async () => {
       const [bmidata,time] = await getData()
-      console.log(bmidata)
+      // set object 
+      for(let i =0 ; i<bmidata.length;i++){
+        let newPoint = {
+          X: time[i], 
+          Y: bmidata[i]
+          
+        }
+        console.log(time[i],bmidata[i])
+        setPoints(points =>[...points , newPoint])
+
+      }
+
       
       
     }
   
     // call the function
     fetchData()
-
-    
 
   },)
 
@@ -91,11 +104,13 @@ function MonthlyBMI() {
     series: [
       {
         Name: "Monthly BMI Chart",
-        points: [
-          // { X: time[0], Y: bmidata[0] },
-          // { X: time[1], Y: bmidata[1] },
-          // { X: time[2], Y: bmidata[2] },
-        ],
+        // points: [
+        //   // { X: time[0], Y: bmidata[0] },
+        //   // { X: time[1], Y: bmidata[1] },
+        //   // { X: time[2], Y: bmidata[2] },
+        // ]
+        
+        points : points,
       },
     ],
   };
