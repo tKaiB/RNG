@@ -8,6 +8,8 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
+import {limit, orderBy, doc, collection, query, where, getDocs} from "firebase/firestore";
+import { db } from "../firebase";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -27,6 +29,12 @@ function RecipeGenerator() {
     const [expanded2, setExpanded2] = useState(false)
     const [expanded3, setExpanded3] = useState(false)
 
+    const [steps , setSteps] = useState('')
+    const [name , setName] = useState('')
+    const [ingredients, setIngredients] = useState('')
+    const [minutes , setMinutes] = useState('')
+    const [nutrition , setNutrition] = useState('')
+
     const handleExpandClick = () => {
         setExpanded(!expanded)
       }
@@ -38,6 +46,66 @@ function RecipeGenerator() {
         setExpanded3(!expanded3)
       }
 
+    const handleClick = async() => {
+
+        const q = query(collection(db, "recipe"), where("minutes", "==", Number(5)));
+
+        try {
+            const querySnapshot = await getDocs(q)
+            let recipe=[]
+            let i=0
+            querySnapshot.forEach((doc)=>{
+                recipe[i] = doc.data()
+                i++
+            })
+
+            const stepArray = recipe[0].steps.split(',')
+            let stepResult = '\n'
+            for(let i = 0; i<stepArray.length;i++){
+                stepResult = stepResult + `${i+1} . ${stepArray[i]} \n` 
+            }
+
+            setSteps(stepResult)
+            setName(recipe[0].name)
+            // setIngredients(recipe[0].ingredients)
+
+            const ingredientsArray = recipe[0].ingredients.split(",")
+            let ingredientResult = ''
+            for(let i = 0; i<ingredientsArray.length;i++){
+                ingredientResult = ingredientResult + `${i+1} . ${String(ingredientsArray[i])} \n` 
+                // stepResult = stepResult + "hello" + "\n"
+            }
+            ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+            setIngredients(ingredientResult)
+
+
+            const nutritionArray = recipe[0].nutrition.split(",")
+            let nutritionResult = ''
+
+            for(let i = 0; i<ingredientsArray.length;i++){
+                nutritionResult = nutritionResult + `${(nutritionArray[i])} \n` 
+                
+            }
+            setNutrition(nutritionResult)
+
+
+            setMinutes(recipe[0].minutes)
+
+          
+
+
+            
+        } catch (e) {
+            alert(e.message)
+            
+        }
+
+        
+
+
+
+    }
+
 
 
     return (
@@ -45,7 +113,8 @@ function RecipeGenerator() {
             <div style={{ paddingBottom: 10 }}>
                 <ResponsiveAppBar />
                 <div style={{ position: 'absolute', right: '40%', padding: '3rem' }}>
-                    <Button>
+                    <Button
+                    onClick = {handleClick}>
                         Generate Recipe
                     </Button>
 
@@ -76,18 +145,20 @@ function RecipeGenerator() {
                         {/* How to make it dynamic when changing the recipe */}
                         <Card sx={{ maxWidth: 360 }}> 
                             <CardHeader
-                                title="Maggi Goreng"
+                                title={name}
                                 subheader="meal 1"
                             />
 
                             <CardContent>
                                 <Grid container spacing={0}>
                                     <Grid item xs={6} >
-                                        <Typography> Nutrition info</Typography>
+                                        <Typography > Nutrition info</Typography>
+                                        <Typography style={{whiteSpace: 'pre-line'}}> {nutrition}</Typography>
                                     </Grid>
 
                                     <Grid item xs={6} >
                                         <Typography>Time to prep meals</Typography>
+                                        <Typography align = "center">{minutes}</Typography>
                                     </Grid>
 
                                 </Grid>
@@ -112,10 +183,12 @@ function RecipeGenerator() {
                                 <CardContent>
                                     <div>
                                         <Typography>How to make it :</Typography>
+                                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{steps}</Typography>
                                     </div>
 
                                     <div style={{paddingTop:10}}>
-                                        <Typography> Ingredients:</Typography>
+                                        <Typography > Ingredients:</Typography>
+                                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{ingredients}</Typography>
                                     </div>
 
                                 </CardContent>
