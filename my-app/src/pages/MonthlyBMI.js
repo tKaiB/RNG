@@ -65,11 +65,12 @@ function MonthlyBMI() {
       //console.log(bmidata.length);
       // set object
       for (let i = 0; i < bmidata.length; i++) {
-        const newTime = new Date((time[i].seconds)*1000).toLocaleDate()
-        let newPoint = {
-          X: newTime,
-          Y: bmidata[i],
-        };
+        const newTime = new Date((time[i].seconds)*1000).toLocaleDateString()
+        let newPoint = [
+          newTime,
+          bmidata[i],
+        ];
+        console.log(newPoint)
         //console.log("effect test" + time[i], bmidata[i]);
         //console.log(time[i]);
         setPoints((points) => [...points, newPoint]);
