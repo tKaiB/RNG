@@ -65,8 +65,9 @@ function MonthlyBMI() {
       //console.log(bmidata.length);
       // set object
       for (let i = 0; i < bmidata.length; i++) {
+        const newTime = new Date((time[i].seconds)*1000).toLocaleDate()
         let newPoint = {
-          X: time[i],
+          X: newTime,
           Y: bmidata[i],
         };
         //console.log("effect test" + time[i], bmidata[i]);
@@ -98,23 +99,14 @@ function MonthlyBMI() {
     series: [
       {
         name: "BMI Chart",
-        points: [
-          points.map((p) => {
-            const date = new Date(p.X * 1000);
-            const formattedDate = date.toLocaleDateString("en-US");
-            console.log("The type of variable is", typeof formattedDate);
-            console.log(formattedDate, p.Y);
-
-            //console.log(p.X, p.Y);
-            return { x: formattedDate, y: p.Y };
-          }),
+        points: points,
           // ["1/1/2020", 29.9],
           // ["1/2/2020", 71.5],
           // ["1/3/2020", 106.4],
           // ["1/6/2020", 129.2],
           // ["1/7/2020", 144.0],
           // ["1/8/2020", 176.0],
-        ],
+        
       },
     ],
   };

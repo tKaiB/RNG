@@ -14,19 +14,49 @@ import { db } from "../firebase";
 
 function DynamicRecipeGenerator(){
 
+    const [expanded, setExpanded] = useState(false)
+    const [selectedId, setSelectedId] = useState(-1);
+    
+
     const cardInfo =[
-        {title : "Meal 1" , text : "Dyanmic card 1"},
-        {title : "Meal 2" , text : "Dyanmic card 2"},
-        {title : "Meal 3" , text : "Dyanmic card 3"},
+        {index : 1, title : "Meal 1" , text : "Dyanmic card 1" },
+        {index : 2, title : "Meal 2" , text : "Dyanmic card 2" },
+        {index : 3, title : "Meal 3" , text : "Dyanmic card 3" },
     ]
+
+    
+    const handleExpandClick = (index) => {
+
+        if(selectedId==index){
+            setSelectedId(-1)
+        }
+        else{
+            setSelectedId(index)
+        }
+
+
+       
+      }
+    
+    const ExpandMore = styled((props) => {
+        const { expand, ...other } = props;
+        return <IconButton {...other} />;
+      })(({ theme, expand }) => ({
+        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shortest,
+        }),
+      }));
+
     
 
     const renderCard= (card, index) =>{
         return(
-            <Card sx={{ maxWidth: 360 }} key ={index}> 
+            <Card sx={{ maxWidth: 360 }} key = {index} > 
             <CardHeader
-                title={card.title}
-                subheader="meal 1"
+                title={card.name}
+                subheader={card.text}
             />
 
             <CardContent>
@@ -34,13 +64,13 @@ function DynamicRecipeGenerator(){
                     <Grid item xs={6} >
                         <Typography > Nutrition info</Typography>
                         {/* <Typography style={{whiteSpace: 'pre-line'}}> {nutrition}</Typography> */}
-                        <Typography style={{whiteSpace: 'pre-line'}}> testing dynamic cards</Typography>
+                        <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography>
                     </Grid>
 
                     <Grid item xs={6} >
                         <Typography>Time to prep meals</Typography>
-                        <Typography align = "center"> minutes</Typography>
-                        <Typography>{card.text}</Typography>
+                        {/* <Typography align = "center">{minutes}</Typography> */}
+                        <Typography align = "center">minutes testing</Typography>
                     </Grid>
 
                 </Grid>
@@ -49,33 +79,40 @@ function DynamicRecipeGenerator(){
             </CardContent>
 
             <CardActions disableSpacing>
+                <ExpandMore
+                expand={expanded}
+                onClick={()=>handleExpandClick(index)}
+                aria-expanded={expanded}
+                aria-label="show more"
+                >
+                    <ExpandMoreIcon></ExpandMoreIcon>
 
-            <ExpandMoreIcon></ExpandMoreIcon>
-
+                </ExpandMore>
 
             </CardActions>
 
-
-
-            {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Collapse in={index==selectedId ? true:false} timeout="auto" unmountOnExit>
                 <CardContent>
                     <div>
                         <Typography>How to make it :</Typography>
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{steps}</Typography>
+                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{steps}</Typography> */}
+                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography>
                     </div>
 
                     <div style={{paddingTop:10}}>
                         <Typography > Ingredients:</Typography>
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{ingredients}</Typography>
+                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{ingredients}</Typography> */}
+                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography>
                     </div>
 
                 </CardContent>
                 
 
-            </Collapse> */}
+            </Collapse>
 
 
         </Card> 
+ 
         )
     }
 
