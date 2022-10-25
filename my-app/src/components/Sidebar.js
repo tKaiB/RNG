@@ -9,7 +9,7 @@ import InputIcon from "@mui/icons-material/Input";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import { Link, useNavigate } from "react-router-dom";
-import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
+import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
 
 function SideBar() {
   const [view, setView] = React.useState("Home");
@@ -30,11 +30,19 @@ function SideBar() {
           <HomeIcon />
           Home
         </ToggleButton>
-        <ToggleButton component={Link} to="/CalorieIntake" value="Calorie Intake">
+        <ToggleButton
+          component={Link}
+          to="/CalorieIntake"
+          value="Calorie Intake"
+        >
           <AnalyticsIcon />
           Calorie Intake
         </ToggleButton>
-        <ToggleButton component={Link} to='/recipegenerator' value="Recipe Generator">
+        <ToggleButton
+          component={Link}
+          to="/recipegenerator"
+          value="Recipe Generator"
+        >
           <FormatListNumberedIcon />
           Recipe Generator
         </ToggleButton>
@@ -45,6 +53,14 @@ function SideBar() {
         <ToggleButton component={Link} to="/monthlybmichart" value="BMI Chart">
           <InputIcon />
           BMI Chart
+        </ToggleButton>
+        <ToggleButton
+          component={Link}
+          to="/monthlycaloriechart"
+          value="Calorie Chart"
+        >
+          <InputIcon />
+          Calorie Chart
         </ToggleButton>
       </ToggleButtonGroup>
     </Grid>
