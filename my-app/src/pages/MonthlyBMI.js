@@ -34,9 +34,10 @@ function MonthlyBMI() {
   };
 
   const getData = async () => {
+    //console.log("test");
     const docRef = collection(db, user.uid);
 
-    const q = query(docRef, orderBy("date", "asc"));
+    const q = query(docRef, orderBy("time", "asc"));
 
     const bmidata = [];
     const time = [];
@@ -46,13 +47,14 @@ function MonthlyBMI() {
     let i = 0;
     querySnapshot.forEach((doc) => {
       bmidata[i] = doc.data().bmi;
-      time[i] = doc.data().date;
+      time[i] = doc.data().time;
       i++;
       //console.log(doc.id, " => ", doc.data().bmi);
     });
 
     return [bmidata, time];
   };
+  getData();
 
   const [points, setPoints] = useState([]);
 
@@ -67,8 +69,8 @@ function MonthlyBMI() {
           X: time[i],
           Y: bmidata[i],
         };
-        //console.log(time[i], bmidata[i]);
-        console.log(time[i])
+        //console.log("effect test" + time[i], bmidata[i]);
+        //console.log(time[i]);
         setPoints((points) => [...points, newPoint]);
       }
     };
@@ -81,16 +83,31 @@ function MonthlyBMI() {
   const config = {
     debug: true,
     type: "line",
-    xAxis: { scale_type: "time" },
+    xAxis: {
+      scale_type: "time",
+      time: {
+        parser: "MM/DD/YYYY HH:mm",
+        tooltipFormat: "ll HH:mm",
+        unit: "day",
+        unitStepSize: 1,
+        displayFormats: {
+          day: "MM/DD/YYYY",
+        },
+      },
+    },
     series: [
       {
         name: "BMI Chart",
         points: [
-          // points.map((p) => {
-          //   const date = new Date(p.X * 1000);
-          //   console.log(date.toLocaleDateString("en-US"), p.Y);
-          //   return { x: date.toLocaleDateString("en-US"), y: p.Y };
-          // }),
+          points.map((p) => {
+            const date = new Date(p.X * 1000);
+            const formattedDate = date.toLocaleDateString("en-US");
+            console.log("The type of variable is", typeof formattedDate);
+            console.log(formattedDate, p.Y);
+
+            //console.log(p.X, p.Y);
+            return { x: formattedDate, y: p.Y };
+          }),
           // ["1/1/2020", 29.9],
           // ["1/2/2020", 71.5],
           // ["1/3/2020", 106.4],
@@ -107,8 +124,6 @@ function MonthlyBMI() {
     height: "40rem",
     margin: "50px auto",
   };
-
-
 
   return (
     <div>
