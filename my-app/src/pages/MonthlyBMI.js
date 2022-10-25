@@ -65,11 +65,8 @@ function MonthlyBMI() {
       //console.log(bmidata.length);
       // set object
       for (let i = 0; i < bmidata.length; i++) {
-        const newTime = new Date((time[i].seconds)*1000).toLocaleDateString()
-        let newPoint = [
-          newTime,
-          bmidata[i],
-        ];
+        const newTime = new Date(time[i].seconds * 1000).toLocaleDateString();
+        let newPoint = [newTime, bmidata[i]];
         //console.log("effect test" + time[i], bmidata[i]);
         //console.log(time[i]);
         setPoints((points) => [...points, newPoint]);
@@ -85,7 +82,7 @@ function MonthlyBMI() {
     debug: true,
     type: "line",
     xAxis: {
-      scale_type: "time",
+      scale_type: "date",
       time: {
         parser: "MM/DD/YYYY HH:mm",
         tooltipFormat: "ll HH:mm",
@@ -100,13 +97,12 @@ function MonthlyBMI() {
       {
         name: "BMI Chart",
         points: points,
-          // ["1/1/2020", 29.9],
-          // ["1/2/2020", 71.5],
-          // ["1/3/2020", 106.4],
-          // ["1/6/2020", 129.2],
-          // ["1/7/2020", 144.0],
-          // ["1/8/2020", 176.0],
-        
+        // ["1/1/2020", 29.9],
+        // ["1/2/2020", 71.5],
+        // ["1/3/2020", 106.4],
+        // ["1/6/2020", 129.2],
+        // ["1/7/2020", 144.0],
+        // ["1/8/2020", 176.0],
       },
     ],
   };
