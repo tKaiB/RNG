@@ -13,6 +13,10 @@ import { db } from "../firebase";
 
 
 function DynamicRecipeGenerator(){
+    // get calorie from db 
+    // get number of meals --> size of array 
+    // number of calories per meal 
+
 
     const [expanded, setExpanded] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
