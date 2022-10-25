@@ -92,7 +92,7 @@ function CalorieIntake() {
   ];
 
   const handleClick = () => {
-    if (gainMuscle === true && loseFat === true) {
+    if ((gainMuscle === true && loseFat === true) || (gainMuscle==false && loseFat==false)) {
       alert("error!!");
       return;
     } else {
@@ -253,7 +253,7 @@ function CalorieIntake() {
               >
                 <OutlinedInput
                   id="outlined-adornment-calorieintake"
-                  defaultValue="0"
+                  value={calorie}
                   inputRef={testRef}
                   endAdornment={
                     <InputAdornment position="end">kcal</InputAdornment>
