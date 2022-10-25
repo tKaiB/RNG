@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -33,18 +33,12 @@ function createData(name, value) {
   return { name, value };
 }
 
-const rows = [
-  createData("Protein", 11),
-  createData("Carbs", 11),
-  createData("Fat", 11),
-  createData("Sugar", 11),
-  createData("SaturatedFat", 11),
-  createData("FoodEnergy", 11),
-];
+
 
 function CalorieIntake() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
+  const weightRef = useRef()
 
 
   const handleLogout = async () => {
@@ -60,9 +54,71 @@ function CalorieIntake() {
   const [meal, setMeal] = useState(3);
 
   const [show, setShow] = useState(false);
+  const [calorie,setCalorie] = useState(0)
 
-  const handleClick = () => {
-    setShow(!show);
+  const [protein , setProtein] = useState(0)
+  const [fat, setFat] = useState(0)
+  const [carbs, setCarbs]  = useState(0)
+  const [sugar, setSugar] = useState(0)
+  const [saturatedFat,setSaturatedFat] = useState(0)
+
+
+
+
+  const rows = [
+    createData("Protein", protein),
+    createData("Carbs", carbs),
+    createData("Fat", fat),
+    createData("Sugar", sugar),
+    createData("SaturatedFat",saturatedFat),
+  ];
+
+const handleClick = () => {
+    if (gainMuscle===true && loseFat ===true){
+      alert("error!!")
+      return
+    }
+    else{
+      const bodyWeight = weightRef.current.value * 2.205
+      const protein = (bodyWeight * 0.36).toFixed(2)
+      setProtein(protein)
+
+
+      if(gainMuscle===true){
+        
+        let dailyCalorie = bodyWeight*15 + 300
+        dailyCalorie=dailyCalorie.toFixed(0)
+        const carbs = ((dailyCalorie*0.5)/4).toFixed(2)
+        setCarbs(carbs)
+        const fat = (dailyCalorie*0.3).toFixed(2)
+        setFat(fat)
+        const sugar = ((dailyCalorie*0.1)/4).toFixed(2)
+        setSugar(sugar)
+        const saturatedFat = (dailyCalorie * 0.1).toFixed(2)
+        setSaturatedFat(saturatedFat)
+
+
+        setCalorie(dailyCalorie)
+
+      }
+      else{
+        let dailyCalorie = bodyWeight*15 -500
+        dailyCalorie=dailyCalorie.toFixed(0)
+        const carbs = (dailyCalorie*0.5/4).toFixed(2)
+        setCarbs(carbs)
+        const fat = (dailyCalorie*0.3).toFixed(2)
+        setFat(fat)
+        const sugar = ((dailyCalorie*0.1)/4).toFixed(2)
+        setSugar(sugar)
+        const saturatedFat = (dailyCalorie * 0.1).toFixed(2)
+        setSaturatedFat(saturatedFat)
+        setCalorie(dailyCalorie)
+
+      }
+      setShow(!show);
+
+    }
+      
   };
 
   const handleChange = (event, newValue) => {
@@ -72,6 +128,22 @@ function CalorieIntake() {
   const handleChange2 = (event, newValue) => {
     setMeal(newValue);
   };
+
+  // useState for checkbox 
+  const [loseFat,setLoseFat] = useState(false)
+  const [gainMuscle,setGainMuscle] = useState(false)
+
+
+  const handleChange3 = (event) =>{
+    setLoseFat(!loseFat)
+
+  }
+
+  const handleChange4 = (event) =>{
+    setGainMuscle(!gainMuscle)
+
+  }
+
 
   return (
     <div>
@@ -112,14 +184,17 @@ function CalorieIntake() {
                 <OutlinedInput
                   id="outlined-adornment-weight"
                   value={values}
+                  inputRef = {weightRef}
                   endAdornment={
                     <InputAdornment position="end">kg</InputAdornment>
                   }
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
+                    readOnly:true,
                     "aria-label": "weight",
                   }}
                   onChange={handleChange}
+                  
                 />
                 <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
                 <Slider
@@ -131,12 +206,13 @@ function CalorieIntake() {
                   value={values}
                   onChange={handleChange}
                   max={200}
+                  
                 />
               </FormControl>
               <p>I aim to:</p>
               <FormGroup>
-                <FormControlLabel control={<Checkbox />} label="Lost Fat" />
-                <FormControlLabel control={<Checkbox />} label="Gain Muscle" />
+                <FormControlLabel control={<Checkbox />} onChange={handleChange3} label="Lost Fat" />
+                <FormControlLabel control={<Checkbox />} onChange ={handleChange4} label="Gain Muscle" />
               </FormGroup>
               <div style={{ paddingTop: 10 , paddingBottom:10 }}>
                 <Button
@@ -163,6 +239,7 @@ function CalorieIntake() {
                 <OutlinedInput
                   id="outlined-adornment-calorieintake"
                   defaultValue="0"
+                  value = {calorie}
                   endAdornment={
                     <InputAdornment position="end">kcal</InputAdornment>
                   }
@@ -196,7 +273,7 @@ function CalorieIntake() {
                     textAlign: "center",
                   }}
                 >
-                  Total xxxx kcal
+                  Total {calorie} kcal
                 </p>
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
