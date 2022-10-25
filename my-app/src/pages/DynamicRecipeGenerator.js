@@ -51,7 +51,8 @@ function DynamicRecipeGenerator(){
         for(let i=0;i<meals;i++){
             let tempObject ={
                 title : `Meal ${i+1}`,
-                text : `Dynamic card ${i+1} `
+                text : `Dynamic card ${i+1} `,
+                expand: false
             }
             // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
             cardInfo.push(tempObject)
@@ -81,20 +82,6 @@ function DynamicRecipeGenerator(){
 
 
 
- 
-
-
-
-
-
- 
-  
-
-    
-
-
-
-
 
 
 
@@ -110,6 +97,9 @@ function DynamicRecipeGenerator(){
 
     
     const handleExpandClick = (index) => {
+        // console.log(card.expand)
+
+        // card.expand = !(card.expand)
 
         if(selectedId==index){
             setSelectedId(-1)
@@ -162,9 +152,9 @@ function DynamicRecipeGenerator(){
 
             <CardActions disableSpacing>
                 <ExpandMore
-                expand={expanded}
                 onClick={()=>handleExpandClick(index)}
-                aria-expanded={expanded}
+                aria-expanded={card.expand}
+                expanded={card.expand}
                 aria-label="show more"
                 >
                     <ExpandMoreIcon></ExpandMoreIcon>
@@ -173,7 +163,7 @@ function DynamicRecipeGenerator(){
 
             </CardActions>
 
-            <Collapse in={index==selectedId ? true:false} timeout="auto" unmountOnExit>
+            <Collapse in={index==selectedId?true:false} timeout="auto" unmountOnExit>
                 <CardContent>
                     <div>
                         <Typography>How to make it :</Typography>
