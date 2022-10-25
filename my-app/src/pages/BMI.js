@@ -15,7 +15,7 @@ import BoyIcon from "@mui/icons-material/Boy";
 import Box from "@mui/material/Box";
 
 import { db } from "../firebase";
-import { updateDoc, doc, setDoc,addDoc , collection } from "firebase/firestore";
+import { updateDoc, doc, setDoc,addDoc , collection , serverTimestamp } from "firebase/firestore";
 
 
 function BMI() {
@@ -52,7 +52,8 @@ function BMI() {
     e.preventDefault()
     try {
       const docRef = await addDoc(collection(db, user.uid), {
-        bmi:testRef.current.value
+        bmi:testRef.current.value,
+        time: serverTimestamp()
 
       });
 
