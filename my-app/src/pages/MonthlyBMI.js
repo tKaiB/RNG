@@ -70,7 +70,6 @@ function MonthlyBMI() {
           newTime,
           bmidata[i],
         ];
-        console.log(newPoint)
         //console.log("effect test" + time[i], bmidata[i]);
         //console.log(time[i]);
         setPoints((points) => [...points, newPoint]);
