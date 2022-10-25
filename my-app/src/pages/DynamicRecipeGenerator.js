@@ -9,8 +9,9 @@ import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import { UserAuth } from "../contexts/AuthContext";
-import {limit, orderBy, doc, collection, query, where, getDoc} from "firebase/firestore";
+import {limit, orderBy, doc, collection, query, where, getDocs , getDoc} from "firebase/firestore";
 import { db } from "../firebase";
+import { RepeatRounded } from "@material-ui/icons";
 
 
 function DynamicRecipeGenerator(){
@@ -20,31 +21,68 @@ function DynamicRecipeGenerator(){
     const { user,logout } = UserAuth();
 
 
-    const [cardInfo, setCardInfo] = useState([]);
+    // const [cardInfo, setCardInfo] = useState([]);
+    const cardInfo =[]
     const [hasLoaded, setLoaded] = useState(false);
     const [totalCalorie , setTotalCalorie] = useState(0)
     const [meals , setMeals] = useState(0)
     
+      const getData = async () => {
+        
+            const docRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(docRef);
 
-    // get data from db 
+            if (docSnap.exists()) {
+             return [docSnap.data().calorie, docSnap.data().meals]
+            } else {
+            // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
 
-    const getData = async () => {
-        //console.log("test");
-       
-        const docRef = doc(db, "users", user.uid);
-        return user.uid
+        
+
+
         
 
       };
 
+      const generateCardInfo = () =>{
+        for(let i=0;i<meals;i++){
+            let tempObject ={
+                title : `Meal ${i+1}`,
+                text : `Dynamic card ${i+1} `
+            }
+            // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+            cardInfo.push(tempObject)
+        }
+        console.log(cardInfo)
+    
+    }
+
+    
+
     useEffect(() =>{
+        if(!user) return;
         const fetchData = async ()=>{
-            const test = await getData()
-            
+            const[calorie, meals] = await getData()
+            setTotalCalorie(calorie)
+            setMeals(meals)  
+                   
         }
     
         fetchData()
-    },[]);
+          
+        
+        
+
+    },[user]);
+    generateCardInfo() 
+
+
+
+ 
+
+
 
 
 
@@ -164,15 +202,15 @@ function DynamicRecipeGenerator(){
 
 
     return  (
-        // <div>
-        //     {cardInfo.map(renderCard)}
-        // </div>
         <div>
-            <ResponsiveAppBar />
-            <h1>
-                {totalCalorie}
-            </h1>
+            {cardInfo.map(renderCard)}
         </div>
+        // <div>
+        //     <ResponsiveAppBar />
+        //     <h1>
+        //         {totalCalorie}, {meals}
+        //     </h1>
+        // </div>
         
 
         
