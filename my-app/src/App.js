@@ -17,6 +17,7 @@ import BmiInput from "./pages/BMI";
 import RecipeGenerator from "./pages/RecipeGenerator";
 import MonthlyBMI from "./pages/MonthlyBMI";
 import MonthlyCalorie from "./pages/MonthlyCalorie";
+import DynamicRecipeGenerator from "./pages/DynamicRecipeGenerator";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/recipegenerator" element={<RecipeGenerator />} />
           <Route path="/monthlybmichart" element={<MonthlyBMI />} />"
           <Route path="/monthlycaloriechart" element={<MonthlyCalorie />} />
+          <Route path= '/dynamic' element={<DynamicRecipeGenerator />} />
         </Routes>
       </AuthContextProvider>
     </div>
