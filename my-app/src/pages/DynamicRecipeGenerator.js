@@ -12,6 +12,7 @@ import { UserAuth } from "../contexts/AuthContext";
 import {limit, orderBy, doc, collection, query, where, getDocs , getDoc} from "firebase/firestore";
 import { db } from "../firebase";
 import { RepeatRounded } from "@material-ui/icons";
+import { maxWidth } from "@mui/system";
 
 
 function DynamicRecipeGenerator(){
@@ -134,7 +135,7 @@ function DynamicRecipeGenerator(){
 
     const renderCard= (card, index) =>{
         return(
-            <Card sx={{ maxWidth: 360 }} key = {index} > 
+            <Card sx={{margin:'10px'}} key = {index} > 
             <CardHeader
                 title={card.name}
                 subheader={card.text}
@@ -203,14 +204,39 @@ function DynamicRecipeGenerator(){
 
     return  (
         <div>
-            {cardInfo.map(renderCard)}
+            <div style={{ paddingBottom: 10}}>
+                <ResponsiveAppBar />
+            </div>
+            <Grid
+            container
+            alignItems="flex-start"
+            justify="flex-start"
+            spacing={1}
+            style={{ minHeight: "100vh" }}
+            >
+                
+                <Grid item xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
+                    <SideBar />
+                </Grid>
+                <Grid item xs ={1} style = {{maxWidth:30}}>
+
+                </Grid>
+
+                <Grid item xs = {10}>
+                    
+                    <div style={{display:"flex" , justifyContent: "space-between"}}>
+                        {cardInfo.map(renderCard)}
+
+                    </div>
+
+                </Grid>
+
+                
+                
+                
+            </Grid>
         </div>
-        // <div>
-        //     <ResponsiveAppBar />
-        //     <h1>
-        //         {totalCalorie}, {meals}
-        //     </h1>
-        // </div>
+ 
         
 
         
