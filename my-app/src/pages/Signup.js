@@ -36,7 +36,7 @@ function SignUp() {
               name: nameRef.current.value,
               age: 0,
               weight: 0,
-              calore: 0,
+              calorie: 0,
               bmi : 0
             });
           } catch (e) {

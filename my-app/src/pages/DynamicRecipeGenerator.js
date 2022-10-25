@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Grid, Button, CardActions } from "@material-ui/core";
 import { Card, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import ResponsiveAppBar from "../components/AccountNavBar";
@@ -8,7 +8,8 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
-import {limit, orderBy, doc, collection, query, where, getDocs} from "firebase/firestore";
+import { UserAuth } from "../contexts/AuthContext";
+import {limit, orderBy, doc, collection, query, where, getDoc} from "firebase/firestore";
 import { db } from "../firebase";
 
 
@@ -16,17 +17,57 @@ function DynamicRecipeGenerator(){
     // get calorie from db 
     // get number of meals --> size of array 
     // number of calories per meal 
+    const { user,logout } = UserAuth();
+
+
+    const [cardInfo, setCardInfo] = useState([]);
+    const [hasLoaded, setLoaded] = useState(false);
+    const [totalCalorie , setTotalCalorie] = useState(0)
+    const [meals , setMeals] = useState(0)
+    
+
+    // get data from db 
+
+    const getData = async () => {
+        //console.log("test");
+       
+        const docRef = doc(db, "users", user.uid);
+        return user.uid
+        
+
+      };
+
+    useEffect(() =>{
+        const fetchData = async ()=>{
+            const test = await getData()
+            
+        }
+    
+        fetchData()
+    },[]);
+
+
+
+ 
+  
+
+    
+
+
+
+
+
 
 
     const [expanded, setExpanded] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
     
 
-    const cardInfo =[
-        {index : 1, title : "Meal 1" , text : "Dyanmic card 1" },
-        {index : 2, title : "Meal 2" , text : "Dyanmic card 2" },
-        {index : 3, title : "Meal 3" , text : "Dyanmic card 3" },
-    ]
+    // const cardInfo =[
+    //     {index : 1, title : "Meal 1" , text : "Dyanmic card 1" },
+    //     {index : 2, title : "Meal 2" , text : "Dyanmic card 2" },
+    //     {index : 3, title : "Meal 3" , text : "Dyanmic card 3" },
+    // ]
 
     
     const handleExpandClick = (index) => {
@@ -37,8 +78,6 @@ function DynamicRecipeGenerator(){
         else{
             setSelectedId(index)
         }
-
-
        
       }
     
@@ -124,11 +163,19 @@ function DynamicRecipeGenerator(){
 
 
 
-    return(
+    return  (
+        // <div>
+        //     {cardInfo.map(renderCard)}
+        // </div>
         <div>
-            {cardInfo.map(renderCard)}
+            <ResponsiveAppBar />
+            <h1>
+                {totalCalorie}
+            </h1>
         </div>
+        
 
+        
     )
 }
 

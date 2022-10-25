@@ -68,6 +68,18 @@ function CalorieIntake() {
       console.error("Error adding document: ", e);
     }
 
+    try {
+      await updateDoc(doc(db, "users", user.uid), {
+      meals: meal,
+      calorie: testRef.current.value
+      });
+    } catch (e) {
+      alert(e.message);
+      console.log(e.message);
+    }
+
+
+
     alert("Data added successfully");
   };
 

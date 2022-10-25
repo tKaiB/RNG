@@ -36,16 +36,16 @@ function BMI() {
 
   // const handleSubmit2 = async (e) => {
   //   e.preventDefault();
-  //   try {
-  //     await updateDoc(doc(db, "users", user.uid), {
-  //       bmi: testRef.current.value,
-  //     });
-  //     alert("BMI updated!");
-  //   } catch (e) {
-  //     setError(e.message);
-  //     alert(e.message);
-  //     console.log(e.message);
-  //   }
+    // try {
+    //   await updateDoc(doc(db, "users", user.uid), {
+    //     bmi: testRef.current.value,
+    //   });
+    //   alert("BMI updated!");
+    // } catch (e) {
+    //   setError(e.message);
+    //   alert(e.message);
+    //   console.log(e.message);
+    // }
   // };
 
   const handleSubmit2 = async(e) =>{
