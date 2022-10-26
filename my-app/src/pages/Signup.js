@@ -47,6 +47,7 @@ function SignUp() {
         .catch((e) => {
           setError(e.message);
           console.log(e.message);
+          alert("Please Enter Valid information");
         });
       navigate("/");
     } catch (e) {

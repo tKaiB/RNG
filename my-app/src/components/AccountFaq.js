@@ -17,7 +17,7 @@ function AccountFaq() {
           </summary>
           <span class="faq-card-spoiler">
             This website is about providing a platform for users to find recipes
-            that suits their individual heatlh needs.
+            that suits their individual health needs.
           </span>
         </details>
         <details class="faq-card">
@@ -35,21 +35,25 @@ function AccountFaq() {
         </details>
         <details class="faq-card">
           <summary>
-            To be filled in <span class="faq-open-icon">+</span>
+            Do we have to pay for any usage on this web application?{" "}
+            <span class="faq-open-icon">+</span>
           </summary>
-          <span class="faq-card-spoiler">To be filled in</span>
+          <span class="faq-card-spoiler">
+            No! Our website is absolutely free for usage and will not request
+            for any form of payment.
+          </span>
         </details>
         <details class="faq-card">
           <summary>
-            To be filled in <span class="faq-open-icon">+</span>
+            Will this application help me to guarantee fat loss or gain muscles?{" "}
+            <span class="faq-open-icon">+</span>
           </summary>
-          <span class="faq-card-spoiler">To be filled in</span>
-        </details>
-        <details class="faq-card">
-          <summary>
-            To be filled in <span class="faq-open-icon">+</span>
-          </summary>
-          <span class="faq-card-spoiler">To be filled in</span>
+          <span class="faq-card-spoiler">
+            Our application only provides recommendations and does not guarantee
+            fat loss or gain muscles. However, we strongly believe that our
+            recommendations will assist Users in their journey towards their
+            desired goals!
+          </span>
         </details>
 
         <h2 class="faq-heading">Still have questions?</h2>
