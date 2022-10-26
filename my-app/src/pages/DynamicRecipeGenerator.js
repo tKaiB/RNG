@@ -22,8 +22,8 @@ function DynamicRecipeGenerator(){
     const { user,logout } = UserAuth();
 
 
-    // const [cardInfo, setCardInfo] = useState([]);
-    const cardInfo =[]
+    const [cardInfo, setCardInfo] = useState([]);
+    // const cardInfo =[]
     const [hasLoaded, setLoaded] = useState(false);
     const [totalCalorie , setTotalCalorie] = useState(0)
     const [meals , setMeals] = useState(0)
@@ -47,17 +47,19 @@ function DynamicRecipeGenerator(){
 
       };
 
-      const generateCardInfo = () =>{
+      const generateCardInfo = async () =>{
         for(let i=0;i<meals;i++){
             let tempObject ={
+                index: i,
                 title : `Meal ${i+1}`,
                 text : `Dynamic card ${i+1} `,
-                expand: false
+                
             }
-            // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-            cardInfo.push(tempObject)
+            setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+            // cardInfo.push(tempObject)
         }
         console.log(cardInfo)
+
     
     }
 
@@ -73,12 +75,16 @@ function DynamicRecipeGenerator(){
         }
     
         fetchData()
+
           
         
         
 
     },[user]);
-    generateCardInfo() 
+
+
+
+
 
 
 
@@ -87,13 +93,13 @@ function DynamicRecipeGenerator(){
 
     const [expanded, setExpanded] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
+
+    const handleClick = async() =>{
+        generateCardInfo()
+    }
     
 
-    // const cardInfo =[
-    //     {index : 1, title : "Meal 1" , text : "Dyanmic card 1" },
-    //     {index : 2, title : "Meal 2" , text : "Dyanmic card 2" },
-    //     {index : 3, title : "Meal 3" , text : "Dyanmic card 3" },
-    // ]
+
 
     
     const handleExpandClick = (index) => {
@@ -103,9 +109,11 @@ function DynamicRecipeGenerator(){
 
         if(selectedId==index){
             setSelectedId(-1)
+            setExpanded(false)
         }
         else{
             setSelectedId(index)
+            setExpanded(true)
         }
        
       }
@@ -153,8 +161,8 @@ function DynamicRecipeGenerator(){
             <CardActions disableSpacing>
                 <ExpandMore
                 onClick={()=>handleExpandClick(index)}
-                aria-expanded={card.expand}
-                expanded={card.expand}
+                aria-expanded={expanded}
+                expanded={expanded}
                 aria-label="show more"
                 >
                     <ExpandMoreIcon></ExpandMoreIcon>
@@ -196,7 +204,17 @@ function DynamicRecipeGenerator(){
         <div>
             <div style={{ paddingBottom: 10}}>
                 <ResponsiveAppBar />
+                <div style={{ position: 'absolute', right: '40%', padding: '3rem' }}>
+                    <Button
+                    onClick = {handleClick}>
+                        Generate Recipe
+                    </Button>
+
+                </div>
+
             </div>
+
+
             <Grid
             container
             alignItems="flex-start"
@@ -212,12 +230,14 @@ function DynamicRecipeGenerator(){
 
                 </Grid>
 
-                <Grid item xs = {10}>
+                <Grid item xs = {10} style={{paddingTop:100}}>
                     
                     <div style={{display:"flex" , justifyContent: "space-between"}}>
                         {cardInfo.map(renderCard)}
 
                     </div>
+                    
+
 
                 </Grid>
 
