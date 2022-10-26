@@ -109,11 +109,9 @@ function DynamicRecipeGenerator(){
 
         if(selectedId==index){
             setSelectedId(-1)
-            setExpanded(false)
         }
         else{
             setSelectedId(index)
-            setExpanded(true)
         }
        
       }
@@ -171,7 +169,7 @@ function DynamicRecipeGenerator(){
 
             </CardActions>
 
-            <Collapse in={index==selectedId?true:false} timeout="auto" unmountOnExit>
+            <Collapse in={index===selectedId?true:false} timeout="auto" unmountOnExit>
                 <CardContent>
                     <div>
                         <Typography>How to make it :</Typography>
@@ -218,7 +216,7 @@ function DynamicRecipeGenerator(){
             <Grid
             container
             alignItems="flex-start"
-            justify="flex-start"
+            justifyContent="flex-start"
             spacing={1}
             style={{ minHeight: "100vh" }}
             >
@@ -232,7 +230,7 @@ function DynamicRecipeGenerator(){
 
                 <Grid item xs = {10} style={{paddingTop:100}}>
                     
-                    <div style={{display:"flex" , justifyContent: "space-between"}}>
+                    <div style={{display:"flex" , justifyContent: "space-between" , alignItems: "flex-start"}}>
                         {cardInfo.map(renderCard)}
 
                     </div>
