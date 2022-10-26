@@ -32,6 +32,7 @@ function SignIn() {
     } catch (e) {
       setError(e.message);
       console.log(e.message);
+      alert("Invalid email or password");
     }
   };
 
@@ -41,7 +42,7 @@ function SignIn() {
       <Grid container style={{ minHeight: "100vh" }}>
         <Grid item xs={12} sm={6}>
           <img
-            src="https://source.unsplash.com/random"
+            src="https://images.squarespace-cdn.com/content/v1/53b839afe4b07ea978436183/1608506169128-S6KYNEV61LEP5MS1UIH4/traditional-food-around-the-world-Travlinmad.jpg"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
             alt="brand"
           />

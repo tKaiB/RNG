@@ -37,7 +37,7 @@ function SignUp() {
               age: 0,
               weight: 0,
               calorie: 0,
-              bmi : 0
+              bmi: 0,
             });
           } catch (e) {
             setError(e.message);
@@ -190,7 +190,7 @@ function SignUp() {
 
         <Grid item xs={12} sm={6}>
           <img
-            src="https://source.unsplash.com/random"
+            src="https://cdn.apartmenttherapy.info/image/upload/v1556282934/k/archive/659cfbc5ef34a05e4c3f200db47af6d08d27d7cd.jpg"
             style={{
               paddingLeft: 200,
               width: "100%",

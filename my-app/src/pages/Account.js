@@ -40,18 +40,24 @@ function Account() {
           <Grid component={Link} to="/monthlybmichart" xs={5}>
             <div>
               <img
-                src="https://source.unsplash.com/random"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                src="https://emilypost.com/client_media/images/blogs/everyday-gym.jpg"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: "0.5",
+                }}
                 alt="brand"
               />
             </div>
+
             <h1
               style={{
                 position: "absolute",
                 right: "50%",
                 left: "30%",
                 bottom: "50%",
-                color: "white",
+                color: "black",
               }}
             >
               Monthly BMI Chart
@@ -60,17 +66,23 @@ function Account() {
           <Grid component={Link} to="/monthlycaloriechart" xs={5}>
             <div>
               <img
-                src="https://source.unsplash.com/random"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                src="https://domf5oio6qrcr.cloudfront.net/medialibrary/9545/conversions/healthy-superfoods-thumb.jpg"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: "0.5",
+                }}
                 alt="brand"
               />
             </div>
+
             <h1
               style={{
                 position: "absolute",
                 right: "7.5%",
                 bottom: "50%",
-                color: "white",
+                color: "black",
               }}
             >
               Monthly calorie intake chart
