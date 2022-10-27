@@ -30,7 +30,7 @@ function Account() {
 
   return (
     <div>
-      <div style={{ paddingBottom: 10 }}>
+      <div style={{ paddingBottom: 10}}>
         <ResponsiveAppBar />
       </div>
       <div>
@@ -41,16 +41,16 @@ function Account() {
           spacing={1}
           style={{ minHeight: "100vh" }}
         >
-          <Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
+          <Grid item xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
             <SideBar />
           </Grid>
-          <Grid component={Link} to="/monthlybmichart" xs={5}>
+          <Grid item component={Link} to="/monthlybmichart" xs={5}>
             <div>
               <img
                 src="https://emilypost.com/client_media/images/blogs/everyday-gym.jpg"
                 style={{
                   width: "100%",
-                  height: "100%",
+                  minHeight:'100vh',
                   objectFit: "cover",
                   opacity: "0.5",
                 }}
@@ -70,13 +70,13 @@ function Account() {
               Monthly BMI Chart
             </h1>
           </Grid>
-          <Grid component={Link} to="/monthlycaloriechart" xs={5}>
+          <Grid item component={Link} to="/monthlycaloriechart" xs={5}>
             <div>
               <img
                 src="https://domf5oio6qrcr.cloudfront.net/medialibrary/9545/conversions/healthy-superfoods-thumb.jpg"
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  width: "auto",
+                  minHeight: "100vh",
                   objectFit: "cover",
                   opacity: "0.5",
                 }}
