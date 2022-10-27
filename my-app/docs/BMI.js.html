@@ -1,4 +1,32 @@
-import React, { useState, useRef } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: BMI.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: BMI.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useRef } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -134,76 +162,76 @@ function BMI() {
     setValue3(bmi);
   };
   let condition = "";
-  if (bmiInput < 18.5) {
+  if (bmiInput &lt; 18.5) {
     condition = "Underweight";
-  } else if (bmiInput >= 18.5 && bmiInput <= 24.9) {
+  } else if (bmiInput >= 18.5 &amp;&amp; bmiInput &lt;= 24.9) {
     condition = "Normal";
-  } else if (bmiInput >= 25 && bmiInput <= 29.9) {
+  } else if (bmiInput >= 25 &amp;&amp; bmiInput &lt;= 29.9) {
     condition = "Overweight";
   } else if (bmiInput >= 30) {
     condition = "Obese";
   }
 
   return (
-    <div>
-      <div style={{ paddingBottom: 10 }}>
-        <ResponsiveAppBar />
-      </div>
-      <div>
-        <Grid
+    &lt;div>
+      &lt;div style={{ paddingBottom: 10 }}>
+        &lt;ResponsiveAppBar />
+      &lt;/div>
+      &lt;div>
+        &lt;Grid
           container
           alignItems="flex-start"
           justify="flex-start"
           spacing={1}
           style={{ minHeight: "100vh" }}
         >
-          <Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
-            <SideBar />
-          </Grid>
+          &lt;Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
+            &lt;SideBar />
+          &lt;/Grid>
 
-          <Grid xs={5}>
-            <div style={{ paddingLeft: 15 }}>
-              <div>
-                <h1
+          &lt;Grid xs={5}>
+            &lt;div style={{ paddingLeft: 15 }}>
+              &lt;div>
+                &lt;h1
                   style={{
                     fontSize: "3rem",
                     fontFamily: "'Times New Roman', Times, serif",
                   }}
                 >
                   Calculate Your Body Mass Index
-                </h1>
-                <p
+                &lt;/h1>
+                &lt;p
                   style={{
                     fontSize: "1.5rem",
                     fontFamily: "'Times New Roman', Times, serif",
                   }}
                 >
                   Calculate Your BMI Using Our Simple Calculator
-                </p>
-                <p>
-                  I am a <b>{gender}</b>
-                </p>
-                <Button
+                &lt;/p>
+                &lt;p>
+                  I am a &lt;b>{gender}&lt;/b>
+                &lt;/p>
+                &lt;Button
                   variant="contained"
                   style={{ backgroundColor: "pink" }}
                   onClick={handleCLick1}
                 >
                   Male
-                </Button>
-                <Button
+                &lt;/Button>
+                &lt;Button
                   variant="contained"
                   style={{ backgroundColor: "pink", margin: "1rem" }}
                   onClick={handleCLick2}
                 >
                   Female
-                </Button>
-                <FormControl sx={{ display: "block" }} variant="outlined">
-                  <p> My Weight </p>
-                  <OutlinedInput
+                &lt;/Button>
+                &lt;FormControl sx={{ display: "block" }} variant="outlined">
+                  &lt;p> My Weight &lt;/p>
+                  &lt;OutlinedInput
                     id="outlined-adornment-weight"
                     value={weight}
                     endAdornment={
-                      <InputAdornment position="end">kg</InputAdornment>
+                      &lt;InputAdornment position="end">kg&lt;/InputAdornment>
                     }
                     aria-describedby="outlined-weight-helper-text"
                     inputProps={{
@@ -212,8 +240,8 @@ function BMI() {
                     }}
                     onChange={handleChange1}
                   />
-                  <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-                  <Slider
+                  &lt;FormHelperText id="outlined-weight-helper-text">&lt;/FormHelperText>
+                  &lt;Slider
                     style={{ width: "15rem" }}
                     size="small"
                     defaultValue={50}
@@ -224,12 +252,12 @@ function BMI() {
                     max={200}
                   />
 
-                  <p> My Height </p>
-                  <OutlinedInput
+                  &lt;p> My Height &lt;/p>
+                  &lt;OutlinedInput
                     id="outlined-adornment-weight"
                     value={height}
                     endAdornment={
-                      <InputAdornment position="end">cm</InputAdornment>
+                      &lt;InputAdornment position="end">cm&lt;/InputAdornment>
                     }
                     aria-describedby="outlined-weight-helper-text"
                     inputProps={{
@@ -238,8 +266,8 @@ function BMI() {
                     }}
                     onChange={handleChange2}
                   />
-                  <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-                  <Slider
+                  &lt;FormHelperText id="outlined-weight-helper-text">&lt;/FormHelperText>
+                  &lt;Slider
                     style={{ width: "15rem" }}
                     size="small"
                     defaultValue={50}
@@ -250,47 +278,47 @@ function BMI() {
                     max={200}
                     inputRef={heightRef}
                   />
-                </FormControl>
-                <Button
+                &lt;/FormControl>
+                &lt;Button
                   variant="contained"
                   style={{ backgroundColor: "Pink", display: "flex" }}
                   fullWidth
                   onClick={handleClick3}
                 >
                   Calculate BMI
-                </Button>
-                <p>
+                &lt;/Button>
+                &lt;p>
                   Enter BMI Value
-                  <FormControl
+                  &lt;FormControl
                     sx={{ display: "flex", width: "25ch" }}
                     variant="outlined"
                   >
-                    <OutlinedInput
+                    &lt;OutlinedInput
                       id="outlined-adornment-BMI"
                       defaultValue="0"
                       aria-describedby="outlined-BMI-helper-text"
                       inputRef={testRef}
                     />
-                  </FormControl>
-                </p>
-                <Button
+                  &lt;/FormControl>
+                &lt;/p>
+                &lt;Button
                   variant="contained"
                   style={{ backgroundColor: "Pink", display: "flex" }}
                   fullWidth
                   onClick={handleSubmit2}
                 >
                   Submit
-                </Button>
-              </div>
-            </div>
-          </Grid>
+                &lt;/Button>
+              &lt;/div>
+            &lt;/div>
+          &lt;/Grid>
 
           {/* Need throw this into the useState */}
-          <Grid xs={5}>
+          &lt;Grid xs={5}>
             {show ? (
-              <div>
-                <div>
-                  <h1
+              &lt;div>
+                &lt;div>
+                  &lt;h1
                     style={{
                       textAlign: "center",
                       fontSize: "3rem",
@@ -298,9 +326,9 @@ function BMI() {
                     }}
                   >
                     Your BMI Is
-                  </h1>
+                  &lt;/h1>
 
-                  <h1
+                  &lt;h1
                     id="bmiOutput"
                     style={{
                       textAlign: "center",
@@ -309,19 +337,19 @@ function BMI() {
                     }}
                   >
                     {bmiInput}
-                  </h1>
-                </div>
-                <div style={{ paddingLeft: 65 }}>
-                  <BoyIcon
+                  &lt;/h1>
+                &lt;/div>
+                &lt;div style={{ paddingLeft: 65 }}>
+                  &lt;BoyIcon
                     style={{ fontSize: "30rem" }}
                     baseClassName="material-icons-boy"
                   >
                     BoyIcon
-                  </BoyIcon>
-                </div>
+                  &lt;/BoyIcon>
+                &lt;/div>
 
-                <Box>
-                  <Slider
+                &lt;Box>
+                  &lt;Slider
                     style={{
                       marginLeft: "4rem",
                       display: "flex",
@@ -336,8 +364,8 @@ function BMI() {
                     max={40}
                     onChange={handleChange3}
                   />
-                </Box>
-                <p
+                &lt;/Box>
+                &lt;p
                   style={{
                     fontSize: "1.5rem",
                     marginLeft: "10rem",
@@ -345,14 +373,37 @@ function BMI() {
                   }}
                 >
                   You are in the {condition} range
-                </p>
-              </div>
+                &lt;/p>
+              &lt;/div>
             ) : null}
-          </Grid>
-        </Grid>
-      </div>
-    </div>
+          &lt;/Grid>
+        &lt;/Grid>
+      &lt;/div>
+    &lt;/div>
   );
 }
 
 export default BMI;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Account">Account</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#SignUp">SignUp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Oct 27 2022 23:08:05 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

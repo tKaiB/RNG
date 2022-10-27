@@ -8,6 +8,10 @@ import { Grid } from "@material-ui/core";
 
 const drawerWidth = 240;
 
+/**
+ * 
+ * @returns {void}
+ */
 function Account() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();

@@ -1,4 +1,32 @@
-import React, { useRef, useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: CalorieIntake.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: CalorieIntake.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useRef, useState } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
@@ -113,8 +141,8 @@ function CalorieIntake() {
 
   const handleClick = () => {
     if (
-      (gainMuscle === true && loseFat === true) ||
-      (gainMuscle == false && loseFat == false)
+      (gainMuscle === true &amp;&amp; loseFat === true) ||
+      (gainMuscle == false &amp;&amp; loseFat == false)
     ) {
       alert("error!!");
       return;
@@ -177,47 +205,47 @@ function CalorieIntake() {
   };
 
   return (
-    <div>
-      <div style={{ paddingBottom: 10 }}>
-        <ResponsiveAppBar />
-      </div>
-      <div>
-        <Grid
+    &lt;div>
+      &lt;div style={{ paddingBottom: 10 }}>
+        &lt;ResponsiveAppBar />
+      &lt;/div>
+      &lt;div>
+        &lt;Grid
           container
           alignItems="flex-start"
           justify="flex-start"
           spacing={1}
           style={{ minHeight: "100vh" }}
         >
-          <Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
-            <SideBar />
-          </Grid>
-          <Grid xs={5}>
-            <div style={{ padding: "2rem" }}>
-              <h1
+          &lt;Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
+            &lt;SideBar />
+          &lt;/Grid>
+          &lt;Grid xs={5}>
+            &lt;div style={{ padding: "2rem" }}>
+              &lt;h1
                 style={{
                   fontSize: "3rem",
                   fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 Calculate Your Calories
-              </h1>
-              <p
+              &lt;/h1>
+              &lt;p
                 style={{
                   fontSize: "1.5rem",
                   fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 Calculate Your Calories Using Our Simple Calculator
-              </p>
-              <FormControl sx={{ width: "25ch" }} variant="outlined">
-                <p> My Weight </p>
-                <OutlinedInput
+              &lt;/p>
+              &lt;FormControl sx={{ width: "25ch" }} variant="outlined">
+                &lt;p> My Weight &lt;/p>
+                &lt;OutlinedInput
                   id="outlined-adornment-weight"
                   value={values}
                   inputRef={weightRef}
                   endAdornment={
-                    <InputAdornment position="end">kg</InputAdornment>
+                    &lt;InputAdornment position="end">kg&lt;/InputAdornment>
                   }
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
@@ -226,8 +254,8 @@ function CalorieIntake() {
                   }}
                   onChange={handleChange}
                 />
-                <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-                <Slider
+                &lt;FormHelperText id="outlined-weight-helper-text">&lt;/FormHelperText>
+                &lt;Slider
                   style={{ width: "15rem" }}
                   size="small"
                   defaultValue={50}
@@ -237,56 +265,56 @@ function CalorieIntake() {
                   onChange={handleChange}
                   max={200}
                 />
-              </FormControl>
-              <div>
-                <FormLabel id="demo-radio-buttons-group-label">
+              &lt;/FormControl>
+              &lt;div>
+                &lt;FormLabel id="demo-radio-buttons-group-label">
                   I aim to
-                </FormLabel>
-                <RadioGroup
+                &lt;/FormLabel>
+                &lt;RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   name="radio-buttons-group"
                 >
-                  <FormControlLabel
+                  &lt;FormControlLabel
                     value="loseFat"
-                    control={<Radio />}
+                    control={&lt;Radio />}
                     onChange={handleChange3}
                     label="Lose fat while maintaining muscle
   "
                   />
-                  <FormControlLabel
+                  &lt;FormControlLabel
                     value="gainMuscle"
-                    control={<Radio />}
+                    control={&lt;Radio />}
                     onChange={handleChange4}
                     label="Build muscle while minimising fat gain
   "
                   />
-                </RadioGroup>
-              </div>
-              {/* <p>I aim to:</p>
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox />}
+                &lt;/RadioGroup>
+              &lt;/div>
+              {/* &lt;p>I aim to:&lt;/p>
+              &lt;FormGroup>
+                &lt;FormControlLabel
+                  control={&lt;Checkbox />}
                   onChange={handleChange3}
                   label="Lost Fat"
                 />
-                <FormControlLabel
-                  control={<Checkbox />}
+                &lt;FormControlLabel
+                  control={&lt;Checkbox />}
                   onChange={handleChange4}
                   label="Gain Muscle"
                 />
-              </FormGroup> */}
-              <div style={{ paddingTop: 10, paddingBottom: 10 }}>
-                <Button
+              &lt;/FormGroup> */}
+              &lt;div style={{ paddingTop: 10, paddingBottom: 10 }}>
+                &lt;Button
                   variant="contained"
                   style={{ backgroundColor: "Pink", display: "flex" }}
                   fullWidth
                   onClick={handleClick}
                 >
                   Calculate Daily Calories
-                </Button>
-              </div>
-              <p>I eat {meal} meals a day</p>
-              <Slider
+                &lt;/Button>
+              &lt;/div>
+              &lt;p>I eat {meal} meals a day&lt;/p>
+              &lt;Slider
                 style={{ width: "15rem" }}
                 size="small"
                 defaultValue={3}
@@ -296,23 +324,23 @@ function CalorieIntake() {
                 value={meal}
                 onChange={handleChange2}
               />
-              <p>Enter Daily Calorie Intake</p>
-              <FormControl
+              &lt;p>Enter Daily Calorie Intake&lt;/p>
+              &lt;FormControl
                 sx={{ width: "25ch", paddingBottom: "1rem" }}
                 variant="outlined"
               >
-                <OutlinedInput
+                &lt;OutlinedInput
                   id="outlined-adornment-calorieintake"
                   value={calorie}
                   inputRef={testRef}
                   endAdornment={
-                    <InputAdornment position="end">kcal</InputAdornment>
+                    &lt;InputAdornment position="end">kcal&lt;/InputAdornment>
                   }
                   aria-describedby="outlined-calorieintake-helper-text"
                 />
-                <FormHelperText id="outlined-calorieintake-helper-text"></FormHelperText>
-              </FormControl>
-              <Button
+                &lt;FormHelperText id="outlined-calorieintake-helper-text">&lt;/FormHelperText>
+              &lt;/FormControl>
+              &lt;Button
                 variant="contained"
                 style={{
                   backgroundColor: "Pink",
@@ -322,23 +350,23 @@ function CalorieIntake() {
                 onClick={handleSubmit2}
               >
                 Submit
-              </Button>
-            </div>
-          </Grid>
-          <Grid xs={5}>
+              &lt;/Button>
+            &lt;/div>
+          &lt;/Grid>
+          &lt;Grid xs={5}>
             {show ? (
-              <div>
-                <div style={{ padding: "2rem" }}>
-                  <h1
+              &lt;div>
+                &lt;div style={{ padding: "2rem" }}>
+                  &lt;h1
                     style={{
                       fontSize: "3rem",
                       fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     Your daily Calorie Goals
-                  </h1>
-                </div>
-                <p
+                  &lt;/h1>
+                &lt;/div>
+                &lt;p
                   style={{
                     marginLeft: "10rem",
                     marginTop: "5rem",
@@ -350,33 +378,56 @@ function CalorieIntake() {
                   }}
                 >
                   Total {calorie} kcal
-                </p>
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableBody>
+                &lt;/p>
+                &lt;TableContainer component={Paper}>
+                  &lt;Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    &lt;TableBody>
                       {rows.map((row) => (
-                        <TableRow
+                        &lt;TableRow
                           key={row.name}
                           sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
+                            "&amp;:last-child td, &amp;:last-child th": { border: 0 },
                           }}
                         >
-                          <TableCell component="th" scope="row">
+                          &lt;TableCell component="th" scope="row">
                             {row.name}
-                          </TableCell>
-                          <TableCell align="right">{row.value}</TableCell>
-                        </TableRow>
+                          &lt;/TableCell>
+                          &lt;TableCell align="right">{row.value}&lt;/TableCell>
+                        &lt;/TableRow>
                       ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </div>
+                    &lt;/TableBody>
+                  &lt;/Table>
+                &lt;/TableContainer>
+              &lt;/div>
             ) : null}
-          </Grid>
-        </Grid>
-      </div>
-    </div>
+          &lt;/Grid>
+        &lt;/Grid>
+      &lt;/div>
+    &lt;/div>
   );
 }
 
 export default CalorieIntake;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Account">Account</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#SignUp">SignUp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Oct 27 2022 23:08:05 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
