@@ -42,14 +42,27 @@ function SignUp() {
           } catch (e) {
             setError(e.message);
             console.log(e.message);
+            alert("Email already exists");
           }
+          alert("Account Created");
+          navigate("/account");
         })
         .catch((e) => {
           setError(e.message);
           console.log(e.message);
-          alert("Please Enter Valid information");
+          if (e.message == "Firebase: Error (auth/email-already-in-use).")
+            alert("Email already in use");
+          if (e.message == "Firebase: Error (auth/invalid-email).")
+            alert("Invalid Email");
+          if (
+            e.message ==
+            "Firebase: Password should be at least 6 characters (auth/weak-password)."
+          )
+            alert(
+              "Password is too weak, Password must be at least 6 characters"
+            );
         });
-      navigate("/");
+      //navigate("/account");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
