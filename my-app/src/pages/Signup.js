@@ -42,7 +42,7 @@ function SignUp() {
           } catch (e) {
             setError(e.message);
             console.log(e.message);
-            alert("Email already exists");
+            alert(e.message);
           }
           alert("Account Created");
           navigate("/account");
