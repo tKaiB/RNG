@@ -93,6 +93,7 @@ function DynamicRecipeGenerator(){
     const [expanded, setExpanded] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
 
+
     const handleClick = async(totalCalorie,meals) =>{
         const docRef = collection(db, "recipe")
         const mealCalorie = Math.floor(totalCalorie/meals)
@@ -100,11 +101,11 @@ function DynamicRecipeGenerator(){
         
         const querySnapshot = await getDocs(q);
         console.log(querySnapshot.size)
-        let counter =1
+        let counter =0
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            if(counter>meals){
+            if(counter>meals-1){
                 return 
             }
             else{
@@ -136,6 +137,7 @@ function DynamicRecipeGenerator(){
             
             counter++;
           });
+          
 
         // generateCardInfo()
     }
