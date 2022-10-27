@@ -152,7 +152,7 @@ function DynamicRecipeGenerator(){
 
     const renderCard= (card, index) =>{
         return(
-            <div>
+            <div key = {index}>
                 <Card sx={{margin:'10px' ,  width:400 , minHeight:350}} key = {index} > 
                     <CardHeader
                         title={card.title}
@@ -216,9 +216,16 @@ function DynamicRecipeGenerator(){
 
 
             </Card> 
-            <Button>
-                Refresh
-            </Button>
+            <div>
+                <Button>
+                    Refresh
+                </Button>
+                <Button>
+                    Like
+                </Button>
+
+            </div>
+
 
             </div>
 
