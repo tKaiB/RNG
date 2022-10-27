@@ -40,30 +40,9 @@ function DynamicRecipeGenerator(){
                 console.log("No such document!");
             }
 
-        
-
-
-        
-
       };
 
-      const generateCardInfo = async () =>{
-        for(let i=0;i<meals;i++){
-            let tempObject ={
-                index: i,
-                title : `Meal ${i+1}`,
-                text : `Dynamic card ${i+1} `,
-                
-            }
-            setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-            // cardInfo.push(tempObject)
-        }
-
-    
-    }
-
-    
-
+  
     useEffect(() =>{
         if(!user) return;
         const fetchData = async ()=>{
@@ -93,18 +72,20 @@ function DynamicRecipeGenerator(){
     const [expanded, setExpanded] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
 
+
     const handleClick = async(totalCalorie,meals) =>{
+        setCardInfo([]);
         const docRef = collection(db, "recipe")
         const mealCalorie = Math.floor(totalCalorie/meals)
         const q = query(docRef, where("calories", "<=" , mealCalorie));
         
         const querySnapshot = await getDocs(q);
         console.log(querySnapshot.size)
-        let counter =1
+        let counter =0
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            if(counter>meals){
+            if(counter>meals-1){
                 return 
             }
             else{
@@ -136,6 +117,7 @@ function DynamicRecipeGenerator(){
             
             counter++;
           });
+          
 
         // generateCardInfo()
     }
@@ -145,9 +127,6 @@ function DynamicRecipeGenerator(){
 
     
     const handleExpandClick = (index) => {
-        // console.log(card.expand)
-
-        // card.expand = !(card.expand)
 
         if(selectedId==index){
             setSelectedId(-1)
@@ -173,69 +152,76 @@ function DynamicRecipeGenerator(){
 
     const renderCard= (card, index) =>{
         return(
-            <Card sx={{margin:'10px' ,  width:360}} key = {index} > 
-            <CardHeader
-                title={card.title}
-                subheader={card.subheader}
-            />
+            <div>
+                <Card sx={{margin:'10px' ,  width:400 , minHeight:350}} key = {index} > 
+                    <CardHeader
+                        title={card.title}
+                        subheader={card.subheader}
+                    />
 
-            <CardContent>
-                <Grid container spacing={0}>
-                    <Grid item xs={6} >
-                        <Typography > Nutrition info</Typography>
-                        <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.protein}</Typography>
-                        {/* <Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}</Typography> */}
-                        <Typography style={{whiteSpace: 'pre-line'}}> Sodium: {card.sodium}</Typography>
-                        <Typography style={{whiteSpace: 'pre-line'}}> Suagr: {card.sugar}</Typography>
-                        <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.totalFat}</Typography>
-                        {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
-                    </Grid>
+                    <CardContent>
+                        <Grid container spacing={0}>
+                            <Grid item xs={6} >
+                                <Typography > Nutrition info</Typography>
+                                <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.protein}</Typography>
+                                {/* <Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}</Typography> */}
+                                <Typography style={{whiteSpace: 'pre-line'}}> Sodium: {card.sodium}</Typography>
+                                <Typography style={{whiteSpace: 'pre-line'}}> Suagr: {card.sugar}</Typography>
+                                <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.totalFat}</Typography>
+                                {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
+                            </Grid>
 
-                    <Grid item xs={6} >
-                        <Typography>Time to prep meals</Typography>
-                        <Typography align = "center">{card.time}</Typography>
-                        {/* <Typography align = "center">minutes testing</Typography> */}
-                    </Grid>
+                            <Grid item xs={6} >
+                                <Typography>Time to prep meals</Typography>
+                                <Typography align = "center">{card.time}</Typography>
+                                {/* <Typography align = "center">minutes testing</Typography> */}
+                            </Grid>
 
-                </Grid>
-
-
-            </CardContent>
-
-            <CardActions disableSpacing>
-                <ExpandMore
-                onClick={()=>handleExpandClick(index)}
-                aria-expanded={expanded}
-                expanded={expanded}
-                aria-label="show more"
-                >
-                    <ExpandMoreIcon></ExpandMoreIcon>
-
-                </ExpandMore>
-
-            </CardActions>
-
-            <Collapse in={index===selectedId?true:false} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <div>
-                        <Typography>How to make it :</Typography>
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.steps}</Typography>
-                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography> */}
-                    </div>
-
-                    <div style={{paddingTop:10}}>
-                        <Typography > Ingredients:</Typography>
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.ingredients}</Typography>
-                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
-                    </div>
-
-                </CardContent>
-                
-
-            </Collapse>
+                        </Grid>
 
 
-        </Card> 
+                    </CardContent>
+
+                    <CardActions disableSpacing>
+                        <ExpandMore
+                        onClick={()=>handleExpandClick(index)}
+                        aria-expanded={expanded}
+                        expanded={expanded}
+                        aria-label="show more"
+                        >
+                            <ExpandMoreIcon></ExpandMoreIcon>
+
+                        </ExpandMore>
+
+                    </CardActions>
+
+                    <Collapse in={index===selectedId?true:false} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            <div>
+                                <Typography>How to make it :</Typography>
+                                <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.steps}</Typography>
+                                {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography> */}
+                            </div>
+
+                            <div style={{paddingTop:10}}>
+                                <Typography > Ingredients:</Typography>
+                                <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.ingredients}</Typography>
+                                {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
+                            </div>
+
+                        </CardContent>
+                        
+
+                    </Collapse>
+
+
+            </Card> 
+            <Button>
+                Refresh
+            </Button>
+
+            </div>
+
  
         )
     }
@@ -278,6 +264,7 @@ function DynamicRecipeGenerator(){
                     
                     <div style={{display:"flex" , justifyContent: "space-between" , alignItems: "flex-start"}}>
                         {cardInfo.map(renderCard)}
+                    
 
                     </div>
                     
