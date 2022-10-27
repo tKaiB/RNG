@@ -40,8 +40,8 @@ function SideBar() {
         </ToggleButton>
         <ToggleButton
           component={Link}
-          to="/recipegenerator"
-          value="Recipe Generator"
+          to="/dynamic"
+          value="DynamicRecipeGenerator"
         >
           <FormatListNumberedIcon />
           Recipe Generator
