@@ -37,6 +37,9 @@ import {
   collection,
   serverTimestamp,
 } from "firebase/firestore";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormLabel from "@mui/material/FormLabel";
 
 function createData(name, value) {
   return { name, value };
@@ -70,15 +73,13 @@ function CalorieIntake() {
 
     try {
       await updateDoc(doc(db, "users", user.uid), {
-      meals: meal,
-      calorie: testRef.current.value
+        meals: meal,
+        calorie: testRef.current.value,
       });
     } catch (e) {
       alert(e.message);
       console.log(e.message);
     }
-
-
 
     alert("Data added successfully");
   };
@@ -104,7 +105,10 @@ function CalorieIntake() {
   ];
 
   const handleClick = () => {
-    if ((gainMuscle === true && loseFat === true) || (gainMuscle==false && loseFat==false)) {
+    if (
+      (gainMuscle === true && loseFat === true) ||
+      (gainMuscle == false && loseFat == false)
+    ) {
       alert("error!!");
       return;
     } else {
@@ -151,15 +155,17 @@ function CalorieIntake() {
   };
 
   // useState for checkbox
-  const [loseFat, setLoseFat] = useState(false);
+  const [loseFat, setLoseFat] = useState(true);
   const [gainMuscle, setGainMuscle] = useState(false);
 
   const handleChange3 = (event) => {
-    setLoseFat(!loseFat);
+    setLoseFat(loseFat);
+    setGainMuscle(gainMuscle);
   };
 
   const handleChange4 = (event) => {
     setGainMuscle(!gainMuscle);
+    setLoseFat(!loseFat);
   };
 
   return (
@@ -224,7 +230,31 @@ function CalorieIntake() {
                   max={200}
                 />
               </FormControl>
-              <p>I aim to:</p>
+              <div>
+                <FormLabel id="demo-radio-buttons-group-label">
+                  I aim to
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="loseFat"
+                    control={<Radio />}
+                    onChange={handleChange3}
+                    label="Lose fat while maintaining muscle
+  "
+                  />
+                  <FormControlLabel
+                    value="gainMuscle"
+                    control={<Radio />}
+                    onChange={handleChange4}
+                    label="Build muscle while minimising fat gain
+  "
+                  />
+                </RadioGroup>
+              </div>
+              {/* <p>I aim to:</p>
               <FormGroup>
                 <FormControlLabel
                   control={<Checkbox />}
@@ -236,7 +266,7 @@ function CalorieIntake() {
                   onChange={handleChange4}
                   label="Gain Muscle"
                 />
-              </FormGroup>
+              </FormGroup> */}
               <div style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <Button
                   variant="contained"
