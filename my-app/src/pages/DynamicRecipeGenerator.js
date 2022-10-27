@@ -58,7 +58,6 @@ function DynamicRecipeGenerator(){
             setCardInfo((cardInfo) => [...cardInfo, tempObject]);
             // cardInfo.push(tempObject)
         }
-        console.log(cardInfo)
 
     
     }
@@ -94,8 +93,51 @@ function DynamicRecipeGenerator(){
     const [expanded, setExpanded] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
 
-    const handleClick = async() =>{
-        generateCardInfo()
+    const handleClick = async(totalCalorie,meals) =>{
+        const docRef = collection(db, "recipe")
+        const mealCalorie = Math.floor(totalCalorie/meals)
+        const q = query(docRef, where("calories", "<=" , mealCalorie));
+        
+        const querySnapshot = await getDocs(q);
+        console.log(querySnapshot.size)
+        let counter =1
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            if(counter>meals){
+                return 
+            }
+            else{
+                let tempObject={}
+                tempObject.index = counter
+                tempObject.title = doc.data().name
+                tempObject.subheader = `Meal ${counter+1}`
+                tempObject.protein = doc.data().protein
+                tempObject.sodium = doc.data().sodium
+                // tempObject.saturatedFat = doc.data().saturated fat,
+                tempObject.sugar = doc.data().sugar
+                tempObject.totalFat = doc.data().totalFat
+                tempObject.time = doc.data().minutes
+                tempObject.steps = doc.data().steps
+                
+                const ingredientsArray = doc.data().ingredients.slice(2, -2).split("', '")
+                let ingredientResult = ''
+                for (let i = 0; i < ingredientsArray.length; i++) {
+                    ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`
+                    // stepResult = stepResult + "hello" + "\n"
+                }
+                // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+                tempObject.ingredients = ingredientResult
+                setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+    
+
+
+            }
+            
+            counter++;
+          });
+
+        // generateCardInfo()
     }
     
 
@@ -131,7 +173,7 @@ function DynamicRecipeGenerator(){
 
     const renderCard= (card, index) =>{
         return(
-            <Card sx={{margin:'10px'}} key = {index} > 
+            <Card sx={{margin:'10px' ,  maxWidth: 360}} key = {index} > 
             <CardHeader
                 title={card.name}
                 subheader={card.text}
@@ -141,14 +183,18 @@ function DynamicRecipeGenerator(){
                 <Grid container spacing={0}>
                     <Grid item xs={6} >
                         <Typography > Nutrition info</Typography>
-                        {/* <Typography style={{whiteSpace: 'pre-line'}}> {nutrition}</Typography> */}
-                        <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography>
+                        <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.protein}</Typography>
+                        {/* <Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}</Typography> */}
+                        <Typography style={{whiteSpace: 'pre-line'}}> Sodium: {card.sodium}</Typography>
+                        <Typography style={{whiteSpace: 'pre-line'}}> Suagr: {card.sugar}</Typography>
+                        <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.totalFat}</Typography>
+                        {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
                     </Grid>
 
                     <Grid item xs={6} >
                         <Typography>Time to prep meals</Typography>
-                        {/* <Typography align = "center">{minutes}</Typography> */}
-                        <Typography align = "center">minutes testing</Typography>
+                        <Typography align = "center">{card.time}</Typography>
+                        {/* <Typography align = "center">minutes testing</Typography> */}
                     </Grid>
 
                 </Grid>
@@ -173,14 +219,14 @@ function DynamicRecipeGenerator(){
                 <CardContent>
                     <div>
                         <Typography>How to make it :</Typography>
-                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{steps}</Typography> */}
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography>
+                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.steps}</Typography>
+                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography> */}
                     </div>
 
                     <div style={{paddingTop:10}}>
                         <Typography > Ingredients:</Typography>
-                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{ingredients}</Typography> */}
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography>
+                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.ingredients}</Typography>
+                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
                     </div>
 
                 </CardContent>
@@ -204,7 +250,7 @@ function DynamicRecipeGenerator(){
                 <ResponsiveAppBar />
                 <div style={{ position: 'absolute', right: '40%', padding: '3rem' }}>
                     <Button
-                    onClick = {handleClick}>
+                    onClick = {() =>handleClick(totalCalorie,meals)}>
                         Generate Recipe
                     </Button>
 
