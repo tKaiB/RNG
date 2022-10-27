@@ -152,69 +152,76 @@ function DynamicRecipeGenerator(){
 
     const renderCard= (card, index) =>{
         return(
-            <Card sx={{margin:'10px' ,  width:360}} key = {index} > 
-            <CardHeader
-                title={card.title}
-                subheader={card.subheader}
-            />
+            <div>
+                <Card sx={{margin:'10px' ,  width:400 , minHeight:350}} key = {index} > 
+                    <CardHeader
+                        title={card.title}
+                        subheader={card.subheader}
+                    />
 
-            <CardContent>
-                <Grid container spacing={0}>
-                    <Grid item xs={6} >
-                        <Typography > Nutrition info</Typography>
-                        <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.protein}</Typography>
-                        {/* <Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}</Typography> */}
-                        <Typography style={{whiteSpace: 'pre-line'}}> Sodium: {card.sodium}</Typography>
-                        <Typography style={{whiteSpace: 'pre-line'}}> Suagr: {card.sugar}</Typography>
-                        <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.totalFat}</Typography>
-                        {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
-                    </Grid>
+                    <CardContent>
+                        <Grid container spacing={0}>
+                            <Grid item xs={6} >
+                                <Typography > Nutrition info</Typography>
+                                <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.protein}</Typography>
+                                {/* <Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}</Typography> */}
+                                <Typography style={{whiteSpace: 'pre-line'}}> Sodium: {card.sodium}</Typography>
+                                <Typography style={{whiteSpace: 'pre-line'}}> Suagr: {card.sugar}</Typography>
+                                <Typography style={{whiteSpace: 'pre-line'}}> Protein: {card.totalFat}</Typography>
+                                {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
+                            </Grid>
 
-                    <Grid item xs={6} >
-                        <Typography>Time to prep meals</Typography>
-                        <Typography align = "center">{card.time}</Typography>
-                        {/* <Typography align = "center">minutes testing</Typography> */}
-                    </Grid>
+                            <Grid item xs={6} >
+                                <Typography>Time to prep meals</Typography>
+                                <Typography align = "center">{card.time}</Typography>
+                                {/* <Typography align = "center">minutes testing</Typography> */}
+                            </Grid>
 
-                </Grid>
-
-
-            </CardContent>
-
-            <CardActions disableSpacing>
-                <ExpandMore
-                onClick={()=>handleExpandClick(index)}
-                aria-expanded={expanded}
-                expanded={expanded}
-                aria-label="show more"
-                >
-                    <ExpandMoreIcon></ExpandMoreIcon>
-
-                </ExpandMore>
-
-            </CardActions>
-
-            <Collapse in={index===selectedId?true:false} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <div>
-                        <Typography>How to make it :</Typography>
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.steps}</Typography>
-                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography> */}
-                    </div>
-
-                    <div style={{paddingTop:10}}>
-                        <Typography > Ingredients:</Typography>
-                        <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.ingredients}</Typography>
-                        {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
-                    </div>
-
-                </CardContent>
-                
-
-            </Collapse>
+                        </Grid>
 
 
-        </Card> 
+                    </CardContent>
+
+                    <CardActions disableSpacing>
+                        <ExpandMore
+                        onClick={()=>handleExpandClick(index)}
+                        aria-expanded={expanded}
+                        expanded={expanded}
+                        aria-label="show more"
+                        >
+                            <ExpandMoreIcon></ExpandMoreIcon>
+
+                        </ExpandMore>
+
+                    </CardActions>
+
+                    <Collapse in={index===selectedId?true:false} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            <div>
+                                <Typography>How to make it :</Typography>
+                                <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.steps}</Typography>
+                                {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing</Typography> */}
+                            </div>
+
+                            <div style={{paddingTop:10}}>
+                                <Typography > Ingredients:</Typography>
+                                <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>{card.ingredients}</Typography>
+                                {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
+                            </div>
+
+                        </CardContent>
+                        
+
+                    </Collapse>
+
+
+            </Card> 
+            <Button>
+                Refresh
+            </Button>
+
+            </div>
+
  
         )
     }
