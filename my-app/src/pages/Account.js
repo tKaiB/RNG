@@ -9,8 +9,11 @@ import { Grid } from "@material-ui/core";
 const drawerWidth = 240;
 
 /**
- * 
- * @returns {void}
+ * @param {string} email - Get email of user
+ * @param {string} name - Get name of user
+ * @param {number} age - Get age of user
+ * @param {float} bmi - Get bmi of user
+ * @returns {Account} Account - Account object
  */
 function Account() {
   const { user, logout } = UserAuth();
