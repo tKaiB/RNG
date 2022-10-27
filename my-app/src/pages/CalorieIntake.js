@@ -159,13 +159,14 @@ function CalorieIntake() {
   const [gainMuscle, setGainMuscle] = useState(false);
 
   const handleChange3 = (event) => {
-    setLoseFat(loseFat);
-    setGainMuscle(gainMuscle);
+    setGainMuscle(false)
+    setLoseFat(true)
+
   };
 
   const handleChange4 = (event) => {
-    setGainMuscle(!gainMuscle);
-    setLoseFat(!loseFat);
+    setGainMuscle(true)
+    setLoseFat(false)
   };
 
   return (
