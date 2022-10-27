@@ -185,14 +185,14 @@ function BMI() {
                 </p>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "pink" }}
+                  style={{ backgroundColor: "pink" , textTransform:"none" }}
                   onClick={handleCLick1}
                 >
                   Male
                 </Button>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "pink", margin: "1rem" }}
+                  style={{ backgroundColor: "pink", margin: "1rem" , textTransform:"none" }}
                   onClick={handleCLick2}
                 >
                   Female
@@ -253,7 +253,7 @@ function BMI() {
                 </FormControl>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "Pink", display: "flex" }}
+                  style={{ backgroundColor: "Pink", display: "flex" , textTransform:"none", borderRadius:"10px" }}
                   fullWidth
                   onClick={handleClick3}
                 >
@@ -275,7 +275,7 @@ function BMI() {
                 </p>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "Pink", display: "flex" }}
+                  style={{ backgroundColor: "Pink", display: "flex",textTransform:"none", borderRadius:"10px" }}
                   fullWidth
                   onClick={handleSubmit2}
                 >
@@ -311,7 +311,7 @@ function BMI() {
                     {bmiInput}
                   </h1>
                 </div>
-                <div style={{ paddingLeft: 65 }}>
+                <div style={{ position:"center"}}>
                   <BoyIcon
                     style={{ fontSize: "30rem" }}
                     baseClassName="material-icons-boy"
