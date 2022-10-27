@@ -40,30 +40,9 @@ function DynamicRecipeGenerator(){
                 console.log("No such document!");
             }
 
-        
-
-
-        
-
       };
 
-      const generateCardInfo = async () =>{
-        for(let i=0;i<meals;i++){
-            let tempObject ={
-                index: i,
-                title : `Meal ${i+1}`,
-                text : `Dynamic card ${i+1} `,
-                
-            }
-            setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-            // cardInfo.push(tempObject)
-        }
-
-    
-    }
-
-    
-
+  
     useEffect(() =>{
         if(!user) return;
         const fetchData = async ()=>{
@@ -95,6 +74,7 @@ function DynamicRecipeGenerator(){
 
 
     const handleClick = async(totalCalorie,meals) =>{
+        setCardInfo([]);
         const docRef = collection(db, "recipe")
         const mealCalorie = Math.floor(totalCalorie/meals)
         const q = query(docRef, where("calories", "<=" , mealCalorie));
@@ -147,9 +127,6 @@ function DynamicRecipeGenerator(){
 
     
     const handleExpandClick = (index) => {
-        // console.log(card.expand)
-
-        // card.expand = !(card.expand)
 
         if(selectedId==index){
             setSelectedId(-1)
@@ -280,6 +257,7 @@ function DynamicRecipeGenerator(){
                     
                     <div style={{display:"flex" , justifyContent: "space-between" , alignItems: "flex-start"}}>
                         {cardInfo.map(renderCard)}
+                    
 
                     </div>
                     
