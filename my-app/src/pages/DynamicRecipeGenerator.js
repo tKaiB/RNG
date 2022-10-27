@@ -173,10 +173,10 @@ function DynamicRecipeGenerator(){
 
     const renderCard= (card, index) =>{
         return(
-            <Card sx={{margin:'10px' ,  maxWidth: 360}} key = {index} > 
+            <Card sx={{margin:'10px' ,  width:360}} key = {index} > 
             <CardHeader
-                title={card.name}
-                subheader={card.text}
+                title={card.title}
+                subheader={card.subheader}
             />
 
             <CardContent>
