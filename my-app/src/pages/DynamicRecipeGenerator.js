@@ -260,14 +260,14 @@ function DynamicRecipeGenerator(){
             style={{ minHeight: "100vh" }}
             >
                 
-                <Grid item xs={2} sm={2} style={{ padding: 0, maxWidth: 240 }}>
+                <Grid item  style={{ padding: 0, maxWidth: 240 }}>
                     <SideBar />
                 </Grid>
-                <Grid item xs ={1} sm = {1} style = {{maxWidth:30}}>
+                <Grid item style = {{maxWidth:30}}>
 
                 </Grid>
 
-                <Grid item xs = {10} sm = {10} style={{paddingTop:100}}>
+                <Grid item style={{paddingTop:100}}>
                     
                     <div style={{display:"flex" , alignItems: "flex-start"}}>
                         {cardInfo.map(renderCard)}
