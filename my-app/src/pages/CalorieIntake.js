@@ -223,24 +223,12 @@ function CalorieIntake() {
                   }
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
-                    readOnly: true,
                     "aria-label": "weight",
                   }}
                   onChange={handleChange}
                 />
-                <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-                <Slider
-                  style={{ width: "15rem" }}
-                  size="small"
-                  defaultValue={50}
-                  aria-label="Small"
-                  valueLabelDisplay="auto"
-                  value={values}
-                  onChange={handleChange}
-                  max={200}
-                />
               </FormControl>
-              <div>
+              <div style={{paddingTop:30}}>
                 <FormLabel id="demo-radio-buttons-group-label">
                   I aim to
                 </FormLabel>
