@@ -103,13 +103,7 @@ function BMI() {
 
   const [bmiInput, setValue3] = React.useState(8);
 
-  const handleChange1 = (event, newValue) => {
-    setValue1(newValue);
-  };
 
-  const handleChange2 = (event, newValue) => {
-    setValue2(newValue);
-  };
 
   const handleCLick1 = (event) => {
     event.preventDefault();
@@ -213,19 +207,9 @@ function BMI() {
                       "aria-label": "weight",
                       readOnly: true,
                     }}
-                    onChange={handleChange1}
                   />
                   <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-                  <Slider
-                    style={{ width: "15rem" }}
-                    size="small"
-                    defaultValue={50}
-                    aria-label="Small"
-                    valueLabelDisplay="auto"
-                    value={weight}
-                    onChange={handleChange1}
-                    max={200}
-                  />
+
 
                   <p> My Height </p>
                   <OutlinedInput
@@ -239,20 +223,10 @@ function BMI() {
                       "aria-label": "weight",
                       readOnly: true,
                     }}
-                    onChange={handleChange2}
                   />
-                  <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-                  <Slider
-                    style={{ width: "15rem" }}
-                    size="small"
-                    defaultValue={50}
-                    aria-label="Small"
-                    valueLabelDisplay="auto"
-                    value={height}
-                    onChange={handleChange2}
-                    max={200}
-                    inputRef={heightRef}
-                  />
+                  <div style={{paddingTop:10 , paddingBottom:10}}>
+
+                  </div>
                 </FormControl>
                 <Button
                   variant="contained"
