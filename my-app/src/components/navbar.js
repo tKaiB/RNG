@@ -65,12 +65,13 @@ export default function NavBar() {
               backgroundColor: "deepskyblue",
               borderRadius: "25px",
               color: "white",
-              //fontFamily: "'Courier New', Courier, monospace",
-              fontSize: "1rem",
+              fontFamily: "Inter",
+              fontSize: "1.15rem",
               alignItems: "center",
               padding: "0.5rem 1rem",
               border: "none",
               margin: "1rem",
+              textTransform:"none"
             }}
           >
             Sign Up
@@ -83,11 +84,12 @@ export default function NavBar() {
               backgroundColor: "deepskyblue",
               borderRadius: "25px",
               color: "white",
-              //fontFamily: "'Courier New', Courier, monospace",
-              fontSize: "1rem",
+              fontFamily: "Inter",
+              fontSize: "1.15rem",
               alignItems: "center",
               padding: "0.5rem 1rem",
               border: "none",
+              textTransform:"none"
             }}
           >
             Sign In
