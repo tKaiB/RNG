@@ -75,7 +75,12 @@ const ResponsiveAppBar = () => {
         }}
       >
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h5"
+            component={Link}
+            to="/account"
+            sx={{ flexGrow: 1, color: "black", textDecoration: "none" }}
+          >
             RNG
           </Typography>
           <Typography

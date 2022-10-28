@@ -21,7 +21,12 @@ export default function NavBar() {
         }}
       >
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h5"
+            component={Link}
+            to="/signin"
+            sx={{ flexGrow: 1, color: "black", textDecoration: "none" }}
+          >
             RNG
           </Typography>
           <Typography
