@@ -136,6 +136,7 @@ function CalorieIntake() {
         setSaturatedFat(saturatedFat);
 
         setCalorie(dailyCalorie);
+        testRef.current.value = dailyCalorie
       } else {
         let dailyCalorie = bodyWeight * 15 - 500;
         dailyCalorie = dailyCalorie.toFixed(0);
@@ -148,7 +149,9 @@ function CalorieIntake() {
         const saturatedFat = (dailyCalorie * 0.1).toFixed(2);
         setSaturatedFat(saturatedFat);
         setCalorie(dailyCalorie);
+        testRef.current.value = dailyCalorie
       }
+      
       setShow(!show);
     }
   };
@@ -302,7 +305,7 @@ function CalorieIntake() {
               >
                 <OutlinedInput
                   id="outlined-adornment-calorieintake"
-                  value={calorie}
+                  defaultValue="0"
                   inputRef={testRef}
                   endAdornment={
                     <InputAdornment position="end">kcal</InputAdornment>
