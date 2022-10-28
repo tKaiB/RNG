@@ -115,6 +115,7 @@ function ForgetPassword() {
                     color: "#ffffff",
                     padding: "1rem",
                     borderRadius: "50px",
+                    marginBottom: "35rem",
                   }}
                 >
                   Reset password
