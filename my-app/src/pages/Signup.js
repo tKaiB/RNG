@@ -79,7 +79,7 @@ function SignUp() {
     <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <Grid container style={{ minHeight: "100vh" }}>
-        <Grid item xs={12} sm={6} style={{ marginTop: "0" }}>
+        <Grid item xs={12} sm={6} style={{ marginTop: 0 }}>
           <img
             src="https://cdn.apartmenttherapy.info/image/upload/v1556282934/k/archive/659cfbc5ef34a05e4c3f200db47af6d08d27d7cd.jpg"
             style={{
