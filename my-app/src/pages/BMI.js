@@ -173,7 +173,7 @@ function BMI() {
                 >
                   Calculate Your BMI Using Our Simple Calculator
                 </p>
-                <p>
+                <p style={{fontSize:20 , fontFamily:"Inter"}}>
                   I am a <b>{gender}</b>
                 </p>
                 <Button

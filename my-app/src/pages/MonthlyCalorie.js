@@ -129,6 +129,7 @@ function MonthlyCalorie() {
             <SideBar />
           </Grid>
           <div style={divStyle}>
+            <h1 style={{textAlign:"center"}}>Your Calorie Intake Chart</h1>
             <JSCharting options={config} />
           </div>
         </Grid>
