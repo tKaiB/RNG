@@ -71,7 +71,7 @@ function CalorieIntake() {
     e.preventDefault();
     try {
       const docRef = await addDoc(collection(db, user.uid + "calorie"), {
-        calorie: testRef.current.value,
+        calorie: parseFloat(testRef.current.value),
         time: serverTimestamp(),
       });
     } catch (e) {
@@ -136,7 +136,7 @@ function CalorieIntake() {
         setSaturatedFat(saturatedFat);
 
         setCalorie(dailyCalorie);
-        testRef.current.value = dailyCalorie
+        testRef.current.value = dailyCalorie;
       } else {
         let dailyCalorie = bodyWeight * 15 - 500;
         dailyCalorie = dailyCalorie.toFixed(0);
@@ -149,9 +149,9 @@ function CalorieIntake() {
         const saturatedFat = (dailyCalorie * 0.1).toFixed(2);
         setSaturatedFat(saturatedFat);
         setCalorie(dailyCalorie);
-        testRef.current.value = dailyCalorie
+        testRef.current.value = dailyCalorie;
       }
-      
+
       setShow(!show);
     }
   };
@@ -228,7 +228,7 @@ function CalorieIntake() {
                   onChange={handleChange}
                 />
               </FormControl>
-              <div style={{paddingTop:30}}>
+              <div style={{ paddingTop: 30 }}>
                 <FormLabel id="demo-radio-buttons-group-label">
                   I aim to
                 </FormLabel>

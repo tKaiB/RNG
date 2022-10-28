@@ -79,19 +79,19 @@ function SignUp() {
     <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <Grid container style={{ minHeight: "100vh" }}>
-        <Grid item xs={12} sm={6} style={{ marginTop: 0, paddingTop:10 }}>
+        <Grid item xs={12} sm={6}>
           <img
             src="https://cdn.apartmenttherapy.info/image/upload/v1556282934/k/archive/659cfbc5ef34a05e4c3f200db47af6d08d27d7cd.jpg"
             style={{
-              height:"70%",
-              maxWidth:"100%",
-              objectFit: "cover",
-              marginTop:0
+              height: "100%",
+              width: "100%",
+              objectFit: "fill",
             }}
             alt="brand"
           />
         </Grid>
-        <Grid item xs={8} sm={4} style={{ paddingLeft: 50 }}>
+
+        <Grid item xs={12} sm={6} style={{ paddingLeft: 50 }}>
           <div style={{ alignItems: "left" }}>
             <Grid container direction="column" alignItems="flex-start">
               <Grid item xs={4}>

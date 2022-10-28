@@ -6,7 +6,6 @@ import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
@@ -15,14 +14,7 @@ import BoyIcon from "@mui/icons-material/Boy";
 import Box from "@mui/material/Box";
 
 import { db } from "../firebase";
-import {
-  updateDoc,
-  doc,
-  setDoc,
-  addDoc,
-  collection,
-  serverTimestamp,
-} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 /**
  * @param {boolean} gender - Get gender of user
@@ -34,6 +26,7 @@ function BMI() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
   const testRef = useRef();
+  const weightRef = useRef();
 
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
@@ -62,7 +55,7 @@ function BMI() {
     e.preventDefault();
     try {
       const docRef = await addDoc(collection(db, user.uid), {
-        bmi: testRef.current.value,
+        bmi: parseFloat(testRef.current.value),
         time: serverTimestamp(),
       });
     } catch (e) {
@@ -97,13 +90,11 @@ function BMI() {
 
   const [gender, setGender] = React.useState("");
 
-  const [weight, setValue1] = React.useState(30);
+  //const [weight, setValue1] = React.useState(30);
 
-  const [height, setValue2] = React.useState(150);
+  //const [height, setValue2] = React.useState(150);
 
   const [bmiInput, setValue3] = React.useState(8);
-
-
 
   const handleCLick1 = (event) => {
     event.preventDefault();
@@ -118,7 +109,9 @@ function BMI() {
   const heightRef = useRef();
 
   const handleClick3 = () => {
-    let bmi = weight / ((height / 100) * (height / 100));
+    let bmi =
+      weightRef.current.value /
+      ((heightRef.current.value / 100) * (heightRef.current.value / 100));
     console.log(bmi);
     bmi = bmi.toFixed(2);
     testRef.current.value = bmi;
@@ -173,7 +166,7 @@ function BMI() {
                 >
                   Calculate Your BMI Using Our Simple Calculator
                 </p>
-                <p style={{fontSize:20 , fontFamily:"Inter"}}>
+                <p style={{ fontSize: 20, fontFamily: "Inter" }}>
                   I am a <b>{gender}</b>
                 </p>
                 <Button
@@ -198,35 +191,34 @@ function BMI() {
                   <p> My Weight </p>
                   <OutlinedInput
                     id="outlined-adornment-weight"
-                    value={weight}
+                    defaultValue="0"
                     endAdornment={
                       <InputAdornment position="end">kg</InputAdornment>
                     }
                     aria-describedby="outlined-weight-helper-text"
                     inputProps={{
                       "aria-label": "weight",
-                      readOnly: true,
+                      //readOnly: true,
                     }}
+                    inputRef={weightRef}
                   />
                   <FormHelperText id="outlined-weight-helper-text"></FormHelperText>
-
 
                   <p> My Height </p>
                   <OutlinedInput
                     id="outlined-adornment-weight"
-                    value={height}
+                    defaultValue="0"
                     endAdornment={
                       <InputAdornment position="end">cm</InputAdornment>
                     }
                     aria-describedby="outlined-weight-helper-text"
                     inputProps={{
                       "aria-label": "weight",
-                      readOnly: true,
+                      //readOnly: true,
                     }}
+                    inputRef={heightRef}
                   />
-                  <div style={{paddingTop:10 , paddingBottom:10}}>
-
-                  </div>
+                  <div style={{ paddingTop: 10, paddingBottom: 10 }}></div>
                 </FormControl>
                 <Button
                   variant="contained"

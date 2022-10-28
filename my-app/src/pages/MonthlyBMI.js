@@ -85,6 +85,9 @@ function MonthlyBMI() {
   const config = {
     debug: true,
     type: "line",
+    yAxis: {
+      scale_type: "numeric",
+    },
     xAxis: {
       scale_type: "date",
       time: {
@@ -133,9 +136,9 @@ function MonthlyBMI() {
           <Grid style={{ padding: 0, maxWidth: 240 }}>
             <SideBar />
           </Grid>
-          
+
           <div style={divStyle}>
-          <h1 style={{textAlign:"center"}}>Your BMI Progress Chart</h1>
+            <h1 style={{ textAlign: "center" }}>Your BMI Progress Chart</h1>
             <JSCharting options={config} />
           </div>
         </Grid>
