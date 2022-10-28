@@ -29,8 +29,8 @@ function Account() {
   };
 
   return (
-    <div>
-      <div style={{ paddingBottom: 10}}>
+    <div style={{ fontFamily: "Inter" }}>
+      <div style={{ paddingBottom: 10 }}>
         <ResponsiveAppBar />
       </div>
       <div>
@@ -50,7 +50,7 @@ function Account() {
                 src="https://emilypost.com/client_media/images/blogs/everyday-gym.jpg"
                 style={{
                   width: "100%",
-                  minHeight:'100vh',
+                  minHeight: "100vh",
                   objectFit: "cover",
                   opacity: "0.5",
                 }}

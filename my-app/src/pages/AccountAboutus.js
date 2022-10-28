@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function AccountAboutus() {
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <div>
         <AccountNavBar />
       </div>
@@ -41,7 +41,7 @@ function AccountAboutus() {
             backgroundColor: "deepskyblue",
             borderRadius: "25px",
             color: "white",
-            fontFamily: "'Courier New', Courier, monospace",
+            //fontFamily: "'Courier New', Courier, monospace",
             fontSize: "1rem",
             alignItems: "center",
             padding: "0.5rem 1rem",

@@ -4,7 +4,7 @@ import "./styles.css";
 
 function FAQ() {
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <div class="container">
         <h2 class="faq-heading">Frequently asked questions</h2>

@@ -76,16 +76,11 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <Grid container style={{ minHeight: "100vh" }}>
-        <Grid
-          item
-          xs={8}
-          sm={4}
-          style={{ paddingLeft: 50 }}
-        >
-          <div style={{ alignItems: "left"}}>
+        <Grid item xs={8} sm={4} style={{ paddingLeft: 50 }}>
+          <div style={{ alignItems: "left" }}>
             <Grid container direction="column" alignItems="flex-start">
               <Grid item xs={4}>
                 <h2 style={{ padding: 10, paddingLeft: 0 }}>Sign Up</h2>
@@ -199,7 +194,7 @@ function SignUp() {
                 color: "#ffffff",
                 padding: "1rem",
                 borderRadius: "50px",
-                marginTop:10
+                marginTop: 10,
               }}
             >
               Register
@@ -211,19 +206,18 @@ function SignUp() {
           <img
             src="https://cdn.apartmenttherapy.info/image/upload/v1556282934/k/archive/659cfbc5ef34a05e4c3f200db47af6d08d27d7cd.jpg"
             style={{
-              paddingTop:10,
+              paddingTop: 10,
               paddingLeft: 100,
               maxWidth: 2150,
-              height:"50%",
+              height: "50%",
               objectFit: "cover",
-              maxwidth:800
+              maxwidth: 800,
             }}
             alt="brand"
           />
         </Grid>
       </Grid>
     </div>
-    
   );
 }
 

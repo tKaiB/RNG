@@ -63,7 +63,7 @@ const ResponsiveAppBar = () => {
   }, [user]);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, fontFamily: "Inter" }}>
       <AppBar
         position="static"
         sx={{
@@ -71,7 +71,7 @@ const ResponsiveAppBar = () => {
           color: "black",
           display: "flex",
           padding: "0 1rem",
-          fontFamily: "'Times New Roman', Times, serif",
+          //fontFamily: "'Times New Roman', Times, serif",
         }}
       >
         <Toolbar>

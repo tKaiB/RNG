@@ -15,7 +15,14 @@ import BoyIcon from "@mui/icons-material/Boy";
 import Box from "@mui/material/Box";
 
 import { db } from "../firebase";
-import { updateDoc, doc, setDoc,addDoc , collection , serverTimestamp } from "firebase/firestore";
+import {
+  updateDoc,
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  serverTimestamp,
+} from "firebase/firestore";
 
 /**
  * @param {boolean} gender - Get gender of user
@@ -31,8 +38,6 @@ function BMI() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-
-
   const [value, setHealth] = React.useState("");
 
   const handleChange3 = (event, health) => {
@@ -41,37 +46,31 @@ function BMI() {
 
   // const handleSubmit2 = async (e) => {
   //   e.preventDefault();
-    // try {
-    //   await updateDoc(doc(db, "users", user.uid), {
-    //     bmi: testRef.current.value,
-    //   });
-    //   alert("BMI updated!");
-    // } catch (e) {
-    //   setError(e.message);
-    //   alert(e.message);
-    //   console.log(e.message);
-    // }
+  // try {
+  //   await updateDoc(doc(db, "users", user.uid), {
+  //     bmi: testRef.current.value,
+  //   });
+  //   alert("BMI updated!");
+  // } catch (e) {
+  //   setError(e.message);
+  //   alert(e.message);
+  //   console.log(e.message);
+  // }
   // };
 
-  const handleSubmit2 = async(e) =>{
-    e.preventDefault()
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
     try {
       const docRef = await addDoc(collection(db, user.uid), {
-        bmi:testRef.current.value,
-        time: serverTimestamp()
-
+        bmi: testRef.current.value,
+        time: serverTimestamp(),
       });
-
     } catch (e) {
       console.error("Error adding document: ", e);
     }
 
-    alert("Data added successfully")
-   
-
-
-
-  }
+    alert("Data added successfully");
+  };
 
   const marks = [
     {
@@ -145,7 +144,7 @@ function BMI() {
   }
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <div style={{ paddingBottom: 10 }}>
         <ResponsiveAppBar />
       </div>
@@ -167,7 +166,7 @@ function BMI() {
                 <h1
                   style={{
                     fontSize: "3rem",
-                    fontFamily: "'Times New Roman', Times, serif",
+                    //fontFamily: "'Times New Roman', Times, serif",
                   }}
                 >
                   Calculate Your Body Mass Index
@@ -175,7 +174,7 @@ function BMI() {
                 <p
                   style={{
                     fontSize: "1.5rem",
-                    fontFamily: "'Times New Roman', Times, serif",
+                    //fontFamily: "'Times New Roman', Times, serif",
                   }}
                 >
                   Calculate Your BMI Using Our Simple Calculator
@@ -185,14 +184,18 @@ function BMI() {
                 </p>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "pink" , textTransform:"none" }}
+                  style={{ backgroundColor: "pink", textTransform: "none" }}
                   onClick={handleCLick1}
                 >
                   Male
                 </Button>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "pink", margin: "1rem" , textTransform:"none" }}
+                  style={{
+                    backgroundColor: "pink",
+                    margin: "1rem",
+                    textTransform: "none",
+                  }}
                   onClick={handleCLick2}
                 >
                   Female
@@ -253,7 +256,12 @@ function BMI() {
                 </FormControl>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "Pink", display: "flex" , textTransform:"none", borderRadius:"10px" }}
+                  style={{
+                    backgroundColor: "Pink",
+                    display: "flex",
+                    textTransform: "none",
+                    borderRadius: "10px",
+                  }}
                   fullWidth
                   onClick={handleClick3}
                 >
@@ -275,7 +283,12 @@ function BMI() {
                 </p>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "Pink", display: "flex",textTransform:"none", borderRadius:"10px" }}
+                  style={{
+                    backgroundColor: "Pink",
+                    display: "flex",
+                    textTransform: "none",
+                    borderRadius: "10px",
+                  }}
                   fullWidth
                   onClick={handleSubmit2}
                 >
@@ -294,7 +307,7 @@ function BMI() {
                     style={{
                       textAlign: "center",
                       fontSize: "3rem",
-                      fontFamily: "'Times New Roman', Times, serif",
+                      //fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     Your BMI Is
@@ -305,13 +318,13 @@ function BMI() {
                     style={{
                       textAlign: "center",
                       fontSize: "3rem",
-                      fontFamily: "'Times New Roman', Times, serif",
+                      //fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     {bmiInput}
                   </h1>
                 </div>
-                <div style={{ position:"center"}}>
+                <div style={{ position: "center" }}>
                   <BoyIcon
                     style={{ fontSize: "30rem" }}
                     baseClassName="material-icons-boy"

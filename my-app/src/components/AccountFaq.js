@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function AccountFaq() {
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <AccountNavBar />
       <div class="container">
         <h2 class="faq-heading">Frequently asked questions</h2>
@@ -69,7 +69,7 @@ function AccountFaq() {
               backgroundColor: "deepskyblue",
               borderRadius: "25px",
               color: "white",
-              fontFamily: "'Courier New', Courier, monospace",
+              //fontFamily: "'Courier New', Courier, monospace",
               fontSize: "1rem",
               alignItems: "center",
               padding: "0.5rem 1rem",

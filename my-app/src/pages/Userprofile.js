@@ -74,7 +74,7 @@ function UserProfile() {
   }, [user]);
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <div style={{ paddingBottom: 9 }}>
         <ResponsiveAppBar />
       </div>
@@ -97,7 +97,7 @@ function UserProfile() {
         <Grid item>
           <p
             style={{
-              fontFamily: "inter",
+              //fontFamily: "inter",
               fontSize: "32px",
               fontStyle: "regular",
               textDecoration: "underline",

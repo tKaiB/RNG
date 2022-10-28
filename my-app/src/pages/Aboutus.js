@@ -4,7 +4,7 @@ import "./styles.css";
 
 function Aboutus() {
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <div class="about-section">
         <h1>About Us</h1>

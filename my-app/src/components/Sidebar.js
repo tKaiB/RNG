@@ -18,7 +18,7 @@ function SideBar() {
     setView(nextView);
   };
   return (
-    <Grid>
+    <Grid style={{ fontFamily: "Inter" }}>
       <ToggleButtonGroup
         orientation="vertical"
         value={view}

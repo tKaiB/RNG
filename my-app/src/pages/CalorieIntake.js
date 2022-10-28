@@ -46,7 +46,7 @@ function createData(name, value) {
 }
 
 /**
- * 
+ *
  * @param {number} weight - Get weight of user
  * @param {boolean} gainMuscle - Whether user wants to gain muscle
  * @param {boolean} loseFat - Whether user wants to lose fat
@@ -166,18 +166,17 @@ function CalorieIntake() {
   const [gainMuscle, setGainMuscle] = useState(false);
 
   const handleChange3 = (event) => {
-    setGainMuscle(false)
-    setLoseFat(true)
-
+    setGainMuscle(false);
+    setLoseFat(true);
   };
 
   const handleChange4 = (event) => {
-    setGainMuscle(true)
-    setLoseFat(false)
+    setGainMuscle(true);
+    setLoseFat(false);
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <div style={{ paddingBottom: 10 }}>
         <ResponsiveAppBar />
       </div>
@@ -197,7 +196,7 @@ function CalorieIntake() {
               <h1
                 style={{
                   fontSize: "3rem",
-                  fontFamily: "'Times New Roman', Times, serif",
+                  //fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 Calculate Your Calories
@@ -205,7 +204,7 @@ function CalorieIntake() {
               <p
                 style={{
                   fontSize: "1.5rem",
-                  fontFamily: "'Times New Roman', Times, serif",
+                  //fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 Calculate Your Calories Using Our Simple Calculator
@@ -332,7 +331,7 @@ function CalorieIntake() {
                   <h1
                     style={{
                       fontSize: "3rem",
-                      fontFamily: "'Times New Roman', Times, serif",
+                      //fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     Your daily Calorie Goals

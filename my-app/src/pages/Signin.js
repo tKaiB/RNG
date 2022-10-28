@@ -42,7 +42,7 @@ function SignIn() {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <Grid container style={{ minHeight: "100vh" }}>
         <Grid item xs={12} sm={6}>

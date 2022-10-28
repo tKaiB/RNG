@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function NavBar() {
   const navigate = useNavigate();
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, fontFamily: "Inter" }}>
       <AppBar
         position="static"
         sx={{
@@ -17,7 +17,7 @@ export default function NavBar() {
           color: "black",
           display: "flex",
           padding: "0 1rem",
-          fontFamily: "'Times New Roman', Times, serif",
+          //fontFamily: "'Times New Roman', Times, serif",
         }}
       >
         <Toolbar>
@@ -55,12 +55,12 @@ export default function NavBar() {
           <Button
             color="inherit"
             component={Link}
-            to='/'
+            to="/"
             sx={{
               backgroundColor: "deepskyblue",
               borderRadius: "25px",
               color: "white",
-              fontFamily: "'Courier New', Courier, monospace",
+              //fontFamily: "'Courier New', Courier, monospace",
               fontSize: "1rem",
               alignItems: "center",
               padding: "0.5rem 1rem",
@@ -72,13 +72,13 @@ export default function NavBar() {
           </Button>
           <Button
             color="inherit"
-            component ={Link}
-            to='/signin'
+            component={Link}
+            to="/signin"
             sx={{
               backgroundColor: "deepskyblue",
               borderRadius: "25px",
               color: "white",
-              fontFamily: "'Courier New', Courier, monospace",
+              //fontFamily: "'Courier New', Courier, monospace",
               fontSize: "1rem",
               alignItems: "center",
               padding: "0.5rem 1rem",

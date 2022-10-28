@@ -113,7 +113,7 @@ function MonthlyCalorie() {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <div style={{ paddingBottom: 10 }}>
         <ResponsiveAppBar />
       </div>

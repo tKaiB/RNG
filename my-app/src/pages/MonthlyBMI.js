@@ -21,7 +21,7 @@ import BMI from "./BMI";
 const drawerWidth = 240;
 
 /**
- * 
+ *
  * @returns {array} bmidata, time - BMI data and time stamp
  */
 function MonthlyBMI() {
@@ -118,7 +118,7 @@ function MonthlyBMI() {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <div style={{ paddingBottom: 10 }}>
         <ResponsiveAppBar />
       </div>

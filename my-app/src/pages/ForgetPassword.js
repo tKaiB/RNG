@@ -7,13 +7,13 @@ import {
   Button,
 } from "@material-ui/core";
 import { EmailOutlined } from "@material-ui/icons";
-import NavBar from "../components/Navbar"
+import NavBar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
 
 /**
-* @param {string} email - Get email of user
-* @returns {resetPassword} resertPassword - Reset password object
+ * @param {string} email - Get email of user
+ * @returns {resetPassword} resertPassword - Reset password object
  */
 function ForgetPassword() {
   const emailRef = useRef();
@@ -32,13 +32,13 @@ function ForgetPassword() {
     navigate("/");
   };
   return (
-    <div>
+    <div style={{ fontFamily: "Inter" }}>
       <NavBar />
       <Grid container direction="column" alignItems="flex-start">
         <Grid item xs={12} xm={6}>
           <p
             style={{
-              fontFamily: "Inter",
+              //: "Inter",
               fontSize: 32,
               fontVariant: "regular",
               marginBottom: 0,
@@ -50,7 +50,7 @@ function ForgetPassword() {
         <Grid item xs={12} xm={6}>
           <p
             style={{
-              fontFamily: "Inter",
+              //fontFamily: "Inter",
               fontSize: 20,
               fontVariant: "regular",
             }}
