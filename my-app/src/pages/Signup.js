@@ -99,13 +99,13 @@ function SignUp() {
               </Grid>
 
               <Grid item xs={4}>
-                <p style={{ margin: 0, paddingBottom: 7 }}>
+                <p style={{ margin: 0, paddingBottom: 7, fontSize:16 }}>
                   If you already have an account
                 </p>
               </Grid>
 
               <Grid item xs={4}>
-                <p style={{ margin: 0 }}>
+                <p style={{ margin: 0 , fontSize:16}}>
                   You can <Link to="/signin">Login here</Link>
                 </p>
               </Grid>
