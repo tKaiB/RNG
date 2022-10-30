@@ -30,13 +30,12 @@ import { RepeatRounded } from "@material-ui/icons";
 import { maxWidth } from "@mui/system";
 
 function DynamicRecipeGenerator() {
-  // get calorie from db
-  // get number of meals --> size of array
-  // number of calories per meal
+
   const { user, logout } = UserAuth();
 
   const [cardInfo, setCardInfo] = useState([]);
-  // const cardInfo =[]
+  const [recipe,setRecipe] = useState([])
+
   const [hasLoaded, setLoaded] = useState(false);
   const [totalCalorie, setTotalCalorie] = useState(0);
   const [meals, setMeals] = useState(0);
@@ -53,67 +52,132 @@ function DynamicRecipeGenerator() {
     }
   };
 
+  
+
+
+
+ 
+
   useEffect(() => {
     if (!user) return;
+    if(!db) return;
     const fetchData = async () => {
       const [calorie, meals] = await getData();
       setTotalCalorie(calorie);
       setMeals(meals);
     };
 
+    const getRecipeFromDB = async(totalCalorie,meals) =>{
+        const docRef = collection(db, "recipe");
+        const mealCalorie = Math.floor(totalCalorie / meals);
+        const q = query(docRef, where("calories", "<=", mealCalorie));
+    
+        const querySnapshot = await getDocs(q);
+        let counter = 0 
+        querySnapshot.forEach((doc) => {
+        //   console.log(doc.id, " => ", doc.data());
+            let tempObject = {};
+            tempObject.index = counter;
+            tempObject.title = doc.data().name;
+            tempObject.subheader = `Meal ${counter + 1}`;
+            tempObject.protein = doc.data().protein;
+            tempObject.sodium = doc.data().sodium;
+            // tempObject.saturatedFat = doc.data().saturated fat,
+            tempObject.sugar = doc.data().sugar;
+            tempObject.totalFat = doc.data().totalFat;
+            tempObject.time = doc.data().minutes;
+            tempObject.steps = doc.data().steps;
+    
+            const ingredientsArray = doc
+              .data()
+              .ingredients.slice(2, -2)
+              .split("', '");
+            let ingredientResult = "";
+            for (let i = 0; i < ingredientsArray.length; i++) {
+              ingredientResult =
+                ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+              // stepResult = stepResult + "hello" + "\n"
+            }
+            // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+            tempObject.ingredients = ingredientResult;
+            setRecipe((recipe) => [...recipe, tempObject]);
+            counter++
+          }
+          
+    
+        );
+        console.log(recipe)
+        
+      }
+
+
     fetchData();
-  }, [user]);
+    getRecipeFromDB(totalCalorie,meals);
+  }, [user,db]);
 
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
 
-  const handleClick = async (totalCalorie, meals) => {
-    setCardInfo([]);
-    const docRef = collection(db, "recipe");
-    const mealCalorie = Math.floor(totalCalorie / meals);
-    const q = query(docRef, where("calories", "<=", mealCalorie));
 
-    const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.size);
-    let counter = 0;
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      if (counter > meals - 1) {
-        return;
-      } else {
-        let tempObject = {};
-        tempObject.index = counter;
-        tempObject.title = doc.data().name;
-        tempObject.subheader = `Meal ${counter + 1}`;
-        tempObject.protein = doc.data().protein;
-        tempObject.sodium = doc.data().sodium;
-        // tempObject.saturatedFat = doc.data().saturated fat,
-        tempObject.sugar = doc.data().sugar;
-        tempObject.totalFat = doc.data().totalFat;
-        tempObject.time = doc.data().minutes;
-        tempObject.steps = doc.data().steps;
 
-        const ingredientsArray = doc
-          .data()
-          .ingredients.slice(2, -2)
-          .split("', '");
-        let ingredientResult = "";
-        for (let i = 0; i < ingredientsArray.length; i++) {
-          ingredientResult =
-            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
-          // stepResult = stepResult + "hello" + "\n"
-        }
-        // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
-        tempObject.ingredients = ingredientResult;
-        setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-      }
+  const handleClick = async(totalCalorie,meals)=>{
+    setCardInfo([])
+    // getRecipeFromDB(totalCalorie,meals)
+    console.log(recipe)
+    // for(let i = 0; i<meals;i++){
+    //     let tempObject = recipe[counter]
+    //     setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+    //     setCounter(counter+1)
+    // }
+  }
 
-      counter++;
-    });
+//   const handleClick = async (totalCalorie, meals) => {
+//     setCardInfo([]);
+//     const docRef = collection(db, "recipe");
+//     const mealCalorie = Math.floor(totalCalorie / meals);
+//     const q = query(docRef, where("calories", "<=", mealCalorie));
 
-    // generateCardInfo()
-  };
+//     const querySnapshot = await getDocs(q);
+//     console.log(querySnapshot.size);
+//     let counter = 0;
+//     querySnapshot.forEach((doc) => {
+//       // doc.data() is never undefined for query doc snapshots
+//       console.log(doc.id, " => ", doc.data());
+//       if (counter > meals - 1) {
+//         return;
+//       } else {
+//         let tempObject = {};
+//         tempObject.index = counter;
+//         tempObject.title = doc.data().name;
+//         tempObject.subheader = `Meal ${counter + 1}`;
+//         tempObject.protein = doc.data().protein;
+//         tempObject.sodium = doc.data().sodium;
+//         // tempObject.saturatedFat = doc.data().saturated fat,
+//         tempObject.sugar = doc.data().sugar;
+//         tempObject.totalFat = doc.data().totalFat;
+//         tempObject.time = doc.data().minutes;
+//         tempObject.steps = doc.data().steps;
+
+//         const ingredientsArray = doc
+//           .data()
+//           .ingredients.slice(2, -2)
+//           .split("', '");
+//         let ingredientResult = "";
+//         for (let i = 0; i < ingredientsArray.length; i++) {
+//           ingredientResult =
+//             ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+//           // stepResult = stepResult + "hello" + "\n"
+//         }
+//         // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+//         tempObject.ingredients = ingredientResult;
+//         setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+//       }
+
+//       counter++;
+//     });
+
+//     // generateCardInfo()
+//   };
 
   const handleExpandClick = (index) => {
     if (selectedId == index) {
