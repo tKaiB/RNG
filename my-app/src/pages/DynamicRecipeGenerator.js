@@ -122,20 +122,22 @@ function DynamicRecipeGenerator() {
   const handleClick = async(totalCalorie,meals)=>{
     setCardInfo([])
     const recipe = await getRecipeFromDB(totalCalorie,meals)
-    console.log(recipe)
-    // for(let i = 0; i<meals;i++){
-    //     let tempObject = recipe[noOfCards]
-        // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-    //     // noOfCards++;
-    //     setNoOfCards(noOfCards+1)
-    // }
-
-    let tempArray = recipe.slice(noOfCards,noOfCards+meals)
-    for(let i=0; i<tempArray.length;i++){
-        setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
+    if((recipe.length == 0) || (noOfCards>recipe.length) ){
+        alert("No Recipe Found!!")
     }
+    else{
+        let tempArray = recipe.slice(noOfCards,noOfCards+meals)
+        for(let i=0; i<tempArray.length;i++){
+            setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
+        }
+    
+        setNoOfCards(noOfCards+meals)
 
-    setNoOfCards(noOfCards+meals)
+    }
+    
+
+
+
     
 
 
