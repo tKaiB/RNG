@@ -134,14 +134,25 @@ function DynamicRecipeGenerator() {
         setNoOfCards(noOfCards+meals)
 
     }
+
+  }
+
+  const handleIndividualRefresh = async(index ,totalCalorie,meals) =>{
+    const recipe = await getRecipeFromDB(totalCalorie,meals)
+    const newCardInfo = recipe[noOfCards]
+    // update that particular item in array
+    const newCardsInfo = cardInfo.map((card,i) =>{
+        if(i==index){
+            return newCardInfo;
+        }
+        else{
+            return card;
+        }
+
+    });
+    setCardInfo(newCardsInfo)
     
-
-
-
-    
-
-
-
+    setNoOfCards(noOfCards+1)
   }
 
 //   const handleClick = async (totalCalorie, meals) => {
@@ -285,7 +296,7 @@ function DynamicRecipeGenerator() {
           </Collapse>
         </Card>
         <div>
-          <Button>Refresh</Button>
+          <Button onClick={()=>{handleIndividualRefresh(index,totalCalorie,meals)}}>Refresh</Button>
           <Button>Like</Button>
         </div>
       </div>
@@ -304,7 +315,7 @@ function DynamicRecipeGenerator() {
         spacing={1}
         style={{ minHeight: "100vh" }}
       >
-        <Grid item style={{ padding: 0, maxWidth: 240 }}>
+        <Grid item sm={6} style={{ padding: 0, maxWidth: 240 }}>
           <SideBar />
         </Grid>
         <div style={{ position: "absolute", right: "40%", padding: "3rem" }}>
