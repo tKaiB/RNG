@@ -34,7 +34,7 @@ function DynamicRecipeGenerator() {
   const { user, logout } = UserAuth();
 
   const [cardInfo, setCardInfo] = useState([]);
-  const [recipe,setRecipe] = useState([])
+  
 
   const [hasLoaded, setLoaded] = useState(false);
   const [totalCalorie, setTotalCalorie] = useState(0);
@@ -54,81 +54,92 @@ function DynamicRecipeGenerator() {
 
   
 
-
-
- 
-
   useEffect(() => {
     if (!user) return;
-    if(!db) return;
+
     const fetchData = async () => {
       const [calorie, meals] = await getData();
       setTotalCalorie(calorie);
       setMeals(meals);
     };
 
-    const getRecipeFromDB = async(totalCalorie,meals) =>{
-        const docRef = collection(db, "recipe");
-        const mealCalorie = Math.floor(totalCalorie / meals);
-        const q = query(docRef, where("calories", "<=", mealCalorie));
-    
-        const querySnapshot = await getDocs(q);
-        let counter = 0 
-        querySnapshot.forEach((doc) => {
-        //   console.log(doc.id, " => ", doc.data());
-            let tempObject = {};
-            tempObject.index = counter;
-            tempObject.title = doc.data().name;
-            tempObject.subheader = `Meal ${counter + 1}`;
-            tempObject.protein = doc.data().protein;
-            tempObject.sodium = doc.data().sodium;
-            // tempObject.saturatedFat = doc.data().saturated fat,
-            tempObject.sugar = doc.data().sugar;
-            tempObject.totalFat = doc.data().totalFat;
-            tempObject.time = doc.data().minutes;
-            tempObject.steps = doc.data().steps;
-    
-            const ingredientsArray = doc
-              .data()
-              .ingredients.slice(2, -2)
-              .split("', '");
-            let ingredientResult = "";
-            for (let i = 0; i < ingredientsArray.length; i++) {
-              ingredientResult =
-                ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
-              // stepResult = stepResult + "hello" + "\n"
-            }
-            // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
-            tempObject.ingredients = ingredientResult;
-            setRecipe((recipe) => [...recipe, tempObject]);
-            counter++
-          }
-          
-    
-        );
-        console.log(recipe)
-        
-      }
-
-
     fetchData();
-    getRecipeFromDB(totalCalorie,meals);
-  }, [user,db]);
+  }, [user]);
+
+
 
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
+
+  const getRecipeFromDB = async(totalCalorie,meals)=>{
+    let recipe=[]
+    const docRef = collection(db, "recipe");
+    const mealCalorie = Math.floor(totalCalorie / meals);
+    const q = query(docRef, where("calories", "<=", mealCalorie));
+
+    const querySnapshot = await getDocs(q);
+    let counter = 0;
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+        let tempObject = {};
+        tempObject.index = counter;
+        tempObject.title = doc.data().name;
+        tempObject.subheader = `Meal ${counter + 1}`;
+        tempObject.protein = doc.data().protein;
+        tempObject.sodium = doc.data().sodium;
+        // tempObject.saturatedFat = doc.data().saturated fat,
+        tempObject.sugar = doc.data().sugar;
+        tempObject.totalFat = doc.data().totalFat;
+        tempObject.time = doc.data().minutes;
+        tempObject.steps = doc.data().steps;
+
+        const ingredientsArray = doc
+          .data()
+          .ingredients.slice(2, -2)
+          .split("', '");
+        let ingredientResult = "";
+        for (let i = 0; i < ingredientsArray.length; i++) {
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+          // stepResult = stepResult + "hello" + "\n"
+        }
+        // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+        tempObject.ingredients = ingredientResult;
+        recipe.push(tempObject)
+    
+      counter++;
+    });
+
+    return recipe
+  }
+
+  const[noOfCards,setNoOfCards] = useState(0)
+
+
 
 
 
   const handleClick = async(totalCalorie,meals)=>{
     setCardInfo([])
-    // getRecipeFromDB(totalCalorie,meals)
+    const recipe = await getRecipeFromDB(totalCalorie,meals)
     console.log(recipe)
     // for(let i = 0; i<meals;i++){
-    //     let tempObject = recipe[counter]
-    //     setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-    //     setCounter(counter+1)
+    //     let tempObject = recipe[noOfCards]
+        // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+    //     // noOfCards++;
+    //     setNoOfCards(noOfCards+1)
     // }
+
+    let tempArray = recipe.slice(noOfCards,noOfCards+meals)
+    for(let i=0; i<tempArray.length;i++){
+        setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
+    }
+
+    setNoOfCards(noOfCards+meals)
+    
+
+
+
   }
 
 //   const handleClick = async (totalCalorie, meals) => {
@@ -170,7 +181,7 @@ function DynamicRecipeGenerator() {
 //         }
 //         // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
 //         tempObject.ingredients = ingredientResult;
-//         setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+        // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
 //       }
 
 //       counter++;
