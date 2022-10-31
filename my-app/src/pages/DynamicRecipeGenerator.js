@@ -28,13 +28,13 @@ import {
 import { db } from "../firebase";
 import { RepeatRounded } from "@material-ui/icons";
 import { maxWidth } from "@mui/system";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import RecommendIcon from "@mui/icons-material/Recommend";
 
 function DynamicRecipeGenerator() {
-
   const { user, logout } = UserAuth();
 
   const [cardInfo, setCardInfo] = useState([]);
-  
 
   const [hasLoaded, setLoaded] = useState(false);
   const [totalCalorie, setTotalCalorie] = useState(0);
@@ -52,8 +52,6 @@ function DynamicRecipeGenerator() {
     }
   };
 
-  
-
   useEffect(() => {
     if (!user) return;
 
@@ -66,13 +64,11 @@ function DynamicRecipeGenerator() {
     fetchData();
   }, [user]);
 
-
-
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
 
-  const getRecipeFromDB = async(totalCalorie,meals)=>{
-    let recipe=[]
+  const getRecipeFromDB = async (totalCalorie, meals) => {
+    let recipe = [];
     const docRef = collection(db, "recipe");
     const mealCalorie = Math.floor(totalCalorie / meals);
     const q = query(docRef, where("calories", "<=", mealCalorie));
@@ -81,127 +77,118 @@ function DynamicRecipeGenerator() {
     let counter = 0;
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-        let tempObject = {};
-        tempObject.index = counter;
-        tempObject.title = doc.data().name;
-        tempObject.subheader = `Meal ${counter + 1}`;
-        tempObject.protein = doc.data().protein;
-        tempObject.sodium = doc.data().sodium;
-        // tempObject.saturatedFat = doc.data().saturated fat,
-        tempObject.sugar = doc.data().sugar;
-        tempObject.totalFat = doc.data().totalFat;
-        tempObject.time = doc.data().minutes;
-        tempObject.steps = doc.data().steps;
+      let tempObject = {};
+      tempObject.index = counter;
+      tempObject.title = doc.data().name;
+      tempObject.subheader = `Meal ${counter + 1}`;
+      tempObject.protein = doc.data().protein;
+      tempObject.sodium = doc.data().sodium;
+      // tempObject.saturatedFat = doc.data().saturated fat,
+      tempObject.sugar = doc.data().sugar;
+      tempObject.totalFat = doc.data().totalFat;
+      tempObject.time = doc.data().minutes;
+      tempObject.steps = doc.data().steps;
 
-        const ingredientsArray = doc
-          .data()
-          .ingredients.slice(2, -2)
-          .split("', '");
-        let ingredientResult = "";
-        for (let i = 0; i < ingredientsArray.length; i++) {
-          ingredientResult =
-            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
-          // stepResult = stepResult + "hello" + "\n"
-        }
-        // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
-        tempObject.ingredients = ingredientResult;
-        recipe.push(tempObject)
-    
+      const ingredientsArray = doc
+        .data()
+        .ingredients.slice(2, -2)
+        .split("', '");
+      let ingredientResult = "";
+      for (let i = 0; i < ingredientsArray.length; i++) {
+        ingredientResult =
+          ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+        // stepResult = stepResult + "hello" + "\n"
+      }
+      // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+      tempObject.ingredients = ingredientResult;
+      recipe.push(tempObject);
+
       counter++;
     });
 
-    return recipe
-  }
+    return recipe;
+  };
 
-  const[noOfCards,setNoOfCards] = useState(0)
+  const [noOfCards, setNoOfCards] = useState(0);
 
+  const handleClick = async (totalCalorie, meals) => {
+    setCardInfo([]);
+    const recipe = await getRecipeFromDB(totalCalorie, meals);
+    if (recipe.length == 0 || noOfCards > recipe.length) {
+      alert("No Recipe Found!!");
+    } else {
+      let tempArray = recipe.slice(noOfCards, noOfCards + meals);
+      for (let i = 0; i < tempArray.length; i++) {
+        setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
+      }
 
-
-
-
-  const handleClick = async(totalCalorie,meals)=>{
-    setCardInfo([])
-    const recipe = await getRecipeFromDB(totalCalorie,meals)
-    if((recipe.length == 0) || (noOfCards>recipe.length) ){
-        alert("No Recipe Found!!")
+      setNoOfCards(noOfCards + meals);
     }
-    else{
-        let tempArray = recipe.slice(noOfCards,noOfCards+meals)
-        for(let i=0; i<tempArray.length;i++){
-            setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
-        }
-    
-        setNoOfCards(noOfCards+meals)
+  };
 
-    }
-
-  }
-
-  const handleIndividualRefresh = async(index ,totalCalorie,meals) =>{
-    const recipe = await getRecipeFromDB(totalCalorie,meals)
-    const newCardInfo = recipe[noOfCards]
+  const handleIndividualRefresh = async (index, totalCalorie, meals) => {
+    const recipe = await getRecipeFromDB(totalCalorie, meals);
+    const newCardInfo = recipe[noOfCards];
     // update that particular item in array
-    const newCardsInfo = cardInfo.map((card,i) =>{
-        if(i==index){
-            return newCardInfo;
-        }
-        else{
-            return card;
-        }
-
+    const newCardsInfo = cardInfo.map((card, i) => {
+      if (i == index) {
+        return newCardInfo;
+      } else {
+        return card;
+      }
     });
-    setCardInfo(newCardsInfo)
-    
-    setNoOfCards(noOfCards+1)
-  }
+    setCardInfo(newCardsInfo);
 
-//   const handleClick = async (totalCalorie, meals) => {
-//     setCardInfo([]);
-//     const docRef = collection(db, "recipe");
-//     const mealCalorie = Math.floor(totalCalorie / meals);
-//     const q = query(docRef, where("calories", "<=", mealCalorie));
+    setNoOfCards(noOfCards + 1);
+  };
 
-//     const querySnapshot = await getDocs(q);
-//     console.log(querySnapshot.size);
-//     let counter = 0;
-//     querySnapshot.forEach((doc) => {
-//       // doc.data() is never undefined for query doc snapshots
-//       console.log(doc.id, " => ", doc.data());
-//       if (counter > meals - 1) {
-//         return;
-//       } else {
-//         let tempObject = {};
-//         tempObject.index = counter;
-//         tempObject.title = doc.data().name;
-//         tempObject.subheader = `Meal ${counter + 1}`;
-//         tempObject.protein = doc.data().protein;
-//         tempObject.sodium = doc.data().sodium;
-//         // tempObject.saturatedFat = doc.data().saturated fat,
-//         tempObject.sugar = doc.data().sugar;
-//         tempObject.totalFat = doc.data().totalFat;
-//         tempObject.time = doc.data().minutes;
-//         tempObject.steps = doc.data().steps;
+  //   const handleClick = async (totalCalorie, meals) => {
+  //     setCardInfo([]);
+  //     const docRef = collection(db, "recipe");
+  //     const mealCalorie = Math.floor(totalCalorie / meals);
+  //     const q = query(docRef, where("calories", "<=", mealCalorie));
 
-//         const ingredientsArray = doc
-//           .data()
-//           .ingredients.slice(2, -2)
-//           .split("', '");
-//         let ingredientResult = "";
-//         for (let i = 0; i < ingredientsArray.length; i++) {
-//           ingredientResult =
-//             ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
-//           // stepResult = stepResult + "hello" + "\n"
-//         }
-//         // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
-//         tempObject.ingredients = ingredientResult;
-        // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-//       }
+  //     const querySnapshot = await getDocs(q);
+  //     console.log(querySnapshot.size);
+  //     let counter = 0;
+  //     querySnapshot.forEach((doc) => {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.id, " => ", doc.data());
+  //       if (counter > meals - 1) {
+  //         return;
+  //       } else {
+  //         let tempObject = {};
+  //         tempObject.index = counter;
+  //         tempObject.title = doc.data().name;
+  //         tempObject.subheader = `Meal ${counter + 1}`;
+  //         tempObject.protein = doc.data().protein;
+  //         tempObject.sodium = doc.data().sodium;
+  //         // tempObject.saturatedFat = doc.data().saturated fat,
+  //         tempObject.sugar = doc.data().sugar;
+  //         tempObject.totalFat = doc.data().totalFat;
+  //         tempObject.time = doc.data().minutes;
+  //         tempObject.steps = doc.data().steps;
 
-//       counter++;
-//     });
+  //         const ingredientsArray = doc
+  //           .data()
+  //           .ingredients.slice(2, -2)
+  //           .split("', '");
+  //         let ingredientResult = "";
+  //         for (let i = 0; i < ingredientsArray.length; i++) {
+  //           ingredientResult =
+  //             ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+  //           // stepResult = stepResult + "hello" + "\n"
+  //         }
+  //         // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+  //         tempObject.ingredients = ingredientResult;
+  // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
+  //       }
 
-//     // generateCardInfo()
-//   };
+  //       counter++;
+  //     });
+
+  //     // generateCardInfo()
+  //   };
 
   const handleExpandClick = (index) => {
     if (selectedId == index) {
@@ -296,8 +283,17 @@ function DynamicRecipeGenerator() {
           </Collapse>
         </Card>
         <div>
-          <Button onClick={()=>{handleIndividualRefresh(index,totalCalorie,meals)}}>Refresh</Button>
-          <Button>Like</Button>
+          <Button
+            onClick={() => {
+              handleIndividualRefresh(index, totalCalorie, meals);
+            }}
+          >
+            {" "}
+            <RefreshIcon />
+          </Button>
+          <Button>
+            <RecommendIcon />
+          </Button>
         </div>
       </div>
     );
