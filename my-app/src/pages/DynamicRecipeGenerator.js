@@ -67,6 +67,10 @@ function DynamicRecipeGenerator() {
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
 
+  function filterItems(arr,query){
+    return arr.filter((el)=>el.toLowerCase().includes(query.toLowerCase()))
+  }
+
   const getRecipeFromDB = async (totalCalorie, meals) => {
     let recipe = [];
     const docRef = collection(db, "recipe");
@@ -83,7 +87,6 @@ function DynamicRecipeGenerator() {
       })
 
     }
-    console.log(healthy)
 
     const querySnapshot = await getDocs(q);
     let counter = 0;
@@ -108,7 +111,16 @@ function DynamicRecipeGenerator() {
       let ingredientResult = "";
       for (let i = 0; i < ingredientsArray.length; i++) {
         // filter logic
-        ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+        const result = filterItems(healthy,String(ingredientsArray[i]))
+        if(result.length>0){
+            ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
+
+        }
+        else{
+            ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+
+        }
+        
         // stepResult = stepResult + "hello" + "\n"
       }
       // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
@@ -133,7 +145,6 @@ function DynamicRecipeGenerator() {
       let tempArray = recipe.slice(noOfCards, noOfCards + meals);
       for (let i = 0; i < tempArray.length; i++) {
         console.log(tempArray[i].ingredientsArray)
-        // search logic goes here
         setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
       }
 
