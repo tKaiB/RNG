@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Button, CardActions } from "@material-ui/core";
 import {
   Card,
@@ -73,6 +73,17 @@ function DynamicRecipeGenerator() {
     const mealCalorie = Math.floor(totalCalorie / meals);
     const q = query(docRef, where("calories", "<=", mealCalorie));
 
+    // const docRef2 = collection(db,"healthy")
+    // const q2 = query(docRef2)
+    // let healthy = []
+    // const querySnapshot2 = await(getDocs(q2))
+    // querySnapshot2.forEach((doc)=>{
+    //   healthy.push(doc.data().brand_and_product_name)
+    // })
+
+
+
+
     const querySnapshot = await getDocs(q);
     let counter = 0;
     querySnapshot.forEach((doc) => {
@@ -95,12 +106,12 @@ function DynamicRecipeGenerator() {
         .split("', '");
       let ingredientResult = "";
       for (let i = 0; i < ingredientsArray.length; i++) {
-        ingredientResult =
-          ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+        ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
         // stepResult = stepResult + "hello" + "\n"
       }
       // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
       tempObject.ingredients = ingredientResult;
+      tempObject.ingredientsArray = ingredientsArray
       recipe.push(tempObject);
 
       counter++;
@@ -119,6 +130,7 @@ function DynamicRecipeGenerator() {
     } else {
       let tempArray = recipe.slice(noOfCards, noOfCards + meals);
       for (let i = 0; i < tempArray.length; i++) {
+        console.log(tempArray[i].ingredientsArray)
         setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
       }
 
@@ -142,53 +154,7 @@ function DynamicRecipeGenerator() {
     setNoOfCards(noOfCards + 1);
   };
 
-  //   const handleClick = async (totalCalorie, meals) => {
-  //     setCardInfo([]);
-  //     const docRef = collection(db, "recipe");
-  //     const mealCalorie = Math.floor(totalCalorie / meals);
-  //     const q = query(docRef, where("calories", "<=", mealCalorie));
 
-  //     const querySnapshot = await getDocs(q);
-  //     console.log(querySnapshot.size);
-  //     let counter = 0;
-  //     querySnapshot.forEach((doc) => {
-  //       // doc.data() is never undefined for query doc snapshots
-  //       console.log(doc.id, " => ", doc.data());
-  //       if (counter > meals - 1) {
-  //         return;
-  //       } else {
-  //         let tempObject = {};
-  //         tempObject.index = counter;
-  //         tempObject.title = doc.data().name;
-  //         tempObject.subheader = `Meal ${counter + 1}`;
-  //         tempObject.protein = doc.data().protein;
-  //         tempObject.sodium = doc.data().sodium;
-  //         // tempObject.saturatedFat = doc.data().saturated fat,
-  //         tempObject.sugar = doc.data().sugar;
-  //         tempObject.totalFat = doc.data().totalFat;
-  //         tempObject.time = doc.data().minutes;
-  //         tempObject.steps = doc.data().steps;
-
-  //         const ingredientsArray = doc
-  //           .data()
-  //           .ingredients.slice(2, -2)
-  //           .split("', '");
-  //         let ingredientResult = "";
-  //         for (let i = 0; i < ingredientsArray.length; i++) {
-  //           ingredientResult =
-  //             ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
-  //           // stepResult = stepResult + "hello" + "\n"
-  //         }
-  //         // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
-  //         tempObject.ingredients = ingredientResult;
-  // setCardInfo((cardInfo) => [...cardInfo, tempObject]);
-  //       }
-
-  //       counter++;
-  //     });
-
-  //     // generateCardInfo()
-  //   };
 
   const handleExpandClick = (index) => {
     if (selectedId == index) {
