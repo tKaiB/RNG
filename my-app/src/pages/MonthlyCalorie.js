@@ -80,8 +80,12 @@ function MonthlyCalorie() {
   const config = {
     debug: true,
     type: "line",
+    yAxis: {
+      label_text: "Calorie Intake",
+    },
     xAxis: {
       scale_type: "date",
+      label_text: "Date",
       time: {
         parser: "MM/DD/YYYY HH:mm",
         tooltipFormat: "ll HH:mm",
@@ -129,7 +133,7 @@ function MonthlyCalorie() {
             <SideBar />
           </Grid>
           <div style={divStyle}>
-            <h1 style={{textAlign:"center"}}>Your Calorie Intake Chart</h1>
+            <h1 style={{ textAlign: "center" }}>Your Calorie Intake Chart</h1>
             <JSCharting options={config} />
           </div>
         </Grid>

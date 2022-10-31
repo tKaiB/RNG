@@ -87,9 +87,11 @@ function MonthlyBMI() {
     type: "line",
     yAxis: {
       scale_type: "numeric",
+      label_text: "BMI",
     },
     xAxis: {
       scale_type: "date",
+      label_text: "Date",
       time: {
         parser: "MM/DD/YYYY HH:mm",
         tooltipFormat: "ll HH:mm",
