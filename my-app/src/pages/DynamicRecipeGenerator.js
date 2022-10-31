@@ -73,16 +73,17 @@ function DynamicRecipeGenerator() {
     const mealCalorie = Math.floor(totalCalorie / meals);
     const q = query(docRef, where("calories", "<=", mealCalorie));
 
-    // const docRef2 = collection(db,"healthy")
-    // const q2 = query(docRef2)
-    // let healthy = []
-    // const querySnapshot2 = await(getDocs(q2))
-    // querySnapshot2.forEach((doc)=>{
-    //   healthy.push(doc.data().brand_and_product_name)
-    // })
+    const docRef2 = collection(db,"healthy")
+    const q2 = query(docRef2)
+    let healthy = []
+    if(healthy.length==0){
+      const querySnapshot2 = await(getDocs(q2))
+      querySnapshot2.forEach((doc)=>{
+        healthy.push(doc.data().brand_and_product_name)
+      })
 
-
-
+    }
+    console.log(healthy)
 
     const querySnapshot = await getDocs(q);
     let counter = 0;
@@ -106,6 +107,7 @@ function DynamicRecipeGenerator() {
         .split("', '");
       let ingredientResult = "";
       for (let i = 0; i < ingredientsArray.length; i++) {
+        // filter logic
         ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
         // stepResult = stepResult + "hello" + "\n"
       }
@@ -131,6 +133,7 @@ function DynamicRecipeGenerator() {
       let tempArray = recipe.slice(noOfCards, noOfCards + meals);
       for (let i = 0; i < tempArray.length; i++) {
         console.log(tempArray[i].ingredientsArray)
+        // search logic goes here
         setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
       }
 
