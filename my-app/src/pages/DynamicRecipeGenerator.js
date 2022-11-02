@@ -114,7 +114,6 @@ function DynamicRecipeGenerator() {
         // filter logic
         const result = filterItems(healthy,String(ingredientsArray[i]))
         if(result.length>0){
-          console.log("hello")
             ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
 
         }
