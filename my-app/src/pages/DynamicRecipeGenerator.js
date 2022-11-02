@@ -109,11 +109,17 @@ function DynamicRecipeGenerator() {
         .ingredients.slice(2, -2)
         .split("', '");
       let ingredientResult = "";
+      let healthierIngredients = ''
+      let healthyCounter = 0;
       for (let i = 0; i < ingredientsArray.length; i++) {
         // filter logic
         const result = filterItems(healthy, String(ingredientsArray[i]));
+        
         if (result.length > 0) {
-          ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
+          ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} * \n`;
+          // do for loop 
+
+          tempObject.healthyIngredients = healthierIngredients
         } else {
           ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
         }
