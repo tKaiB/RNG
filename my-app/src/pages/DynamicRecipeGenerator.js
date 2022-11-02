@@ -67,8 +67,8 @@ function DynamicRecipeGenerator() {
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
 
-  function filterItems(arr,query){
-    return arr.filter((el)=>el.toLowerCase().includes(query.toLowerCase()))
+  function filterItems(arr, query) {
+    return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
   }
 
   const getRecipeFromDB = async (totalCalorie, meals) => {
@@ -77,17 +77,16 @@ function DynamicRecipeGenerator() {
     const mealCalorie = Math.floor(totalCalorie / meals);
     const q = query(docRef, where("calories", "<=", mealCalorie));
 
-    const docRef2 = collection(db,"healthy")
-    const q2 = query(docRef2)
-    let healthy = []
-    if(healthy.length==0){
-      const querySnapshot2 = await(getDocs(q2))
-      querySnapshot2.forEach((doc)=>{
-        healthy.push(doc.data().brand_and_product_name)
-      })
-
+    const docRef2 = collection(db, "healthy");
+    const q2 = query(docRef2);
+    let healthy = [];
+    if (healthy.length == 0) {
+      const querySnapshot2 = await getDocs(q2);
+      querySnapshot2.forEach((doc) => {
+        healthy.push(doc.data().brand_and_product_name);
+      });
     }
-    console.log(healthy)
+    console.log(healthy);
 
     const querySnapshot = await getDocs(q);
     let counter = 0;
@@ -112,21 +111,20 @@ function DynamicRecipeGenerator() {
       let ingredientResult = "";
       for (let i = 0; i < ingredientsArray.length; i++) {
         // filter logic
-        const result = filterItems(healthy,String(ingredientsArray[i]))
-        if(result.length>0){
-            ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
-
+        const result = filterItems(healthy, String(ingredientsArray[i]));
+        if (result.length > 0) {
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
+        } else {
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
         }
-        else{
-            ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
 
-        }
-        
         // stepResult = stepResult + "hello" + "\n"
       }
       // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
       tempObject.ingredients = ingredientResult;
-      tempObject.ingredientsArray = ingredientsArray
+      tempObject.ingredientsArray = ingredientsArray;
       recipe.push(tempObject);
 
       counter++;
@@ -168,8 +166,6 @@ function DynamicRecipeGenerator() {
     setNoOfCards(noOfCards + 1);
   };
 
-
-
   const handleExpandClick = (index) => {
     if (selectedId == index) {
       setSelectedId(-1);
@@ -192,7 +188,16 @@ function DynamicRecipeGenerator() {
   const renderCard = (card, index) => {
     return (
       <div key={index}>
-        <Card sx={{ margin: "10px", width: 400, minHeight: 350 }} key={index}>
+        <Card
+          style={{
+            margin: "10px",
+            width: 400,
+            minHeight: 350,
+            borderRadius: "25px",
+            backgroundColor: "#E6E6FA",
+          }}
+          key={index}
+        >
           <CardHeader title={card.title} subheader={card.subheader} />
 
           <CardContent>
@@ -256,6 +261,13 @@ function DynamicRecipeGenerator() {
                 <Typography> Ingredients:</Typography>
                 <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
                   {card.ingredients}
+                  {/* <img
+                    src="https://www.unisoy.com.sg/image/catalog/award/award-02.png"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }} */}
                 </Typography>
                 {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
               </div>
