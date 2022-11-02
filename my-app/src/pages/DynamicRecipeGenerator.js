@@ -109,19 +109,28 @@ function DynamicRecipeGenerator() {
         .ingredients.slice(2, -2)
         .split("', '");
       let ingredientResult = "";
-      let healthierIngredients = ''
+      let healthierIngredients = "";
       let healthyCounter = 0;
       for (let i = 0; i < ingredientsArray.length; i++) {
         // filter logic
         const result = filterItems(healthy, String(ingredientsArray[i]));
-        
-        if (result.length > 0) {
-          ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} * \n`;
-          // do for loop 
 
-          tempObject.healthyIngredients = healthierIngredients
+        if (result.length > 0) {
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} * \n`;
+          // do for loop
+          for (
+            healthyCounter;
+            healthyCounter < result.length;
+            healthyCounter++
+          ) {
+            healthierIngredients =
+              healthierIngredients +
+              `${healthyCounter + 1} . ${String(result[healthyCounter])} \n`;
+          }
         } else {
-          ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
         }
 
         // stepResult = stepResult + "hello" + "\n"
@@ -129,6 +138,7 @@ function DynamicRecipeGenerator() {
       // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
       tempObject.ingredients = ingredientResult;
       tempObject.ingredientsArray = ingredientsArray;
+      tempObject.healthyIngredients = healthierIngredients;
       recipe.push(tempObject);
 
       counter++;
@@ -274,14 +284,11 @@ function DynamicRecipeGenerator() {
                     }} */}
                 </Typography>
                 <div>
-                    <Typography>Healthier Choice Ingredients:</Typography>
-                    <Typography variant = "body1" style={{whiteSpace : "preline"}}>
-                        {card.healthyIngredients}
-                    </Typography>
-
-
+                  <Typography>Healthier Choice Ingredients:</Typography>
+                  <Typography variant="body1" style={{ whiteSpace: "preline" }}>
+                    {card.healthyIngredients}
+                  </Typography>
                 </div>
- 
 
                 {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
               </div>
