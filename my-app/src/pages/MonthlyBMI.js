@@ -83,7 +83,6 @@ function MonthlyBMI() {
   // get first point
 
   const config = {
-    debug: true,
     type: "line",
     yAxis: {
       scale_type: "numeric",

@@ -78,7 +78,6 @@ function MonthlyCalorie() {
   // get first point
 
   const config = {
-    debug: true,
     type: "line",
     yAxis: {
       label_text: "Calorie Intake",
