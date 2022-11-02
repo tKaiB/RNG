@@ -113,11 +113,9 @@ function DynamicRecipeGenerator() {
         // filter logic
         const result = filterItems(healthy, String(ingredientsArray[i]));
         if (result.length > 0) {
-          ingredientResult =
-            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
+          ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])}* \n`;
         } else {
-          ingredientResult =
-            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+          ingredientResult = ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
         }
 
         // stepResult = stepResult + "hello" + "\n"
@@ -269,6 +267,16 @@ function DynamicRecipeGenerator() {
                       objectFit: "cover",
                     }} */}
                 </Typography>
+                <div>
+                    <Typography>Healthier Choice Ingredients:</Typography>
+                    <Typography variant = "body1" style={{whiteSpace : "preline"}}>
+                        {card.healthyIngredients}
+                    </Typography>
+
+
+                </div>
+ 
+
                 {/* <Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing</Typography> */}
               </div>
             </CardContent>
