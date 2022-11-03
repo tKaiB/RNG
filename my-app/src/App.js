@@ -21,7 +21,7 @@ import DynamicRecipeGenerator from "./pages/DynamicRecipeGenerator";
 
 function App() {
   return (
-    <div style={{ backgroundColor: "#FFEAEA" }}>
+    <div style={{ backgroundColor: "#FFe9e9"}}>
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<SignUp />} />

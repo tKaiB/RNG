@@ -1,5 +1,11 @@
-{
-    box-sizing: border-box;
+@font-face {
+    font-family: 'Inter-Bold';
+    src: url('../assets/fonts/Inter-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-Regular.ttf');
 }
 
 body {

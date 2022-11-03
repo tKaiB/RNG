@@ -153,7 +153,9 @@ function BMI() {
                 <h1
                   style={{
                     fontSize: "3rem",
-                    //fontFamily: "'Times New Roman', Times, serif",
+                    // fontFamily: "Inter" 
+                    fontFamily: "Inter",
+                    fontWeight:'bold'        
                   }}
                 >
                   Calculate Your Body Mass Index
@@ -162,6 +164,7 @@ function BMI() {
                   style={{
                     fontSize: "1.5rem",
                     //fontFamily: "'Times New Roman', Times, serif",
+                    fontFamily: "Inter" 
                   }}
                 >
                   Calculate Your BMI Using Our Simple Calculator
