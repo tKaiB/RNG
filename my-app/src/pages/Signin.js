@@ -37,7 +37,7 @@ function SignIn() {
     } catch (e) {
       setError(e.message);
       console.log(e.message);
-      alert("Invalid email or password");
+      alert("Invalid email or password, Please try again");
     }
   };
 

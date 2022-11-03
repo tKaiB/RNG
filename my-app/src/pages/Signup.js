@@ -57,7 +57,7 @@ function SignUp() {
           setError(e.message);
           console.log(e.message);
           if (e.message == "Firebase: Error (auth/email-already-in-use).")
-            alert("Email already in use");
+            alert("Email already in use, Please try again");
           if (e.message == "Firebase: Error (auth/invalid-email).")
             alert("Invalid Email");
           if (
@@ -65,8 +65,14 @@ function SignUp() {
             "Firebase: Password should be at least 6 characters (auth/weak-password)."
           )
             alert(
-              "Password is too weak, Password must be at least 6 characters"
+              "Password is too weak, Password must be at least 6 characters, Please try again"
             );
+          if (e.message == "Firebase: Error (auth/internal-error).")
+            alert("Fill in all required fields");
+          if (e.messaage == "Firebase: Error (auth/missing-email).")
+            alert("Fill in all required fields");
+          if (e.message == "Firebase: Error (auth/missing-password).")
+            alert("Fill in all required fields");
         });
       //navigate("/account");
     } catch (e) {
@@ -99,13 +105,13 @@ function SignUp() {
               </Grid>
 
               <Grid item xs={4}>
-                <p style={{ margin: 0, paddingBottom: 7, fontSize:16 }}>
+                <p style={{ margin: 0, paddingBottom: 7, fontSize: 16 }}>
                   If you already have an account
                 </p>
               </Grid>
 
               <Grid item xs={4}>
-                <p style={{ margin: 0 , fontSize:16}}>
+                <p style={{ margin: 0, fontSize: 16 }}>
                   You can <Link to="/signin">Login here</Link>
                 </p>
               </Grid>
