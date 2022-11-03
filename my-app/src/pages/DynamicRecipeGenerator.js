@@ -102,7 +102,16 @@ function DynamicRecipeGenerator() {
       tempObject.sugar = doc.data().sugar;
       tempObject.totalFat = doc.data().totalFat;
       tempObject.time = doc.data().minutes;
-      tempObject.steps = doc.data().steps;
+      
+
+      const recipeArray = doc.data().steps.split("%")
+      let recipeResult = ''
+      for(let i =0 ; i < recipeArray.length ;i++ ){
+        recipeResult = recipeResult + `${i + 1} . ${String(recipeArray[i])}  \n`;
+
+
+      }
+      tempObject.steps = recipeResult
 
       const ingredientsArray = doc
         .data()
