@@ -116,7 +116,7 @@ function DynamicRecipeGenerator() {
       const ingredientsArray = doc
         .data()
         .ingredients.slice(2, -2)
-        .split("', '");
+        .split("%");
       let ingredientResult = "";
       let healthierIngredients = "";
       let healthyCounter = 0;
