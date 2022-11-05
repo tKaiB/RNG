@@ -105,7 +105,7 @@ function BMI() {
     event.preventDefault();
     setGender("Female");
   };
-
+  const number = 0;
   const heightRef = useRef();
 
   const handleClick3 = () => {
@@ -153,9 +153,9 @@ function BMI() {
                 <h1
                   style={{
                     fontSize: "3rem",
-                    // fontFamily: "Inter" 
+                    // fontFamily: "Inter"
                     fontFamily: "Inter",
-                    fontWeight:'bold'        
+                    fontWeight: "bold",
                   }}
                 >
                   Calculate Your Body Mass Index
@@ -164,7 +164,7 @@ function BMI() {
                   style={{
                     fontSize: "1.5rem",
                     //fontFamily: "'Times New Roman', Times, serif",
-                    fontFamily: "Inter" 
+                    fontFamily: "Inter",
                   }}
                 >
                   Calculate Your BMI Using Our Simple Calculator
@@ -194,7 +194,8 @@ function BMI() {
                   <p> My Weight </p>
                   <OutlinedInput
                     id="outlined-adornment-weight"
-                    defaultValue="0"
+                    defaultValue={number}
+                    type="number"
                     endAdornment={
                       <InputAdornment position="end">kg</InputAdornment>
                     }
@@ -210,7 +211,8 @@ function BMI() {
                   <p> My Height </p>
                   <OutlinedInput
                     id="outlined-adornment-weight"
-                    defaultValue="0"
+                    defaultValue={number}
+                    type="number"
                     endAdornment={
                       <InputAdornment position="end">cm</InputAdornment>
                     }
@@ -244,7 +246,8 @@ function BMI() {
                   >
                     <OutlinedInput
                       id="outlined-adornment-BMI"
-                      defaultValue="0"
+                      defaultValue={number}
+                      type="number"
                       aria-describedby="outlined-BMI-helper-text"
                       inputRef={testRef}
                     />

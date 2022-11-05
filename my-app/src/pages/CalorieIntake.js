@@ -90,7 +90,7 @@ function CalorieIntake() {
 
     alert("Data added successfully");
   };
-
+  const number = 0;
   const [values, setValue] = React.useState(30);
   const [meal, setMeal] = useState(3);
 
@@ -218,6 +218,7 @@ function CalorieIntake() {
                   id="outlined-adornment-weight"
                   value={values}
                   inputRef={weightRef}
+                  type="number"
                   endAdornment={
                     <InputAdornment position="end">kg</InputAdornment>
                   }
@@ -282,6 +283,7 @@ function CalorieIntake() {
                 defaultValue={3}
                 aria-label="Small"
                 valueLabelDisplay="auto"
+                min={1}
                 max={10}
                 value={meal}
                 onChange={handleChange2}
@@ -293,8 +295,9 @@ function CalorieIntake() {
               >
                 <OutlinedInput
                   id="outlined-adornment-calorieintake"
-                  defaultValue="0"
+                  defaultValue={number}
                   inputRef={testRef}
+                  type="number"
                   endAdornment={
                     <InputAdornment position="end">kcal</InputAdornment>
                   }
