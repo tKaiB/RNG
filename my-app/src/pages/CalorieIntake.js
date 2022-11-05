@@ -282,6 +282,7 @@ function CalorieIntake() {
                 defaultValue={3}
                 aria-label="Small"
                 valueLabelDisplay="auto"
+                min={1}
                 max={10}
                 value={meal}
                 onChange={handleChange2}
