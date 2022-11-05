@@ -15,57 +15,72 @@ function EditProfile() {
   const AgeRef = useRef();
   const WeightRef = useRef();
 
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
+  const error = useRef('')
   const { user, setEmail } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      if (EmailRef.current.value == "") {
-        setError(e.message);
-        alert(e.message);
-      }
-      await setEmail(EmailRef.current.value)
-        .then(async () => {
-          try {
 
-            if (NameRef.current.value == "") {
-              setError(e.message);
-              alert(e.message);
-
-            }
-            if (AgeRef.current.value == "") {
-              setError(e.message);
-              alert(e.message);
-
-            }
-            if (WeightRef.current.value == "") {
-              setError(e.message);
-              alert(e.message);
-
-            }
-            await updateDoc(doc(db, "users", user.uid), {
-              email: EmailRef.current.value,
-              name: NameRef.current.value,
-              age: AgeRef.current.value,
-              weight: WeightRef.current.value,
-            });
-          } catch (e) {
-            setError(e.message);
-            alert(e.message);
-          }
-        })
-        .catch((e) => {
-          setError(e.message);
-          alert(e.message);
-        });
-    } catch (e) {
-      setError(e.message);
-      alert(e.message);
-      console.log(e.message);
+    if (EmailRef.current.value == "") {
+      alert(e.message)
+      error.current.value = "Error"
+      
     }
-    navigate("/profile");
-  };
+
+    if (NameRef.current.value == "") {
+      error.current.value = "Error"
+      alert(e.message)
+      console.log(error)
+
+    }
+    if (AgeRef.current.value == "") {
+      error.current.value = "Error"
+      alert(e.message)
+      console.log(error)
+
+    }
+    if (WeightRef.current.value == "") {
+      error.current.value = "Error"
+      alert(e.message)
+      console.log(error)
+
+    }
+
+    console.log(error)
+
+    if(error.current.value == "Error"){
+      alert(error)
+      
+      return
+    }
+    else{
+      try {
+        await setEmail(EmailRef.current.value)
+          .then(async () => {
+            try {
+              await updateDoc(doc(db, "users", user.uid), {
+                email: EmailRef.current.value,
+                name: NameRef.current.value,
+                age: AgeRef.current.value,
+                weight: WeightRef.current.value,
+              });
+            } catch (e) {
+              alert(e.message);
+            }
+          })
+          .catch((e) => {
+            alert(e.message);
+          });
+      } catch (e) {
+        alert(e.message);
+        console.log(e.message);
+      }
+      navigate("/profile");
+    };
+
+    }
+   
 
   return (
     <div style={{ fontFamily: "Inter" }}>
