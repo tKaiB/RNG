@@ -107,7 +107,7 @@ function DynamicRecipeGenerator() {
       const recipeArray = doc.data().steps.split("%")
       let recipeResult = ''
       for (let i = 0; i < recipeArray.length; i++) {
-        recipeResult = recipeResult + `${i + 1} . ${String(recipeArray[i])}  \n`;
+        recipeResult = recipeResult + `${i + 1} . ${(String(recipeArray[i]).charAt(0).toUpperCase() + recipeArray[i].slice(1))}  \n`;
 
 
       }
