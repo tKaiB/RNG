@@ -68,7 +68,7 @@ function DynamicRecipeGenerator() {
   const [selectedId, setSelectedId] = useState(-1);
 
   function filterItems(arr, query) {
-    return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+    return arr.filter((el) => el.ingredient.toLowerCase().includes(query.toLowerCase()));
   }
 
   const getRecipeFromDB = async (totalCalorie, meals) => {
@@ -79,14 +79,27 @@ function DynamicRecipeGenerator() {
 
     const docRef2 = collection(db, "healthy");
     const q2 = query(docRef2);
-    let healthy = [];
-    if (healthy.length == 0) {
-      const querySnapshot2 = await getDocs(q2);
-      querySnapshot2.forEach((doc) => {
-        healthy.push(doc.data().brand_and_product_name);
-      });
-    }
-    console.log(healthy);
+    // let healthy = [];
+    // if (healthy.length == 0) {
+      // const querySnapshot2 = await getDocs(q2);
+      // querySnapshot2.forEach((doc) => {
+      //   healthy.push(doc.data().brand_and_product_name);
+      // });
+    // }
+    // console.log(healthy);
+
+    let healthy =[]
+    const querySnapshot2 = await getDocs(q2);
+    querySnapshot2.forEach((doc) => {
+      let tempObject={}
+      tempObject.brandName = doc.data().brand_and_product_name;
+      tempObject.ingredient = doc.data().ingredient;
+      healthy.push(tempObject)
+
+    });
+
+    console.log(healthy)
+
 
     const querySnapshot = await getDocs(q);
     let counter = 0;
@@ -135,7 +148,7 @@ function DynamicRecipeGenerator() {
           ) {
             healthierIngredients =
               healthierIngredients +
-              `${healthyCounter + 1} . ${String(result[healthyCounter])} \n`;
+              `${healthyCounter + 1} . ${String(result[healthyCounter].brandName)} \n`;
           }
         } else {
           ingredientResult =

@@ -19,6 +19,10 @@ function EditProfile() {
   const error = useRef('')
   const { user, setEmail } = UserAuth();
 
+
+  // logic for defualt value using useEffect
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
