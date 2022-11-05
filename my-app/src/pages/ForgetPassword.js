@@ -29,7 +29,7 @@ function ForgetPassword() {
     } catch (e) {
       setError(e.message);
     }
-    navigate("/");
+    //navigate("/");
   };
   return (
     <div style={{ fontFamily: "Inter" }}>
@@ -90,9 +90,9 @@ function ForgetPassword() {
                 }}
               >
                 <TextField
-                  label="Email"
+                  label="Confirm Email"
                   margin="normal"
-                  placeholder="Enter your Email Address"
+                  placeholder="Confirm your Email Address"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
