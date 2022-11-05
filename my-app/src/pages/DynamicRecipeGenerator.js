@@ -307,7 +307,7 @@ function DynamicRecipeGenerator() {
                 </Typography>
                 <div>
                   <Typography>Healthier Choice Ingredients:</Typography>
-                  <Typography variant="body1" style={{ whiteSpace: "preline" }}>
+                  <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
                     {card.healthyIngredients}
                   </Typography>
                 </div>
