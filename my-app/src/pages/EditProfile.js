@@ -21,9 +21,29 @@ function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (EmailRef.current.value == "") {
+        setError(e.message);
+        alert(e.message);
+      }
       await setEmail(EmailRef.current.value)
         .then(async () => {
           try {
+
+            if (NameRef.current.value == "") {
+              setError(e.message);
+              alert(e.message);
+
+            }
+            if (AgeRef.current.value == "") {
+              setError(e.message);
+              alert(e.message);
+
+            }
+            if (WeightRef.current.value == "") {
+              setError(e.message);
+              alert(e.message);
+
+            }
             await updateDoc(doc(db, "users", user.uid), {
               email: EmailRef.current.value,
               name: NameRef.current.value,
