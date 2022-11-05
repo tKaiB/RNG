@@ -26,10 +26,11 @@ function ForgetPassword() {
     setError("");
     try {
       await resetPassword(emailRef.current.value);
+      alert("Password reset link has been sent to your email");
     } catch (e) {
       setError(e.message);
+      alert("Invalid email");
     }
-    //navigate("/");
   };
   return (
     <div style={{ fontFamily: "Inter" }}>
