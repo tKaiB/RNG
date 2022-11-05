@@ -238,7 +238,7 @@ function DynamicRecipeGenerator() {
                 </Typography>
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
-                  Suagr: {card.sugar}
+                  Sugar: {card.sugar}
                 </Typography>
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
