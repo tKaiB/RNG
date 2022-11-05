@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid, TextField, Button, Box } from "@material-ui/core";
 
 import { UserAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
-import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc , getDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 function EditProfile() {
@@ -21,6 +21,23 @@ function EditProfile() {
 
 
   // logic for defualt value using useEffect
+
+  useEffect(() =>{
+    const fetchData = async () =>{
+      const ref = doc(db, "users", user.uid)
+      const docSnap = await getDoc(ref);
+      if (docSnap.exists()) {
+        NameRef.current.value = docSnap.data().name;
+        AgeRef.current.value = docSnap.data().age 
+        WeightRef.current.value = docSnap.data().weight
+        EmailRef.current.value = user.email
+      } else {
+        console.log("error");
+      }
+
+    }
+    fetchData()
+  },[user] )
 
 
   const handleSubmit = async (e) => {
