@@ -104,6 +104,7 @@ function CalorieIntake() {
   const [saturatedFat, setSaturatedFat] = useState(0);
 
   const rows = [
+    createData("Calories", calorie),
     createData("Protein", protein),
     createData("Carbs", carbs),
     createData("Fat", fat),

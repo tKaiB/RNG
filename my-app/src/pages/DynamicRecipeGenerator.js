@@ -75,23 +75,23 @@ function DynamicRecipeGenerator() {
     let recipe = [];
     const docRef = collection(db, "recipe");
     const mealCalorie = Math.floor(totalCalorie / meals);
-    const q = query(docRef, where("calories", "<=", mealCalorie));
+    const q = query(docRef, where("calories", "<=", mealCalorie), orderBy("calories", "desc"));
 
     const docRef2 = collection(db, "healthy");
     const q2 = query(docRef2);
     // let healthy = [];
     // if (healthy.length == 0) {
-      // const querySnapshot2 = await getDocs(q2);
-      // querySnapshot2.forEach((doc) => {
-      //   healthy.push(doc.data().brand_and_product_name);
-      // });
+    // const querySnapshot2 = await getDocs(q2);
+    // querySnapshot2.forEach((doc) => {
+    //   healthy.push(doc.data().brand_and_product_name);
+    // });
     // }
     // console.log(healthy);
 
-    let healthy =[]
+    let healthy = []
     const querySnapshot2 = await getDocs(q2);
     querySnapshot2.forEach((doc) => {
-      let tempObject={}
+      let tempObject = {}
       tempObject.brandName = doc.data().brand_and_product_name;
       tempObject.ingredient = doc.data().ingredient;
       healthy.push(tempObject)
@@ -109,6 +109,7 @@ function DynamicRecipeGenerator() {
       tempObject.index = counter;
       tempObject.title = doc.data().name;
       tempObject.subheader = `Meal ${counter + 1}`;
+      tempObject.calories = doc.data().calories;
       tempObject.protein = doc.data().protein;
       tempObject.sodium = doc.data().sodium;
       // tempObject.saturatedFat = doc.data().saturated fat,
@@ -242,20 +243,24 @@ function DynamicRecipeGenerator() {
                 <Typography> Nutrition info</Typography>
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
-                  Protein: {card.protein}
+                  Calories: {card.calories} g
+                </Typography>
+                <Typography style={{ whiteSpace: "pre-line" }}>
+                  {" "}
+                  Protein: {card.protein} g
                 </Typography>
                 {/* <Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}</Typography> */}
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
-                  Sodium: {card.sodium}
+                  Sodium: {card.sodium} g
                 </Typography>
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
-                  Sugar: {card.sugar}
+                  Sugar: {card.sugar} g
                 </Typography>
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
-                  Protein: {card.totalFat}
+                  Protein: {card.totalFat} g
                 </Typography>
                 {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
               </Grid>
