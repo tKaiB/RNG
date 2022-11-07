@@ -129,7 +129,7 @@ function CalorieIntake() {
         dailyCalorie = dailyCalorie.toFixed(0);
         const carbs = ((dailyCalorie * 0.5) / 4).toFixed(2);
         setCarbs(carbs);
-        const fat = (dailyCalorie * 0.3).toFixed(2);
+        const fat = ((dailyCalorie * 0.3) / 9).toFixed(2);
         setFat(fat);
         const sugar = ((dailyCalorie * 0.1) / 4).toFixed(2);
         setSugar(sugar);
@@ -143,7 +143,7 @@ function CalorieIntake() {
         dailyCalorie = dailyCalorie.toFixed(0);
         const carbs = ((dailyCalorie * 0.5) / 4).toFixed(2);
         setCarbs(carbs);
-        const fat = (dailyCalorie * 0.3).toFixed(2);
+        const fat = ((dailyCalorie * 0.3) / 9).toFixed(2);
         setFat(fat);
         const sugar = ((dailyCalorie * 0.1) / 4).toFixed(2);
         setSugar(sugar);
@@ -237,20 +237,20 @@ function CalorieIntake() {
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   name="radio-buttons-group"
+                  defaultValue="loseFat"
                 >
                   <FormControlLabel
                     value="loseFat"
                     control={<Radio />}
                     onChange={handleChange3}
-                    label="Lose fat while maintaining muscle
-  "
+                    onSelect
+                    label="Lose fat while maintaining muscle"
                   />
                   <FormControlLabel
                     value="gainMuscle"
                     control={<Radio />}
                     onChange={handleChange4}
-                    label="Build muscle while minimising fat gain
-  "
+                    label="Build muscle while minimising fat gain"
                   />
                 </RadioGroup>
               </div>
