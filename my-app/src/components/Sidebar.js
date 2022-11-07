@@ -12,18 +12,18 @@ import { Link, useNavigate } from "react-router-dom";
 import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
 
 function SideBar() {
-  const [view, setView] = React.useState("Home");
+  const [view, setView] = React.useState();
 
-  const handleChange = (event, nextView) => {
-    setView(nextView);
-  };
+  // const handleChange = (event, nextView) => {
+  //   setView(nextView);
+  // };
   return (
     <Grid style={{ fontFamily: "Inter" }}>
       <ToggleButtonGroup
         orientation="vertical"
         value={view}
         exclusive
-        onChange={handleChange}
+        // onChange={handleChange}
         fullWidth
       >
         <ToggleButton component={Link} to="/account" value="Home">
