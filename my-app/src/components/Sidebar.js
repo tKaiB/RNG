@@ -30,38 +30,27 @@ function SideBar() {
           <HomeIcon />
           Home
         </ToggleButton>
-        <ToggleButton
-          component={Link}
-          to="/CalorieIntake"
-          value="Calorie Intake"
-        >
-          <AnalyticsIcon />
+        <ToggleButton component={Link} to="/CalorieIntake" value="Calorie Intake">
+          <InputIcon />
           Calorie Intake
         </ToggleButton>
-        <ToggleButton
-          component={Link}
-          to="/dynamic"
-          value="DynamicRecipeGenerator"
-        >
-          <FormatListNumberedIcon />
-          Recipe Generator
+        <ToggleButton component={Link} to="/monthlycaloriechart" value="Calorie Chart">
+          <AnalyticsIcon />
+          Calorie Chart
         </ToggleButton>
         <ToggleButton component={Link} to="/BmiInput" value="BMI Input">
           <InputIcon />
           BMI Input
         </ToggleButton>
         <ToggleButton component={Link} to="/monthlybmichart" value="BMI Chart">
-          <InputIcon />
+          <AnalyticsIcon />
           BMI Chart
         </ToggleButton>
-        <ToggleButton
-          component={Link}
-          to="/monthlycaloriechart"
-          value="Calorie Chart"
-        >
-          <InputIcon />
-          Calorie Chart
+        <ToggleButton component={Link} to="/dynamic" value="DynamicRecipeGenerator">
+          <FormatListNumberedIcon />
+          Recipe Generator
         </ToggleButton>
+
       </ToggleButtonGroup>
     </Grid>
   );
