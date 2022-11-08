@@ -260,7 +260,7 @@ function DynamicRecipeGenerator() {
                 </Typography>
                 <Typography style={{ whiteSpace: "pre-line" }}>
                   {" "}
-                  Protein: {card.totalFat} g
+                  Total Fat: {card.totalFat} g
                 </Typography>
                 {/* <Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing</Typography> */}
               </Grid>
