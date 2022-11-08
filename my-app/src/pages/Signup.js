@@ -26,7 +26,7 @@ function SignUp() {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser } = UserAuth();
+  const { createUser , EmailVerification } = UserAuth();
 
   const navigate = useNavigate();
 
@@ -35,8 +35,10 @@ function SignUp() {
     setError("");
     try {
       await createUser(emailRef.current.value, passwordRef.current.value)
+      EmailVerification()
         .then(async (user) => {
           try {
+
             await setDoc(doc(db, "users", user.user.uid), {
               email: email,
               name: nameRef.current.value,

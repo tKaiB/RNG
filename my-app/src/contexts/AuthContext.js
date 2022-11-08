@@ -8,12 +8,17 @@ import {
   sendPasswordResetEmail,
   updateEmail,
   updateProfile,
+  sendEmailVerification
 } from "firebase/auth";
 
 const UserContext = React.createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+
+  const EmailVerification = () => {
+    return sendEmailVerification(auth.currentUser)
+  }
 
   /**
    * 
@@ -86,6 +91,7 @@ export const AuthContextProvider = ({ children }) => {
         resetPassword,
         setEmail,
         updateProfile,
+        EmailVerification
       }}
     >
       {children}
