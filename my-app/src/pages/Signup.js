@@ -34,7 +34,7 @@ function SignUp() {
     e.preventDefault();
     setError("");
     try {
-      EmailVerification()
+      
       await createUser(emailRef.current.value, passwordRef.current.value)
         .then(async (user) => {
           try {
@@ -47,6 +47,7 @@ function SignUp() {
               calorie: 0,
               bmi: 0,
             });
+            EmailVerification()
           } catch (e) {
             setError(e.message);
             console.log(e.message);
