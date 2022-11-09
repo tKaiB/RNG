@@ -26,7 +26,7 @@ function SignUp() {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser , EmailVerification } = UserAuth();
+  const { createUser , EmailVerification , user } = UserAuth();
 
   const navigate = useNavigate();
 
@@ -34,8 +34,8 @@ function SignUp() {
     e.preventDefault();
     setError("");
     try {
-      await createUser(emailRef.current.value, passwordRef.current.value)
       EmailVerification()
+      await createUser(emailRef.current.value, passwordRef.current.value)
         .then(async (user) => {
           try {
 
