@@ -53,7 +53,7 @@ function SignUp() {
             alert(e.message);
           }
           alert("Account Created");
-          navigate("/account");
+          navigate("/signin");
         })
         .catch((e) => {
           setError(e.message);
