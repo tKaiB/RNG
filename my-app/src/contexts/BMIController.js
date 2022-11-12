@@ -1,6 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { UserAuth } from "./AccountController";
+import {
+    limit,
+    orderBy,
+    doc,
+    collection,
+    query,
+    where,
+    getDocs,
+    addDoc,
+    serverTimestamp,
+    getDoc
+  } from "firebase/firestore";
+  import { db } from "../firebase";
 
 
 const BMIController = React.createContext();
@@ -72,7 +85,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider
+    <BMIController.Provider
       value={{
         CalculateBMI,
         generateChart,
@@ -84,10 +97,10 @@ export const AuthContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </BMIController.Provider>
   );
 };
 
-export const bmiController = () => {
+export const BmiController = () => {
   return useContext(BMIController);
 };

@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AccountController";
+import { bmiController } from "../contexts/BMIController";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
