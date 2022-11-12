@@ -29,12 +29,12 @@
             <pre class="prettyprint source linenums"><code>import React, { useState, useRef } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
+import { bmiController } from "../contexts/BMIController";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
@@ -43,7 +43,7 @@ import BoyIcon from "@mui/icons-material/Boy";
 import Box from "@mui/material/Box";
 
 import { db } from "../firebase";
-import { updateDoc, doc, setDoc,addDoc , collection , serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 /**
  * @param {boolean} gender - Get gender of user
@@ -55,51 +55,46 @@ function BMI() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
   const testRef = useRef();
+  const weightRef = useRef();
 
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-
-
   const [value, setHealth] = React.useState("");
+  /**
+   *
+   * @param {string} condition - Get condition of user
+   * set health condition of user based on BMI
+   */
 
   const handleChange3 = (event, health) => {
     setHealth(health);
   };
 
-  // const handleSubmit2 = async (e) => {
-  //   e.preventDefault();
-    // try {
-    //   await updateDoc(doc(db, "users", user.uid), {
-    //     bmi: testRef.current.value,
-    //   });
-    //   alert("BMI updated!");
-    // } catch (e) {
-    //   setError(e.message);
-    //   alert(e.message);
-    //   console.log(e.message);
-    // }
-  // };
+  /**
+   * @param {String} user.uid - Get userID of user
+   * @param {String} bmi - Get bmi of user
+   * @param {number} time - Get time of user input
+   * upload bmi data to firebase
+   */
 
-  const handleSubmit2 = async(e) =>{
-    e.preventDefault()
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
     try {
       const docRef = await addDoc(collection(db, user.uid), {
-        bmi:testRef.current.value,
-        time: serverTimestamp()
-
+        bmi: parseFloat(testRef.current.value),
+        time: serverTimestamp(),
       });
-
     } catch (e) {
       console.error("Error adding document: ", e);
     }
 
-    alert("Data added successfully")
-   
-
-
-
-  }
+    alert("Data added successfully");
+  };
+  /**
+   * @param {number} marks - get marks of slider
+   * set different points for slider
+   */
 
   const marks = [
     {
@@ -126,34 +121,41 @@ function BMI() {
 
   const [gender, setGender] = React.useState("");
 
-  const [weight, setValue1] = React.useState(30);
+  //const [weight, setValue1] = React.useState(30);
 
-  const [height, setValue2] = React.useState(150);
+  //const [height, setValue2] = React.useState(150);
 
   const [bmiInput, setValue3] = React.useState(8);
 
-  const handleChange1 = (event, newValue) => {
-    setValue1(newValue);
-  };
-
-  const handleChange2 = (event, newValue) => {
-    setValue2(newValue);
-  };
+  /**
+   * @returns {String} Male
+   */
 
   const handleCLick1 = (event) => {
     event.preventDefault();
     setGender("Male");
   };
 
+  /**
+   * @returns {String} Female
+   */
+
   const handleCLick2 = (event) => {
     event.preventDefault();
     setGender("Female");
   };
-
+  const number = 0;
   const heightRef = useRef();
 
+  /**
+   * @param {number} bmi - Get bmi of user
+   * @returns {string} bmi - bmi of user
+   */
+
   const handleClick3 = () => {
-    let bmi = weight / ((height / 100) * (height / 100));
+    let bmi =
+      weightRef.current.value /
+      ((heightRef.current.value / 100) * (heightRef.current.value / 100));
     console.log(bmi);
     bmi = bmi.toFixed(2);
     testRef.current.value = bmi;
@@ -173,7 +175,7 @@ function BMI() {
   }
 
   return (
-    &lt;div>
+    &lt;div style={{ fontFamily: "Inter" }}>
       &lt;div style={{ paddingBottom: 10 }}>
         &lt;ResponsiveAppBar />
       &lt;/div>
@@ -195,7 +197,9 @@ function BMI() {
                 &lt;h1
                   style={{
                     fontSize: "3rem",
-                    fontFamily: "'Times New Roman', Times, serif",
+                    // fontFamily: "Inter"
+                    fontFamily: "Inter",
+                    fontWeight: "bold",
                   }}
                 >
                   Calculate Your Body Mass Index
@@ -203,24 +207,29 @@ function BMI() {
                 &lt;p
                   style={{
                     fontSize: "1.5rem",
-                    fontFamily: "'Times New Roman', Times, serif",
+                    //fontFamily: "'Times New Roman', Times, serif",
+                    fontFamily: "Inter",
                   }}
                 >
                   Calculate Your BMI Using Our Simple Calculator
                 &lt;/p>
-                &lt;p>
+                &lt;p style={{ fontSize: 20, fontFamily: "Inter" }}>
                   I am a &lt;b>{gender}&lt;/b>
                 &lt;/p>
                 &lt;Button
                   variant="contained"
-                  style={{ backgroundColor: "pink" }}
+                  style={{ backgroundColor: "pink", textTransform: "none" }}
                   onClick={handleCLick1}
                 >
                   Male
                 &lt;/Button>
                 &lt;Button
                   variant="contained"
-                  style={{ backgroundColor: "pink", margin: "1rem" }}
+                  style={{
+                    backgroundColor: "pink",
+                    margin: "1rem",
+                    textTransform: "none",
+                  }}
                   onClick={handleCLick2}
                 >
                   Female
@@ -229,59 +238,45 @@ function BMI() {
                   &lt;p> My Weight &lt;/p>
                   &lt;OutlinedInput
                     id="outlined-adornment-weight"
-                    value={weight}
+                    defaultValue={number}
+                    type="number"
                     endAdornment={
                       &lt;InputAdornment position="end">kg&lt;/InputAdornment>
                     }
                     aria-describedby="outlined-weight-helper-text"
                     inputProps={{
                       "aria-label": "weight",
-                      readOnly: true,
+                      //readOnly: true,
                     }}
-                    onChange={handleChange1}
+                    inputRef={weightRef}
                   />
                   &lt;FormHelperText id="outlined-weight-helper-text">&lt;/FormHelperText>
-                  &lt;Slider
-                    style={{ width: "15rem" }}
-                    size="small"
-                    defaultValue={50}
-                    aria-label="Small"
-                    valueLabelDisplay="auto"
-                    value={weight}
-                    onChange={handleChange1}
-                    max={200}
-                  />
 
                   &lt;p> My Height &lt;/p>
                   &lt;OutlinedInput
                     id="outlined-adornment-weight"
-                    value={height}
+                    defaultValue={number}
+                    type="number"
                     endAdornment={
                       &lt;InputAdornment position="end">cm&lt;/InputAdornment>
                     }
                     aria-describedby="outlined-weight-helper-text"
                     inputProps={{
                       "aria-label": "weight",
-                      readOnly: true,
+                      //readOnly: true,
                     }}
-                    onChange={handleChange2}
-                  />
-                  &lt;FormHelperText id="outlined-weight-helper-text">&lt;/FormHelperText>
-                  &lt;Slider
-                    style={{ width: "15rem" }}
-                    size="small"
-                    defaultValue={50}
-                    aria-label="Small"
-                    valueLabelDisplay="auto"
-                    value={height}
-                    onChange={handleChange2}
-                    max={200}
                     inputRef={heightRef}
                   />
+                  &lt;div style={{ paddingTop: 10, paddingBottom: 10 }}>&lt;/div>
                 &lt;/FormControl>
                 &lt;Button
                   variant="contained"
-                  style={{ backgroundColor: "Pink", display: "flex" }}
+                  style={{
+                    backgroundColor: "Pink",
+                    display: "flex",
+                    textTransform: "none",
+                    borderRadius: "10px",
+                  }}
                   fullWidth
                   onClick={handleClick3}
                 >
@@ -295,7 +290,8 @@ function BMI() {
                   >
                     &lt;OutlinedInput
                       id="outlined-adornment-BMI"
-                      defaultValue="0"
+                      defaultValue={number}
+                      type="number"
                       aria-describedby="outlined-BMI-helper-text"
                       inputRef={testRef}
                     />
@@ -303,7 +299,12 @@ function BMI() {
                 &lt;/p>
                 &lt;Button
                   variant="contained"
-                  style={{ backgroundColor: "Pink", display: "flex" }}
+                  style={{
+                    backgroundColor: "Pink",
+                    display: "flex",
+                    textTransform: "none",
+                    borderRadius: "10px",
+                  }}
                   fullWidth
                   onClick={handleSubmit2}
                 >
@@ -322,7 +323,7 @@ function BMI() {
                     style={{
                       textAlign: "center",
                       fontSize: "3rem",
-                      fontFamily: "'Times New Roman', Times, serif",
+                      //fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     Your BMI Is
@@ -333,13 +334,13 @@ function BMI() {
                     style={{
                       textAlign: "center",
                       fontSize: "3rem",
-                      fontFamily: "'Times New Roman', Times, serif",
+                      //fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     {bmiInput}
                   &lt;/h1>
                 &lt;/div>
-                &lt;div style={{ paddingLeft: 65 }}>
+                &lt;div style={{ position: "center" }}>
                   &lt;BoyIcon
                     style={{ fontSize: "30rem" }}
                     baseClassName="material-icons-boy"
@@ -394,13 +395,13 @@ export default BMI;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Account">Account</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Aboutus">Aboutus</a></li><li><a href="global.html#Account">Account</a></li><li><a href="global.html#AccountAboutus">AccountAboutus</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#DynamicRecipeGenerator">DynamicRecipeGenerator</a></li><li><a href="global.html#EditProfile">EditProfile</a></li><li><a href="global.html#FAQ">FAQ</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#MonthlyCalorie">MonthlyCalorie</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UserProfile">UserProfile</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Oct 27 2022 23:39:02 GMT+0800 (Singapore Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Nov 13 2022 00:42:56 GMT+0800 (Singapore Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

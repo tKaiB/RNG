@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/DynamicRecipeGenerator.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/DynamicRecipeGenerator.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import { Grid, Button, CardActions } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import ResponsiveAppBar from "../components/AccountNavBar";
+import SideBar from "../components/Sidebar";
+import CalorieCard from "../components/CalorieCard";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Collapse from "@mui/material/Collapse";
+import { UserAuth } from "../contexts/AccountController";
+import { RecipeController } from "../contexts/RecipeController";
+import {
+  limit,
+  orderBy,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { RepeatRounded } from "@material-ui/icons";
+import { maxWidth } from "@mui/system";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import RecommendIcon from "@mui/icons-material/Recommend";
+
+/**
+ * @param {string} user.uid - Get the userID of the user
+ * @param {string} recipe - Get the 
+ * @param {int} totalcalories - Get the total calories per day of user
+ * @param {int} meals - Get total number of meals per day of user
+ * @param {string[]} ingredientsArray - Get the ingredients for meal 
+ * Prints out the steps, nutritional values also the 
+ * healthier choice options for the recipe. 
+ */
+
+function DynamicRecipeGenerator() {
+  const { user, logout } = UserAuth();
+
+  const [cardInfo, setCardInfo] = useState([]);
+
+  const [hasLoaded, setLoaded] = useState(false);
+  const [totalCalorie, setTotalCalorie] = useState(0);
+  const [meals, setMeals] = useState(0);
+
+  const getData = async () => {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return [docSnap.data().calorie, docSnap.data().meals];
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  };
+
+  /**
+   * waits for the data to be received
+   */
+
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchData = async () => {
+      const [calorie, meals] = await getData();
+      setTotalCalorie(calorie);
+      setMeals(meals);
+    };
+
+    fetchData();
+  }, [user]);
+
+  const [expanded, setExpanded] = useState(false);
+  const [selectedId, setSelectedId] = useState(-1);
+
+  function filterItems(arr, query) {
+    return arr.filter((el) => el.ingredient.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  /**
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   */
+
+  const getRecipeFromDB = async (totalCalorie, meals) => {
+    let recipe = [];
+    const docRef = collection(db, "recipe");
+    const mealCalorie = Math.floor(totalCalorie / meals);
+    const q = query(docRef, where("calories", "&lt;=", mealCalorie), orderBy("calories", "desc"));
+
+    const docRef2 = collection(db, "healthy");
+    const q2 = query(docRef2);
+    // let healthy = [];
+    // if (healthy.length == 0) {
+    // const querySnapshot2 = await getDocs(q2);
+    // querySnapshot2.forEach((doc) => {
+    //   healthy.push(doc.data().brand_and_product_name);
+    // });
+    // }
+    // console.log(healthy);
+
+    let healthy = []
+    const querySnapshot2 = await getDocs(q2);
+    querySnapshot2.forEach((doc) => {
+      let tempObject = {}
+      tempObject.brandName = doc.data().brand_and_product_name;
+      tempObject.ingredient = doc.data().ingredient;
+      healthy.push(tempObject)
+
+    });
+
+    console.log(healthy)
+
+
+    const querySnapshot = await getDocs(q);
+    let counter = 0;
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      let tempObject = {};
+      tempObject.index = counter;
+      tempObject.title = doc.data().name;
+      tempObject.subheader = `Meal ${counter + 1}`;
+      tempObject.calories = doc.data().calories;
+      tempObject.protein = doc.data().protein;
+      tempObject.sodium = doc.data().sodium;
+      // tempObject.saturatedFat = doc.data().saturated fat,
+      tempObject.sugar = doc.data().sugar;
+      tempObject.totalFat = doc.data().totalFat;
+      tempObject.time = doc.data().minutes;
+
+
+      const recipeArray = doc.data().steps.split("%")
+      let recipeResult = ''
+      for (let i = 0; i &lt; recipeArray.length; i++) {
+        recipeResult = recipeResult + `${i + 1} . ${String(recipeArray[i])}  \n`;
+
+
+      }
+      tempObject.steps = recipeResult
+
+      const ingredientsArray = doc
+        .data()
+        .ingredients.slice(0, -2)
+        .split("%");
+      let ingredientResult = "";
+      let healthierIngredients = "";
+      let healthyCounter = 0;
+      for (let i = 0; i &lt; ingredientsArray.length; i++) {
+        // filter logic
+        const result = filterItems(healthy, String(ingredientsArray[i]));
+
+        if (result.length > 0) {
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} * \n`;
+          // do for loop
+          for (
+            healthyCounter;
+            healthyCounter &lt; result.length;
+            healthyCounter++
+          ) {
+            healthierIngredients =
+              healthierIngredients +
+              `${healthyCounter + 1} . ${String(result[healthyCounter].brandName)} \n`;
+          }
+        } else {
+          ingredientResult =
+            ingredientResult + `${i + 1} . ${String(ingredientsArray[i])} \n`;
+        }
+
+        // stepResult = stepResult + "hello" + "\n"
+      }
+      // ingredientResult = ingredientResult.replaceAll(/[']/g,'')
+      tempObject.ingredients = ingredientResult;
+      tempObject.ingredientsArray = ingredientsArray;
+      tempObject.healthyIngredients = healthierIngredients;
+      recipe.push(tempObject);
+
+      counter++;
+    });
+
+    return recipe;
+  };
+
+  const [noOfCards, setNoOfCards] = useState(0);
+  /**
+   * 
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   */
+  const handleClick = async (totalCalorie, meals) => {
+    setCardInfo([]);
+    const recipe = await getRecipeFromDB(totalCalorie, meals);
+    if (recipe.length == 0 || noOfCards > recipe.length) {
+      alert("No Recipe Found!!");
+    } else {
+      let tempArray = recipe.slice(noOfCards, noOfCards + meals);
+      for (let i = 0; i &lt; tempArray.length; i++) {
+        setCardInfo((cardInfo) => [...cardInfo, tempArray[i]]);
+      }
+
+      setNoOfCards(noOfCards + meals);
+    }
+  };
+  /**
+   * 
+   * @param {int} index 
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   */
+  const handleIndividualRefresh = async (index, totalCalorie, meals) => {
+    const recipe = await getRecipeFromDB(totalCalorie, meals);
+    const newCardInfo = recipe[noOfCards];
+    // update that particular item in array
+    const newCardsInfo = cardInfo.map((card, i) => {
+      if (i == index) {
+        return newCardInfo;
+      } else {
+        return card;
+      }
+    });
+    setCardInfo(newCardsInfo);
+
+    setNoOfCards(noOfCards + 1);
+  };
+  /**
+   * 
+   * @param {int} index 
+   */
+  const handleExpandClick = (index) => {
+    if (selectedId == index) {
+      setSelectedId(-1);
+    } else {
+      setSelectedId(index);
+    }
+  };
+
+
+  const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return &lt;IconButton {...other} />;
+  })(({ theme, expand }) => ({
+    transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  }));
+  /**
+   * 
+   * @param {card} card 
+   * @param {int} index 
+   * Prints out the card with the relevant information 
+   * of calories, protein, sodium, sugar, totalFat,
+   * whilst displaying the steps and ingredients
+   * and also the healthier choice options 
+   * 
+   */
+
+  const renderCard = (card, index) => {
+    return (
+      &lt;div key={index}>
+        &lt;Card
+          style={{
+            margin: "10px",
+            width: 400,
+            minHeight: 350,
+            borderRadius: "25px",
+            backgroundColor: "#E6E6FA",
+          }}
+          key={index}
+        >
+          &lt;CardHeader title={card.title} subheader={card.subheader} />
+
+          &lt;CardContent>
+            &lt;Grid container spacing={0}>
+              &lt;Grid item xs={6}>
+                &lt;Typography> Nutrition info&lt;/Typography>
+                &lt;Typography style={{ whiteSpace: "pre-line" }}>
+                  {" "}
+                  Calories: {card.calories} g
+                &lt;/Typography>
+                &lt;Typography style={{ whiteSpace: "pre-line" }}>
+                  {" "}
+                  Protein: {card.protein} g
+                &lt;/Typography>
+                {/* &lt;Typography style={{whiteSpace: 'pre-line'}}> Saturated fat: {card.saturatedFat}&lt;/Typography> */}
+                &lt;Typography style={{ whiteSpace: "pre-line" }}>
+                  {" "}
+                  Sodium: {card.sodium} g
+                &lt;/Typography>
+                &lt;Typography style={{ whiteSpace: "pre-line" }}>
+                  {" "}
+                  Sugar: {card.sugar} g
+                &lt;/Typography>
+                &lt;Typography style={{ whiteSpace: "pre-line" }}>
+                  {" "}
+                  Total Fat: {card.totalFat} g
+                &lt;/Typography>
+                {/* &lt;Typography style={{whiteSpace: 'pre-line'}}> Nutrition testing&lt;/Typography> */}
+              &lt;/Grid>
+
+              &lt;Grid item xs={6}>
+                &lt;Typography>Time to prep meals&lt;/Typography>
+                &lt;Typography align="center">{card.time}&lt;/Typography>
+                {/* &lt;Typography align = "center">minutes testing&lt;/Typography> */}
+              &lt;/Grid>
+            &lt;/Grid>
+          &lt;/CardContent>
+
+          &lt;CardActions disableSpacing>
+            &lt;ExpandMore
+              onClick={() => handleExpandClick(index)}
+              aria-expanded={expanded}
+              expanded={expanded}
+              aria-label="show more"
+            >
+              &lt;ExpandMoreIcon>&lt;/ExpandMoreIcon>
+            &lt;/ExpandMore>
+          &lt;/CardActions>
+
+          &lt;Collapse
+            in={index === selectedId ? true : false}
+            timeout="auto"
+            unmountOnExit
+          >
+            &lt;CardContent>
+              &lt;div>
+                &lt;Typography>How to make it :&lt;/Typography>
+                &lt;Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
+                  {card.steps}
+                &lt;/Typography>
+                {/* &lt;Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>steps testing&lt;/Typography> */}
+              &lt;/div>
+
+              &lt;div style={{ paddingTop: 10 }}>
+                &lt;Typography> Ingredients:&lt;/Typography>
+                &lt;Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
+                  {card.ingredients}
+                  {/* &lt;img
+                    src="https://www.unisoy.com.sg/image/catalog/award/award-02.png"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }} */}
+                &lt;/Typography>
+                &lt;div>
+                  &lt;Typography>Healthier Choice Ingredients:&lt;/Typography>
+                  &lt;Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
+                    {card.healthyIngredients}
+                  &lt;/Typography>
+                &lt;/div>
+
+                {/* &lt;Typography variant = "body1" style={{whiteSpace: 'pre-line'}}>ingredients testing&lt;/Typography> */}
+              &lt;/div>
+            &lt;/CardContent>
+          &lt;/Collapse>
+        &lt;/Card>
+        &lt;div>
+          &lt;Button
+            onClick={() => {
+              handleIndividualRefresh(index, totalCalorie, meals);
+            }}
+          >
+            {" "}
+            &lt;RefreshIcon />
+          &lt;/Button>
+          &lt;Button>
+            &lt;RecommendIcon />
+          &lt;/Button>
+        &lt;/div>
+      &lt;/div>
+    );
+  };
+
+  return (
+    &lt;div>
+      &lt;div style={{ paddingBottom: 10 }}>
+        &lt;ResponsiveAppBar />
+      &lt;/div>
+      &lt;Grid
+        container
+        alignItems="flex-start"
+        justify="flex-start"
+        spacing={1}
+        style={{ minHeight: "100vh" }}
+      >
+        &lt;Grid item sm={6} style={{ padding: 0, maxWidth: 240 }}>
+          &lt;SideBar />
+        &lt;/Grid>
+        &lt;div style={{ position: "absolute", right: "40%", padding: "3rem" }}>
+          &lt;Button onClick={() => handleClick(totalCalorie, meals)}>
+            Generate Recipe
+          &lt;/Button>
+        &lt;/div>
+        &lt;Grid>
+          &lt;div
+            style={{
+              paddingTop: 100,
+              postiton: "sticky",
+              display: "inline-flex",
+              margin: "auto",
+              alignItems: "flex-start",
+            }}
+          >
+            {cardInfo.map(renderCard)}
+          &lt;/div>
+        &lt;/Grid>
+      &lt;/Grid>
+    &lt;/div>
+  );
+}
+
+export default DynamicRecipeGenerator;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Aboutus">Aboutus</a></li><li><a href="global.html#Account">Account</a></li><li><a href="global.html#AccountAboutus">AccountAboutus</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#DynamicRecipeGenerator">DynamicRecipeGenerator</a></li><li><a href="global.html#EditProfile">EditProfile</a></li><li><a href="global.html#FAQ">FAQ</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#MonthlyCalorie">MonthlyCalorie</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UserProfile">UserProfile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Nov 13 2022 00:42:56 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

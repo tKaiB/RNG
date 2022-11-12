@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/MonthlyBMI.js</title>
+    <title>JSDoc: Source: pages/MonthlyCalorie.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/MonthlyBMI.js</h1>
+    <h1 class="page-title">Source: pages/MonthlyCalorie.js</h1>
 
     
 
@@ -30,7 +30,7 @@
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AccountController";
-import { bmiController } from "../contexts/BMIController";
+import { CalorieCounterController } from "../contexts/CalorieCounterController";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
@@ -45,18 +45,17 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import BMI from "./BMI";
 
 const drawerWidth = 240;
 
 /**
- * @param {string} user.uid - Get userID of user
- * @param {number} bmidata - Get bmidata of user
- * @param {date} time - Get time of bmidata of user
- * @returns {array} bmidata, time - BMI data and time stamp
+ * @param {string} user.uid - Gets the userID
+ * @param {int} calories - Gets the calories from the user
+ * @param {date} date - Gets the current date
+ *
  */
 
-function MonthlyBMI() {
+function MonthlyCalorie() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
 
@@ -69,40 +68,51 @@ function MonthlyBMI() {
     }
   };
 
+
+  /**
+   * 
+   * @param {string}  user.uid 
+   * @returns {string[]}
+   */
+
   const getData = async () => {
     //console.log("test");
-    const docRef = collection(db, user.uid);
+    const docRef = collection(db, user.uid + "calorie");
 
     const q = query(docRef, orderBy("time", "asc"));
 
-    const bmidata = [];
+    const caloriedata = [];
     const time = [];
 
     const querySnapshot = await getDocs(q);
     //console.log(querySnapshot.id);
     let i = 0;
     querySnapshot.forEach((doc) => {
-      bmidata[i] = doc.data().bmi;
+      caloriedata[i] = doc.data().calorie;
       time[i] = doc.data().time;
       i++;
       //console.log(doc.id, " => ", doc.data().bmi);
     });
 
-    return [bmidata, time];
+    return [caloriedata, time];
   };
   getData();
 
   const [points, setPoints] = useState([]);
 
+
+  /**
+   *  waits for the data to be fetched 
+   */
   useEffect(() => {
     // declare the data fetching function
     const fetchData = async () => {
-      const [bmidata, time] = await getData();
+      const [caloriedata, time] = await getData();
       //console.log(bmidata.length);
       // set object
-      for (let i = 0; i &lt; bmidata.length; i++) {
+      for (let i = 0; i &lt; caloriedata.length; i++) {
         const newTime = new Date(time[i].seconds * 1000).toLocaleDateString();
-        let newPoint = [newTime, bmidata[i]];
+        let newPoint = [newTime, caloriedata[i]];
         //console.log("effect test" + time[i], bmidata[i]);
         //console.log(time[i]);
         setPoints((points) => [...points, newPoint]);
@@ -117,8 +127,7 @@ function MonthlyBMI() {
   const config = {
     type: "line",
     yAxis: {
-      scale_type: "numeric",
-      label_text: "BMI",
+      label_text: "Calorie Intake",
     },
     xAxis: {
       scale_type: "date",
@@ -166,12 +175,11 @@ function MonthlyBMI() {
           spacing={1}
           style={{ minHeight: "100vh" }}
         >
-          &lt;Grid style={{ padding: 0, maxWidth: 240 }}>
+          &lt;Grid xs={2} sm={6} style={{ padding: 0, maxWidth: 240 }}>
             &lt;SideBar />
           &lt;/Grid>
-
           &lt;div style={divStyle}>
-            &lt;h1 style={{ textAlign: "center" }}>Your BMI Progress Chart&lt;/h1>
+            &lt;h1 style={{ textAlign: "center" }}>Your Calorie Intake Chart&lt;/h1>
             &lt;JSCharting options={config} />
           &lt;/div>
         &lt;/Grid>
@@ -179,7 +187,7 @@ function MonthlyBMI() {
     &lt;/div>
   );
 }
-export default MonthlyBMI;
+export default MonthlyCalorie;
 </code></pre>
         </article>
     </section>

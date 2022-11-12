@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contexts/ProfilePageController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contexts/ProfilePageController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useContext, useEffect, useState } from "react";
+import { auth } from "../firebase";
+import { UserAuth } from "./AccountController";
+import {
+  limit,
+  orderBy,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { CallToActionSharp } from "@material-ui/icons";
+import { connectStorageEmulator } from "firebase/storage";
+import { sendSignInLinkToEmail } from "firebase/auth";
+
+const profilePageController = React.createContext();
+
+export const ProfileContextProvider = ({ children }) => {
+  const { user, setEmail } = UserAuth();
+  /**
+   *
+   * @param {String} name - Get name of user
+   * @returns {boolean} - Return true if name is valid
+   * @returns {boolean} - Return false if name is invalid
+   * @return {updateName} - Update name
+   */
+
+  const updateName = async (name) => {
+    try {
+      await updateDoc(doc(db, "users", user.uid), {
+        name: name,
+      });
+      return true;
+    } catch (e) {
+      console.log(e.message);
+      return false;
+    }
+  };
+  /**
+   *
+   * @param {String} weight - Get weight of user
+   * @returns {boolean} - Return true if weight is valid
+   * @returns {boolean} - Return false if weight is invalid
+   * @return {updateWeight} - Update weight
+   */
+
+  const updateWeight = async (weight) => {
+    try {
+      await updateDoc(doc(db, "users", user.uid), {
+        weight: weight,
+      });
+      return true;
+    } catch (e) {
+      console.log(e.message);
+      return false;
+    }
+  };
+
+  /**
+   *
+   * @param {String} age - Get age of user
+   * @returns {boolean} - Return true if age is valid
+   * @returns {boolean} - Return false if age is invalid
+   * @return {updateAge} - Update age
+   */
+  const updateAge = async (age) => {
+    try {
+      await updateDoc(doc(db, "users", user.uid), {
+        age: age,
+      });
+      return true;
+    } catch (e) {
+      console.log(e.message);
+      return false;
+    }
+  };
+  /**
+   *
+   * @param {String} email - Get email of user
+   * @returns {boolean} - Return true if email is valid
+   * @returns {boolean} - Return false if email is invalid
+   * @return {updateEmail} - Update email
+   */
+  const updateEmail = async (email) => {
+    try {
+      await setEmail(email);
+      return true;
+    } catch (e) {
+      console.log(e.message);
+      return false;
+    }
+  };
+  /**
+   * @param {String} user.uid - Get user id
+   * @param {String} name - Get name of user
+   * @returns {String} user.name - Return name of user
+   */
+
+  const DisplayName = async (id) => {
+    const ref = doc(db, "users", user.uid);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      return docSnap.data().name;
+    } else {
+      return null;
+    }
+  };
+  /**
+   *
+   * @param {String} user.uid - Get user id
+   * @param {String} user.weight - Get weight of user
+   * @returns {String} user.weight - Return weight of user
+   */
+  const DisplayWeight = async (id) => {
+    const ref = doc(db, "users", user.uid);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      return docSnap.data().weight;
+    } else {
+      return null;
+    }
+  };
+  /**
+   *
+   * @param {String} user.uid - Get user id
+   * @param {String} user.age - Get age of user
+   * @returns {String} user.age - Return age of user
+   */
+  const DisplayAge = async (id) => {
+    const ref = doc(db, "users", user.uid);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      return docSnap.data().age;
+    } else {
+      return null;
+    }
+  };
+  /**
+   *
+   * @param {String} user.uid - Get user id
+   * @param {String} user.email - Get email of user
+   * @returns {String} user.email - Return email of user
+   */
+  const DisplayEmail = async (id) => {
+    const ref = doc(db, "users", user.uid);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      return docSnap.data().email;
+    } else {
+      return null;
+    }
+  };
+  /**
+   *
+   * @param {String} name - Get name of user
+   * @param {String} age - Get age of user
+   * @param {String} email - Get email of user
+   * @param {String} weight - Get weight of user
+   * @param {String} id - Get user id
+   * @returns {updateProfile} - Update profile
+   *
+   */
+  const updateProfile = async (name, age, email, weight, id) => {
+    try {
+      await setEmail(email)
+        .then(async () => {
+          try {
+            await updateDoc(doc(db, "users", user.uid), {
+              email: email,
+              name: name,
+              age: age,
+              weight: weight,
+            });
+          } catch (e) {
+            alert(e.message);
+            return false;
+          }
+        })
+        .catch((e) => {
+          alert(e.message);
+          return false;
+        });
+    } catch (e) {
+      alert(e.message);
+      console.log(e.message);
+      return false;
+    }
+    return true;
+  };
+
+  return (
+    &lt;profilePageController.Provider
+      value={{
+        updateName,
+        updateWeight,
+        updateAge,
+        updateEmail,
+        DisplayName,
+        DisplayWeight,
+        DisplayAge,
+        DisplayEmail,
+        updateProfile,
+      }}
+    >
+      {children}
+    &lt;/profilePageController.Provider>
+  );
+};
+
+export const ProfilePageController = () => {
+  return useContext(profilePageController);
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Aboutus">Aboutus</a></li><li><a href="global.html#Account">Account</a></li><li><a href="global.html#AccountAboutus">AccountAboutus</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#DynamicRecipeGenerator">DynamicRecipeGenerator</a></li><li><a href="global.html#EditProfile">EditProfile</a></li><li><a href="global.html#FAQ">FAQ</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#MonthlyCalorie">MonthlyCalorie</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UserProfile">UserProfile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Nov 13 2022 00:42:56 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

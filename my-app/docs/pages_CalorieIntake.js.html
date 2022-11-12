@@ -29,7 +29,8 @@
             <pre class="prettyprint source linenums"><code>import React, { useRef, useState } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
+import { CalorieCounterController } from "../contexts/CalorieCounterController";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
@@ -74,7 +75,7 @@ function createData(name, value) {
 }
 
 /**
- * 
+ *
  * @param {number} weight - Get weight of user
  * @param {boolean} gainMuscle - Whether user wants to gain muscle
  * @param {boolean} loseFat - Whether user wants to lose fat
@@ -99,7 +100,7 @@ function CalorieIntake() {
     e.preventDefault();
     try {
       const docRef = await addDoc(collection(db, user.uid + "calorie"), {
-        calorie: testRef.current.value,
+        calorie: parseFloat(testRef.current.value),
         time: serverTimestamp(),
       });
     } catch (e) {
@@ -118,7 +119,7 @@ function CalorieIntake() {
 
     alert("Data added successfully");
   };
-
+  const number = 0;
   const [values, setValue] = React.useState(30);
   const [meal, setMeal] = useState(3);
 
@@ -132,6 +133,7 @@ function CalorieIntake() {
   const [saturatedFat, setSaturatedFat] = useState(0);
 
   const rows = [
+    createData("Calories", calorie),
     createData("Protein", protein),
     createData("Carbs", carbs),
     createData("Fat", fat),
@@ -156,7 +158,7 @@ function CalorieIntake() {
         dailyCalorie = dailyCalorie.toFixed(0);
         const carbs = ((dailyCalorie * 0.5) / 4).toFixed(2);
         setCarbs(carbs);
-        const fat = (dailyCalorie * 0.3).toFixed(2);
+        const fat = ((dailyCalorie * 0.3) / 9).toFixed(2);
         setFat(fat);
         const sugar = ((dailyCalorie * 0.1) / 4).toFixed(2);
         setSugar(sugar);
@@ -164,19 +166,22 @@ function CalorieIntake() {
         setSaturatedFat(saturatedFat);
 
         setCalorie(dailyCalorie);
+        testRef.current.value = dailyCalorie;
       } else {
         let dailyCalorie = bodyWeight * 15 - 500;
         dailyCalorie = dailyCalorie.toFixed(0);
         const carbs = ((dailyCalorie * 0.5) / 4).toFixed(2);
         setCarbs(carbs);
-        const fat = (dailyCalorie * 0.3).toFixed(2);
+        const fat = ((dailyCalorie * 0.3) / 9).toFixed(2);
         setFat(fat);
         const sugar = ((dailyCalorie * 0.1) / 4).toFixed(2);
         setSugar(sugar);
         const saturatedFat = (dailyCalorie * 0.1).toFixed(2);
         setSaturatedFat(saturatedFat);
         setCalorie(dailyCalorie);
+        testRef.current.value = dailyCalorie;
       }
+
       setShow(!show);
     }
   };
@@ -194,18 +199,17 @@ function CalorieIntake() {
   const [gainMuscle, setGainMuscle] = useState(false);
 
   const handleChange3 = (event) => {
-    setGainMuscle(false)
-    setLoseFat(true)
-
+    setGainMuscle(false);
+    setLoseFat(true);
   };
 
   const handleChange4 = (event) => {
-    setGainMuscle(true)
-    setLoseFat(false)
+    setGainMuscle(true);
+    setLoseFat(false);
   };
 
   return (
-    &lt;div>
+    &lt;div style={{ fontFamily: "Inter" }}>
       &lt;div style={{ paddingBottom: 10 }}>
         &lt;ResponsiveAppBar />
       &lt;/div>
@@ -225,7 +229,7 @@ function CalorieIntake() {
               &lt;h1
                 style={{
                   fontSize: "3rem",
-                  fontFamily: "'Times New Roman', Times, serif",
+                  //fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 Calculate Your Calories
@@ -233,7 +237,7 @@ function CalorieIntake() {
               &lt;p
                 style={{
                   fontSize: "1.5rem",
-                  fontFamily: "'Times New Roman', Times, serif",
+                  //fontFamily: "'Times New Roman', Times, serif",
                 }}
               >
                 Calculate Your Calories Using Our Simple Calculator
@@ -244,49 +248,38 @@ function CalorieIntake() {
                   id="outlined-adornment-weight"
                   value={values}
                   inputRef={weightRef}
+                  type="number"
                   endAdornment={
                     &lt;InputAdornment position="end">kg&lt;/InputAdornment>
                   }
                   aria-describedby="outlined-weight-helper-text"
                   inputProps={{
-                    readOnly: true,
                     "aria-label": "weight",
                   }}
                   onChange={handleChange}
                 />
-                &lt;FormHelperText id="outlined-weight-helper-text">&lt;/FormHelperText>
-                &lt;Slider
-                  style={{ width: "15rem" }}
-                  size="small"
-                  defaultValue={50}
-                  aria-label="Small"
-                  valueLabelDisplay="auto"
-                  value={values}
-                  onChange={handleChange}
-                  max={200}
-                />
               &lt;/FormControl>
-              &lt;div>
+              &lt;div style={{ paddingTop: 30 }}>
                 &lt;FormLabel id="demo-radio-buttons-group-label">
                   I aim to
                 &lt;/FormLabel>
                 &lt;RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   name="radio-buttons-group"
+                  defaultValue="loseFat"
                 >
                   &lt;FormControlLabel
                     value="loseFat"
                     control={&lt;Radio />}
                     onChange={handleChange3}
-                    label="Lose fat while maintaining muscle
-  "
+                    onSelect
+                    label="Lose fat while maintaining muscle"
                   />
                   &lt;FormControlLabel
                     value="gainMuscle"
                     control={&lt;Radio />}
                     onChange={handleChange4}
-                    label="Build muscle while minimising fat gain
-  "
+                    label="Build muscle while minimising fat gain"
                   />
                 &lt;/RadioGroup>
               &lt;/div>
@@ -320,6 +313,7 @@ function CalorieIntake() {
                 defaultValue={3}
                 aria-label="Small"
                 valueLabelDisplay="auto"
+                min={1}
                 max={10}
                 value={meal}
                 onChange={handleChange2}
@@ -331,8 +325,9 @@ function CalorieIntake() {
               >
                 &lt;OutlinedInput
                   id="outlined-adornment-calorieintake"
-                  value={calorie}
+                  defaultValue={number}
                   inputRef={testRef}
+                  type="number"
                   endAdornment={
                     &lt;InputAdornment position="end">kcal&lt;/InputAdornment>
                   }
@@ -360,7 +355,7 @@ function CalorieIntake() {
                   &lt;h1
                     style={{
                       fontSize: "3rem",
-                      fontFamily: "'Times New Roman', Times, serif",
+                      //fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
                     Your daily Calorie Goals
@@ -418,13 +413,13 @@ export default CalorieIntake;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Account">Account</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Aboutus">Aboutus</a></li><li><a href="global.html#Account">Account</a></li><li><a href="global.html#AccountAboutus">AccountAboutus</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#DynamicRecipeGenerator">DynamicRecipeGenerator</a></li><li><a href="global.html#EditProfile">EditProfile</a></li><li><a href="global.html#FAQ">FAQ</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#MonthlyCalorie">MonthlyCalorie</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UserProfile">UserProfile</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Oct 27 2022 23:39:02 GMT+0800 (Singapore Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Nov 13 2022 00:42:56 GMT+0800 (Singapore Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

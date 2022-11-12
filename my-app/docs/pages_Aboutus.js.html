@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: pages/Aboutus.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: pages/Aboutus.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import NavBar from "../components/Navbar";
+import "./styles.css";
 
+/**
+ *
+ * @returns {JSX} - FAQ page
+ */
+function Aboutus() {
+  return (
+    &lt;div style={{ fontFamily: "Inter" }}>
+      &lt;NavBar />
+      &lt;div class="about-section">
+        &lt;h1>About Us&lt;/h1>
+        &lt;p>
+          We are a group of students from the Nanyang Technological University
+          who are aiming to provide an application for health conscious people
+          to find recipes that suit their individual health needs as well as
+          healthier food choices available in Singapore for citizens.
+        &lt;/p>
+      &lt;/div>
+      &lt;div class="Our-Team">
+        &lt;h2>Our Team&lt;/h2>
+        &lt;p>JAIN SHIKHAR - Year 2 Computer Science Undergraduate&lt;/p>
+        &lt;p>LIM ZI SUAN - Year 2 Computer Science Undergraduate&lt;/p>
+        &lt;p>VIGNESH EZHIL - Year 2 Computer Science Undergraduate&lt;/p>
+        &lt;p>EVA LIM LITING - Year 3 Computer Science Undergraduate&lt;/p>
+        &lt;p>
+          REMELIA SHIRLLEY JOHN BENEDICT - Year 3 Computer Engineering
+          Undergraduate
+        &lt;/p>
+        &lt;p>Tan Kai Boon - Year 2 Computer Science Undergraduate&lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default Aboutus;
+</code></pre>
+        </article>
+    </section>
 
 
 

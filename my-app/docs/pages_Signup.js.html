@@ -35,7 +35,7 @@ import {
   HttpsOutlined,
 } from "@material-ui/icons";
 import { Box } from "@mui/material";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 import { app, db } from "../firebase";
 import NavBar from "../components/Navbar";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
@@ -54,7 +54,7 @@ function SignUp() {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser } = UserAuth();
+  const { createUser , EmailVerification , user } = UserAuth();
 
   const navigate = useNavigate();
 
@@ -62,9 +62,11 @@ function SignUp() {
     e.preventDefault();
     setError("");
     try {
+      
       await createUser(emailRef.current.value, passwordRef.current.value)
         .then(async (user) => {
           try {
+
             await setDoc(doc(db, "users", user.user.uid), {
               email: email,
               name: nameRef.current.value,
@@ -73,19 +75,20 @@ function SignUp() {
               calorie: 0,
               bmi: 0,
             });
+            EmailVerification()
           } catch (e) {
             setError(e.message);
             console.log(e.message);
             alert(e.message);
           }
           alert("Account Created");
-          navigate("/account");
+          navigate("/signin");
         })
         .catch((e) => {
           setError(e.message);
           console.log(e.message);
           if (e.message == "Firebase: Error (auth/email-already-in-use).")
-            alert("Email already in use");
+            alert("Email already in use, Please try again");
           if (e.message == "Firebase: Error (auth/invalid-email).")
             alert("Invalid Email");
           if (
@@ -93,8 +96,14 @@ function SignUp() {
             "Firebase: Password should be at least 6 characters (auth/weak-password)."
           )
             alert(
-              "Password is too weak, Password must be at least 6 characters"
+              "Password is too weak, Password must be at least 6 characters, Please try again"
             );
+          if (e.message == "Firebase: Error (auth/internal-error).")
+            alert("Fill in all required fields");
+          if (e.messaage == "Firebase: Error (auth/missing-email).")
+            alert("Fill in all required fields");
+          if (e.message == "Firebase: Error (auth/missing-password).")
+            alert("Fill in all required fields");
         });
       //navigate("/account");
     } catch (e) {
@@ -104,31 +113,36 @@ function SignUp() {
   };
 
   return (
-    &lt;div>
+    &lt;div style={{ fontFamily: "Inter" }}>
       &lt;NavBar />
       &lt;Grid container style={{ minHeight: "100vh" }}>
-        &lt;Grid
-          item
-          xs={8}
-          sm={4}
-          direction="column"
-          justify="space-between"
-          style={{ paddingLeft: 0 }}
-        >
+        &lt;Grid item xs={12} sm={6}>
+          &lt;img
+            src="https://cdn.apartmenttherapy.info/image/upload/v1556282934/k/archive/659cfbc5ef34a05e4c3f200db47af6d08d27d7cd.jpg"
+            style={{
+              height: "100%",
+              width: "100%",
+              objectFit: "fill",
+            }}
+            alt="brand"
+          />
+        &lt;/Grid>
+
+        &lt;Grid item xs={12} sm={6} style={{ paddingLeft: 50 }}>
           &lt;div style={{ alignItems: "left" }}>
-            &lt;Grid container direction="column" alignItems="left">
+            &lt;Grid container direction="column" alignItems="flex-start">
               &lt;Grid item xs={4}>
                 &lt;h2 style={{ padding: 10, paddingLeft: 0 }}>Sign Up&lt;/h2>
               &lt;/Grid>
 
               &lt;Grid item xs={4}>
-                &lt;p style={{ margin: 0, paddingBottom: 7 }}>
+                &lt;p style={{ margin: 0, paddingBottom: 7, fontSize: 16 }}>
                   If you already have an account
                 &lt;/p>
               &lt;/Grid>
 
               &lt;Grid item xs={4}>
-                &lt;p style={{ margin: 0 }}>
+                &lt;p style={{ margin: 0, fontSize: 16 }}>
                   You can &lt;Link to="/signin">Login here&lt;/Link>
                 &lt;/p>
               &lt;/Grid>
@@ -229,6 +243,7 @@ function SignUp() {
                 color: "#ffffff",
                 padding: "1rem",
                 borderRadius: "50px",
+                marginTop: 10,
               }}
             >
               Register
@@ -236,18 +251,20 @@ function SignUp() {
           &lt;/Box>
         &lt;/Grid>
 
-        &lt;Grid item xs={12} sm={6}>
+        {/* &lt;Grid item xs={12} sm={6}>
           &lt;img
             src="https://cdn.apartmenttherapy.info/image/upload/v1556282934/k/archive/659cfbc5ef34a05e4c3f200db47af6d08d27d7cd.jpg"
             style={{
-              paddingLeft: 200,
-              width: "100%",
-              height: "100%",
+              paddingTop: 10,
+              paddingLeft: 100,
+              maxWidth: 2150,
+              height: "50%",
               objectFit: "cover",
+              maxwidth: 800,
             }}
             alt="brand"
           />
-        &lt;/Grid>
+        &lt;/Grid> */}
       &lt;/Grid>
     &lt;/div>
   );
@@ -264,13 +281,13 @@ export default SignUp;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Account">Account</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Aboutus">Aboutus</a></li><li><a href="global.html#Account">Account</a></li><li><a href="global.html#AccountAboutus">AccountAboutus</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#DynamicRecipeGenerator">DynamicRecipeGenerator</a></li><li><a href="global.html#EditProfile">EditProfile</a></li><li><a href="global.html#FAQ">FAQ</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#MonthlyCalorie">MonthlyCalorie</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UserProfile">UserProfile</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Oct 27 2022 23:39:02 GMT+0800 (Singapore Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Nov 13 2022 00:42:56 GMT+0800 (Singapore Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
