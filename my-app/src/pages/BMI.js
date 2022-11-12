@@ -33,24 +33,22 @@ function BMI() {
   const [error, setError] = useState("");
 
   const [value, setHealth] = React.useState("");
+  /**
+   *
+   * @param {string} condition - Get condition of user
+   * set health condition of user based on BMI
+   */
 
   const handleChange3 = (event, health) => {
     setHealth(health);
   };
 
-  // const handleSubmit2 = async (e) => {
-  //   e.preventDefault();
-  // try {
-  //   await updateDoc(doc(db, "users", user.uid), {
-  //     bmi: testRef.current.value,
-  //   });
-  //   alert("BMI updated!");
-  // } catch (e) {
-  //   setError(e.message);
-  //   alert(e.message);
-  //   console.log(e.message);
-  // }
-  // };
+  /**
+   * @param {String} user.uid - Get userID of user
+   * @param {String} bmi - Get bmi of user
+   * @param {number} time - Get time of user input
+   * upload bmi data to firebase
+   */
 
   const handleSubmit2 = async (e) => {
     e.preventDefault();
@@ -65,6 +63,10 @@ function BMI() {
 
     alert("Data added successfully");
   };
+  /**
+   * @param {number} marks - get marks of slider
+   * set different points for slider
+   */
 
   const marks = [
     {
@@ -97,10 +99,18 @@ function BMI() {
 
   const [bmiInput, setValue3] = React.useState(8);
 
+  /**
+   * @returns {String} Male
+   */
+
   const handleCLick1 = (event) => {
     event.preventDefault();
     setGender("Male");
   };
+
+  /**
+   * @returns {String} Female
+   */
 
   const handleCLick2 = (event) => {
     event.preventDefault();
@@ -108,6 +118,11 @@ function BMI() {
   };
   const number = 0;
   const heightRef = useRef();
+
+  /**
+   * @param {number} bmi - Get bmi of user
+   * @returns {string} bmi - bmi of user
+   */
 
   const handleClick3 = () => {
     let bmi =

@@ -19,15 +19,6 @@ function Account() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
   return (
     <div style={{ fontFamily: "Inter" }}>
       <div style={{ paddingBottom: 10 }}>
@@ -96,10 +87,6 @@ function Account() {
             </h1>
           </Grid>
         </Grid>
-
-        {/* <Button onClick={handleLogout} type="submit">
-        Log out
-      </Button> */}
       </div>
     </div>
   );
