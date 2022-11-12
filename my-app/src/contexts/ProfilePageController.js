@@ -139,6 +139,35 @@ export const AuthContextProvider = ({ children }) => {
 
   }
 
+  const updateProfile = async( name ,age , email , weight , id) =>{
+    try {
+        await setEmail(email)
+          .then(async () => {
+            try {
+              await updateDoc(doc(db, "users", user.uid), {
+                email: email,
+                name: name,
+                age: age,
+                weight: weight,
+              });
+            } catch (e) {
+              alert(e.message);
+              return false
+            }
+          })
+          .catch((e) => {
+            alert(e.message);
+            return false
+          });
+      } catch (e) {
+        alert(e.message);
+        console.log(e.message);
+        return false
+      }
+      return true
+
+  }
+
 
 
 
@@ -160,7 +189,8 @@ export const AuthContextProvider = ({ children }) => {
         DisplayName,
         DisplayWeight,
         DisplayAge,
-        DisplayEmail
+        DisplayEmail,
+        updateProfile
 
       }}
     >
