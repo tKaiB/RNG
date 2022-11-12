@@ -11,7 +11,8 @@ import {
     getDocs,
     addDoc,
     serverTimestamp,
-    getDoc
+    getDoc,
+    updateDoc
   } from "firebase/firestore";
   import { db } from "../firebase";
 import { CallToActionSharp } from "@material-ui/icons";
@@ -169,5 +170,5 @@ export const AuthContextProvider = ({ children }) => {
 };
 
 export const ProfilePageController = () => {
-  return useContext(BMIController);
+  return useContext(profilePageController);
 };

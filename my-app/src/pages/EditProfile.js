@@ -4,6 +4,7 @@ import SideBar from "../components/Sidebar";
 import { Grid, TextField, Button, Box } from "@material-ui/core";
 
 import { UserAuth } from "../contexts/AccountController";
+import { ProfilePageController } from "../contexts/ProfilePageController";
 import { db } from "../firebase";
 import { collection, addDoc, setDoc, doc, updateDoc , getDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,6 +19,8 @@ function EditProfile() {
   // const [error, setError] = useState("");
   const error = useRef('')
   const { user, setEmail } = UserAuth();
+
+  const{updateName , updateWeight , updateEmail , updateProfile} = ProfilePageController()
 
 
   // logic for defualt value using useEffect
