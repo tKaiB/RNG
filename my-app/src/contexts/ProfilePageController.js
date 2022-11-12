@@ -22,7 +22,7 @@ import { sendSignInLinkToEmail } from "firebase/auth";
 
 const profilePageController = React.createContext();
 
-export const AuthContextProvider = ({ children }) => {
+export const ProfileContextProvider = ({ children }) => {
   const {user ,setEmail}  = UserAuth()
 
   const updateName =  async (name) => {

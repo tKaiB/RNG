@@ -20,7 +20,7 @@ function EditProfile() {
   const error = useRef('')
   const { user, setEmail } = UserAuth();
 
-  const{updateName , updateWeight , updateEmail , updateProfile} = ProfilePageController()
+  // const{ updateName , updateWeight , updateEmail , updateProfile } = ProfilePageController()
 
 
   // logic for defualt value using useEffect
