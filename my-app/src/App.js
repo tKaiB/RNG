@@ -14,7 +14,6 @@ import AccountFaq from "./components/AccountFaq";
 import AccountAboutus from "./pages/AccountAboutus";
 import CalorieIntake from "./pages/CalorieIntake";
 import BmiInput from "./pages/BMI";
-import RecipeGenerator from "./pages/RecipeGenerator";
 import MonthlyBMI from "./pages/MonthlyBMI";
 import MonthlyCalorie from "./pages/MonthlyCalorie";
 import DynamicRecipeGenerator from "./pages/DynamicRecipeGenerator";
@@ -36,7 +35,6 @@ function App() {
           <Route path="/accountaboutus" element={<AccountAboutus />} />
           <Route path="/calorieintake" element={<CalorieIntake />} />
           <Route path="/BmiInput" element={<BmiInput />} />
-          <Route path="/recipegenerator" element={<RecipeGenerator />} />
           <Route path="/monthlybmichart" element={<MonthlyBMI />} />"
           <Route path="/monthlycaloriechart" element={<MonthlyCalorie />} />
           <Route path= '/dynamic' element={<DynamicRecipeGenerator />} />
