@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 import { db, upload, storage } from "../firebase";
 import { useEffect, useState } from "react";
 

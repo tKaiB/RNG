@@ -3,7 +3,7 @@ import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid, TextField, Button, Box } from "@material-ui/core";
 
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 import { db } from "../firebase";
 import { collection, addDoc, setDoc, doc, updateDoc , getDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";

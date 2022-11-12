@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 import ResponsiveAppBar from "../components/AccountNavBar";
 import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";

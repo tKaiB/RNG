@@ -11,7 +11,7 @@ import {
 import { Box } from "@mui/material";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 import NavBar from "../components/Navbar";
 
 /**

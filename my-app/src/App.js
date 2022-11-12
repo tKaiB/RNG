@@ -3,7 +3,7 @@ import NavBar from "./components/Navbar";
 import ForgetPassword from "./pages/ForgetPassword";
 import SignUp from "./pages/Signup";
 import SignIn from "./pages/Signin";
-import { AuthContextProvider } from "./contexts/AuthContext";
+import { AuthContextProvider } from "./contexts/AccountController";
 import { Routes, Route } from "react-router-dom";
 import Account from "./pages/Account";
 import FAQ from "./pages/Faq";

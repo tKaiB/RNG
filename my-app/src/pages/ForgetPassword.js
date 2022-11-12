@@ -9,7 +9,7 @@ import {
 import { EmailOutlined } from "@material-ui/icons";
 import NavBar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 
 /**
  * @param {string} email - Get email of user

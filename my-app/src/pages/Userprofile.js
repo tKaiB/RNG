@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-import { UserAuth, AuthContextProvider } from "../contexts/AuthContext";
+import { UserAuth, AuthContextProvider } from "../contexts/AccountController";
 import { db, upload, storage } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";

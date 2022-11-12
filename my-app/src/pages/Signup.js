@@ -7,7 +7,7 @@ import {
   HttpsOutlined,
 } from "@material-ui/icons";
 import { Box } from "@mui/material";
-import { UserAuth } from "../contexts/AuthContext";
+import { UserAuth } from "../contexts/AccountController";
 import { app, db } from "../firebase";
 import NavBar from "../components/Navbar";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
