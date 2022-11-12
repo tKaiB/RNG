@@ -2,19 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { UserAuth } from "./AccountController";
 import {
-    limit,
-    orderBy,
-    doc,
-    collection,
-    query,
-    where,
-    getDocs,
-    addDoc,
-    serverTimestamp,
-    getDoc,
-    updateDoc
-  } from "firebase/firestore";
-  import { db } from "../firebase";
+  limit,
+  orderBy,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  getDoc,
+  updateDoc
+} from "firebase/firestore";
+import { db } from "../firebase";
 import { CallToActionSharp } from "@material-ui/icons";
 import { connectStorageEmulator } from "firebase/storage";
 import { sendSignInLinkToEmail } from "firebase/auth";
@@ -22,12 +22,17 @@ import { sendSignInLinkToEmail } from "firebase/auth";
 const recipeController = React.createContext();
 
 export const recipeContextProvider = ({ children }) => {
-  const {user ,setEmail}  = UserAuth()
-
+  const { user, setEmail } = UserAuth()
+  /**
+   * 
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   * @returns {string[]} recipe
+   */
   const getRecipeFromDB = async (totalCalorie, meals) => {
     function filterItems(arr, query) {
-        return arr.filter((el) => el.ingredient.toLowerCase().includes(query.toLowerCase()));
-      }
+      return arr.filter((el) => el.ingredient.toLowerCase().includes(query.toLowerCase()));
+    }
     let recipe = [];
     const docRef = collection(db, "recipe");
     const mealCalorie = Math.floor(totalCalorie / meals);
@@ -125,10 +130,15 @@ export const recipeContextProvider = ({ children }) => {
 
     return recipe;
   };
-
+  /**
+   * 
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   * @returns 
+   */
   const GenerateRecipe = async (totalCalorie, meals) => {
     // overwritten in UI 
-    return null 
+    return null
 
   };
 
