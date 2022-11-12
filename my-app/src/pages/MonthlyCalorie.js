@@ -19,6 +19,12 @@ import { db } from "../firebase";
 
 const drawerWidth = 240;
 
+/**
+ * @param {int} calories
+ * @param {date} date
+ *
+ */
+
 function MonthlyCalorie() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
