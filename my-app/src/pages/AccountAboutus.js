@@ -5,7 +5,10 @@ import SideBar from "../components/Sidebar";
 import { Grid } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
+/**
+ *
+ * @returns {JSX} - FAQ page
+ */
 function AccountAboutus() {
   return (
     <div style={{ fontFamily: "Inter" }}>

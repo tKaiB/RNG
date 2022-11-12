@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import { UserAuth } from "../contexts/AccountController";
+import { RecipeController } from "../contexts/RecipeController";
 import {
   limit,
   orderBy,

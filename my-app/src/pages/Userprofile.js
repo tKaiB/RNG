@@ -10,16 +10,26 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 import { UserAuth, AuthContextProvider } from "../contexts/AccountController";
-import { ProfilePageController } from "../contexts/ProfilePageController";
+import {
+  ProfilePageController,
+  ProfileContextProvider,
+} from "../contexts/ProfilePageController";
 import { db, upload, storage } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 
+/**
+ * @param {string} user.uid - Get userID of user
+ * @param {string} user.age - Get age of user
+ * @param {string} user.displayName - Get displayName of user
+ * @param {string} user.photoURL - Get photoURL of user
+ * @param {string} user.weight - Get weight of user
+ * @returns {string} user.age, user.displayName, user.photoURL, user.weight - User's age, display name, photo URL, and weight
+ */
 function UserProfile() {
   const { user } = UserAuth();
-  const{DisplayName , DisplayWeight , DisplayEmail , DisplayAge} = ProfilePageController()
   const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = React.useState(
     "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"

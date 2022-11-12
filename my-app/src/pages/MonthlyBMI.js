@@ -22,9 +22,12 @@ import BMI from "./BMI";
 const drawerWidth = 240;
 
 /**
- *
+ * @param {string} user.uid - Get userID of user
+ * @param {number} bmidata - Get bmidata of user
+ * @param {date} time - Get time of bmidata of user
  * @returns {array} bmidata, time - BMI data and time stamp
  */
+
 function MonthlyBMI() {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();

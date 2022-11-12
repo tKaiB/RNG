@@ -2,6 +2,11 @@ import React from "react";
 import NavBar from "../components/Navbar";
 import "./styles.css";
 
+/**
+ *
+ * @returns {JSX} - FAQ page
+ */
+
 function FAQ() {
   return (
     <div style={{ fontFamily: "Inter" }}>
