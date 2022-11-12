@@ -134,7 +134,6 @@ export const recipeContextProvider = ({ children }) => {
    * 
    * @param {int} totalCalorie 
    * @param {int} meals 
-   * @returns 
    */
   const GenerateRecipe = async (totalCalorie, meals) => {
     // overwritten in UI 

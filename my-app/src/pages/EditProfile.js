@@ -15,7 +15,6 @@ import { Link, useNavigate } from "react-router-dom";
  * @param {string} name - Gets the name of the user
  * @param {int} age - Gets the age of the user
  * @param {int} weight - Gets the weight of the user
- * @returns 
  */
 
 function EditProfile() {

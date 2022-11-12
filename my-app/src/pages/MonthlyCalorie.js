@@ -44,7 +44,7 @@ function MonthlyCalorie() {
   /**
    * 
    * @param {string}  user.uid 
-   * @returns {caloriedata, time} 
+   * @returns {string[]}
    */
 
   const getData = async () => {

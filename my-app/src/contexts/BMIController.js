@@ -26,7 +26,7 @@ export const BMIContextProvider = ({ children }) => {
    * @param {string} gender 
    * @param {int} height 
    * @param {int} weight 
-   * @returns 
+   * @returns bmi
    */
   const CalculateBMI = (gender, height, weight) => {
     let bmi = weight / ((height / 100) * (height / 100));
@@ -36,7 +36,7 @@ export const BMIContextProvider = ({ children }) => {
 
   }
   /**
-   * @returns {string[], int} caloriedata, time
+   * @returns {string[]} caloriedata, time
    */
   const generateChart = async () => {
     const docRef = collection(db, user.uid + "bmi");
@@ -61,7 +61,7 @@ export const BMIContextProvider = ({ children }) => {
   /**
    * 
    * @param {float} bmi 
-   * @returns 
+   * @returns {boolean} true
    */
   const inputBMI = async (bmi) => {
     try {

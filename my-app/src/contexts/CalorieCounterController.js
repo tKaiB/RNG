@@ -25,7 +25,6 @@ export const CalorieContextProvider = ({ children }) => {
    * @param {boolean} gainMuscle 
    * @param {boolean} loseFat 
    * @param {float} weight 
-   * @returns 
    */
   const CalculateCalorie = (gainMuscle, loseFat, weight) => {
     if (gainMuscle) {
@@ -73,7 +72,6 @@ export const CalorieContextProvider = ({ children }) => {
   /**
    * 
    * @param {int} calorie 
-   * @returns 
    */
   const inputCalorie = async (calorie) => {
     try {
