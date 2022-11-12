@@ -30,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   const generateChart = async () => {
-    const docRef = collection(db, user.uid + "calorie");
+    const docRef = collection(db, user.uid + "bmi");
 
     const q = query(docRef, orderBy("time", "asc"));
 
