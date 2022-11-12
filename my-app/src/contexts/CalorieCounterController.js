@@ -2,26 +2,32 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { UserAuth } from "./AccountController";
 import {
-    limit,
-    orderBy,
-    doc,
-    collection,
-    query,
-    where,
-    getDocs,
-    addDoc,
-    serverTimestamp,
-    getDoc
-  } from "firebase/firestore";
-  import { db } from "../firebase";
+  limit,
+  orderBy,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  getDoc
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 
 const calorieCounterController = React.createContext();
 
-export const AuthContextProvider = ({ children }) => {
+export const CalorieContextProvider = ({ children }) => {
   const user = UserAuth()
-
-  const CalculateCalorie = (gainMuscle, loseFat, weight)=> {
+  /**
+   * 
+   * @param {boolean} gainMuscle 
+   * @param {boolean} loseFat 
+   * @param {float} weight 
+   * @returns 
+   */
+  const CalculateCalorie = (gainMuscle, loseFat, weight) => {
     if (gainMuscle) {
       let dailyCalorie = weight * 15 + 300;
       dailyCalorie = dailyCalorie.toFixed(0);
@@ -29,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
       const fat = ((dailyCalorie * 0.3) / 9).toFixed(2);
       const sugar = ((dailyCalorie * 0.1) / 4).toFixed(2);
       const saturatedFat = (dailyCalorie * 0.1).toFixed(2);
-      return [ dailyCalorie,carbs,fat,sugar,saturatedFat]
+      return [dailyCalorie, carbs, fat, sugar, saturatedFat]
     } else {
       let dailyCalorie = weight * 15 - 500;
       dailyCalorie = dailyCalorie.toFixed(0);
@@ -37,7 +43,7 @@ export const AuthContextProvider = ({ children }) => {
       const fat = ((dailyCalorie * 0.3) / 9).toFixed(2);
       const sugar = ((dailyCalorie * 0.1) / 4).toFixed(2);
       const saturatedFat = (dailyCalorie * 0.1).toFixed(2);
-      return [ dailyCalorie,carbs,fat,sugar,saturatedFat]
+      return [dailyCalorie, carbs, fat, sugar, saturatedFat]
     }
     return null
 
@@ -64,8 +70,12 @@ export const AuthContextProvider = ({ children }) => {
 
     return [caloriedata, time];
   }
-
-  const inputCalorie = async ( calorie ) => {
+  /**
+   * 
+   * @param {int} calorie 
+   * @returns 
+   */
+  const inputCalorie = async (calorie) => {
     try {
       const docRef = await addDoc(collection(db, user.uid), {
         calorie: calorie,
@@ -79,20 +89,23 @@ export const AuthContextProvider = ({ children }) => {
     alert("Data added successfully");
     return true
   };
-
+  /**
+     * 
+     * @returns {int} calorie
+     */
   const getCalorie = async () => {
     const ref = doc(db, "users", user.uid);
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
-        return docSnap.data().calorie
+      return docSnap.data().calorie
 
     } else {
-        return null
-     
+      return null
+
     }
   }
 
-  
+
 
 
 

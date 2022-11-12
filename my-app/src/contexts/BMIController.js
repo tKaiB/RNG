@@ -2,33 +2,42 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { UserAuth } from "./AccountController";
 import {
-    limit,
-    orderBy,
-    doc,
-    collection,
-    query,
-    where,
-    getDocs,
-    addDoc,
-    serverTimestamp,
-    getDoc
-  } from "firebase/firestore";
-  import { db } from "../firebase";
+  limit,
+  orderBy,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  getDoc
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 
 const BMIController = React.createContext();
 
-export const AuthContextProvider = ({ children }) => {
-  const user = UserAuth()
 
-  const CalculateBMI = (gender, height, weight)=> {
-    let bmi =weight / ((height / 100) * (height/ 100));
+export const BMIContextProvider = ({ children }) => {
+  const user = UserAuth()
+  /**
+   * 
+   * @param {string} gender 
+   * @param {int} height 
+   * @param {int} weight 
+   * @returns 
+   */
+  const CalculateBMI = (gender, height, weight) => {
+    let bmi = weight / ((height / 100) * (height / 100));
     bmi = bmi.toFixed(2);
     return bmi
 
 
   }
-
+  /**
+   * @returns {string[], int} caloriedata, time
+   */
   const generateChart = async () => {
     const docRef = collection(db, user.uid + "bmi");
 
@@ -49,8 +58,12 @@ export const AuthContextProvider = ({ children }) => {
 
     return [caloriedata, time];
   }
-
-  const inputBMI = async ( bmi ) => {
+  /**
+   * 
+   * @param {float} bmi 
+   * @returns 
+   */
+  const inputBMI = async (bmi) => {
     try {
       const docRef = await addDoc(collection(db, user.uid), {
         bmi: bmi,
@@ -64,20 +77,23 @@ export const AuthContextProvider = ({ children }) => {
     alert("Data added successfully");
     return true
   };
-
+  /**
+   * 
+   * @returns {float} bmi
+   */
   const getBMI = async () => {
     const ref = doc(db, "users", user.uid);
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
-        return docSnap.data().bmi
+      return docSnap.data().bmi
 
     } else {
-        return null
-     
+      return null
+
     }
 
   }
-  
+
 
 
 
