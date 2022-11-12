@@ -6,8 +6,17 @@ import { Grid, TextField, Button, Box } from "@material-ui/core";
 import { UserAuth } from "../contexts/AccountController";
 import { ProfilePageController } from "../contexts/ProfilePageController";
 import { db } from "../firebase";
-import { collection, addDoc, setDoc, doc, updateDoc , getDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc, getDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
+
+/**
+ * @param {string} user.uid - Gets the userID 
+ * @param {string} email - Gets the email of the user
+ * @param {string} name - Gets the name of the user
+ * @param {int} age - Gets the age of the user
+ * @param {int} weight - Gets the weight of the user
+ * @returns 
+ */
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -20,18 +29,20 @@ function EditProfile() {
   const error = useRef('')
   const { user, setEmail } = UserAuth();
 
-  const{updateName , updateWeight , updateEmail , updateProfile} = ProfilePageController()
+  const { updateName, updateWeight, updateEmail, updateProfile } = ProfilePageController()
 
 
-  // logic for defualt value using useEffect
+  /**
+   * to run the function when the page initially loads
+   */
 
-  useEffect(() =>{
-    const fetchData = async () =>{
+  useEffect(() => {
+    const fetchData = async () => {
       const ref = doc(db, "users", user.uid)
       const docSnap = await getDoc(ref);
       if (docSnap.exists()) {
         NameRef.current.value = docSnap.data().name;
-        AgeRef.current.value = docSnap.data().age 
+        AgeRef.current.value = docSnap.data().age
         WeightRef.current.value = docSnap.data().weight
         EmailRef.current.value = user.email
       } else {
@@ -40,7 +51,17 @@ function EditProfile() {
 
     }
     fetchData()
-  },[user] )
+  }, [user])
+
+
+  /**
+   * 
+   * Display an error when any of the
+   * requirements are not met
+   * If all requirements are met, it will 
+   * display the edited profile credentials 
+   * 
+   */
 
 
   const handleSubmit = async (e) => {
@@ -49,7 +70,7 @@ function EditProfile() {
     if (EmailRef.current.value == "") {
       alert(e.message)
       error.current.value = "Error"
-      
+
     }
 
     if (NameRef.current.value == "") {
@@ -73,12 +94,12 @@ function EditProfile() {
 
     console.log(error)
 
-    if(error.current.value == "Error"){
+    if (error.current.value == "Error") {
       alert(error)
-      
+
       return
     }
-    else{
+    else {
       try {
         await setEmail(EmailRef.current.value)
           .then(async () => {
@@ -103,8 +124,8 @@ function EditProfile() {
       navigate("/profile");
     };
 
-    }
-   
+  }
+
 
   return (
     <div style={{ fontFamily: "Inter" }}>

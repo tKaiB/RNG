@@ -31,6 +31,16 @@ import { maxWidth } from "@mui/system";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import RecommendIcon from "@mui/icons-material/Recommend";
 
+/**
+ * @param {string} user.uid - Get the userID of the user
+ * @param {string} recipe - Get the 
+ * @param {int} totalcalories - Get the total calories per day of user
+ * @param {int} meals - Get total number of meals per day of user
+ * @param {string[]} ingredientsArray - Get the ingredients for meal 
+ * Prints out the steps, nutritional values also the 
+ * healthier choice options for the recipe. 
+ */
+
 function DynamicRecipeGenerator() {
   const { user, logout } = UserAuth();
 
@@ -52,6 +62,10 @@ function DynamicRecipeGenerator() {
     }
   };
 
+  /**
+   * waits for the data to be received
+   */
+
   useEffect(() => {
     if (!user) return;
 
@@ -70,6 +84,11 @@ function DynamicRecipeGenerator() {
   function filterItems(arr, query) {
     return arr.filter((el) => el.ingredient.toLowerCase().includes(query.toLowerCase()));
   }
+
+  /**
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   */
 
   const getRecipeFromDB = async (totalCalorie, meals) => {
     let recipe = [];
@@ -171,7 +190,11 @@ function DynamicRecipeGenerator() {
   };
 
   const [noOfCards, setNoOfCards] = useState(0);
-
+  /**
+   * 
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   */
   const handleClick = async (totalCalorie, meals) => {
     setCardInfo([]);
     const recipe = await getRecipeFromDB(totalCalorie, meals);
@@ -186,7 +209,12 @@ function DynamicRecipeGenerator() {
       setNoOfCards(noOfCards + meals);
     }
   };
-
+  /**
+   * 
+   * @param {int} index 
+   * @param {int} totalCalorie 
+   * @param {int} meals 
+   */
   const handleIndividualRefresh = async (index, totalCalorie, meals) => {
     const recipe = await getRecipeFromDB(totalCalorie, meals);
     const newCardInfo = recipe[noOfCards];
@@ -202,7 +230,10 @@ function DynamicRecipeGenerator() {
 
     setNoOfCards(noOfCards + 1);
   };
-
+  /**
+   * 
+   * @param {int} index 
+   */
   const handleExpandClick = (index) => {
     if (selectedId == index) {
       setSelectedId(-1);
@@ -210,6 +241,7 @@ function DynamicRecipeGenerator() {
       setSelectedId(index);
     }
   };
+
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -221,6 +253,16 @@ function DynamicRecipeGenerator() {
       duration: theme.transitions.duration.shortest,
     }),
   }));
+  /**
+   * 
+   * @param {card} card 
+   * @param {int} index 
+   * Prints out the card with the relevant information 
+   * of calories, protein, sodium, sugar, totalFat,
+   * whilst displaying the steps and ingredients
+   * and also the healthier choice options 
+   * 
+   */
 
   const renderCard = (card, index) => {
     return (

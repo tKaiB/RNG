@@ -20,8 +20,9 @@ import { db } from "../firebase";
 const drawerWidth = 240;
 
 /**
- * @param {int} calories
- * @param {date} date
+ * @param {string} user.uid - Gets the userID
+ * @param {int} calories - Gets the calories from the user
+ * @param {date} date - Gets the current date
  *
  */
 
@@ -37,6 +38,13 @@ function MonthlyCalorie() {
       console.log(e.message);
     }
   };
+
+
+  /**
+   * 
+   * @param {string}  user.uid 
+   * @returns {caloriedata, time} 
+   */
 
   const getData = async () => {
     //console.log("test");
@@ -63,6 +71,10 @@ function MonthlyCalorie() {
 
   const [points, setPoints] = useState([]);
 
+
+  /**
+   *  waits for the data to be fetched 
+   */
   useEffect(() => {
     // declare the data fetching function
     const fetchData = async () => {
