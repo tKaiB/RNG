@@ -6,6 +6,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 
+/**
+ * 
+ * @global NavBar when user is not signed in 
+ */
+
 export default function NavBar() {
   const navigate = useNavigate();
   return (

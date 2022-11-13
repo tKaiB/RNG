@@ -19,6 +19,11 @@ import { CallToActionSharp } from "@material-ui/icons";
 import { connectStorageEmulator } from "firebase/storage";
 import { sendSignInLinkToEmail } from "firebase/auth";
 
+  /**
+   * @global
+   */
+
+
 const recipeController = React.createContext();
 
 export const recipeContextProvider = ({ children }) => {

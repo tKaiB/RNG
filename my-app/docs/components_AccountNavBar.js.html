@@ -1,4 +1,32 @@
-import * as React from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/AccountNavBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/AccountNavBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -68,8 +96,8 @@ const ResponsiveAppBar = () => {
   }, [user]);
 
   return (
-    <Box sx={{ flexGrow: 1, fontFamily: "Inter" }}>
-      <AppBar
+    &lt;Box sx={{ flexGrow: 1, fontFamily: "Inter" }}>
+      &lt;AppBar
         position="static"
         sx={{
           backgroundColor: "aliceblue",
@@ -79,16 +107,16 @@ const ResponsiveAppBar = () => {
           //fontFamily: "'Times New Roman', Times, serif",
         }}
       >
-        <Toolbar>
-          <Typography
+        &lt;Toolbar>
+          &lt;Typography
             variant="h5"
             component={Link}
             to="/account"
             sx={{ flexGrow: 1, color: "black", textDecoration: "none" }}
           >
             RNG
-          </Typography>
-          <Typography
+          &lt;/Typography>
+          &lt;Typography
             variant="h6"
             component={Link}
             to="/accountaboutus"
@@ -101,8 +129,8 @@ const ResponsiveAppBar = () => {
             }}
           >
             About Us
-          </Typography>
-          <Typography
+          &lt;/Typography>
+          &lt;Typography
             variant="h6"
             component={Link}
             to="/accountfaq"
@@ -115,15 +143,15 @@ const ResponsiveAppBar = () => {
             }}
           >
             FAQ
-          </Typography>
+          &lt;/Typography>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Avatar" src={photoURL} />
-              </IconButton>
-            </Tooltip>
-            <Menu
+          &lt;Box sx={{ flexGrow: 0 }}>
+            &lt;Tooltip title="Open settings">
+              &lt;IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                &lt;Avatar alt="Avatar" src={photoURL} />
+              &lt;/IconButton>
+            &lt;/Tooltip>
+            &lt;Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -139,23 +167,46 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem component={Link} to="/profile">
+              &lt;MenuItem component={Link} to="/profile">
                 Profile
-              </MenuItem>
-              <MenuItem component={Link} to="/signin" onClick={handleLogout}>
+              &lt;/MenuItem>
+              &lt;MenuItem component={Link} to="/signin" onClick={handleLogout}>
                 {" "}
                 Logout
-              </MenuItem>
+              &lt;/MenuItem>
               {/* {settings.map((setting) => (
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                &lt;MenuItem onClick={handleCloseUserMenu}>
+                  &lt;Typography textAlign="center">{setting}&lt;/Typography>
+                &lt;/MenuItem>
               ))} */}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            &lt;/Menu>
+          &lt;/Box>
+        &lt;/Toolbar>
+      &lt;/AppBar>
+    &lt;/Box>
   );
 };
 export default ResponsiveAppBar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Aboutus">Aboutus</a></li><li><a href="global.html#Account">Account</a></li><li><a href="global.html#AccountAboutus">AccountAboutus</a></li><li><a href="global.html#AccountFaq">AccountFaq</a></li><li><a href="global.html#AuthContextProvider">AuthContextProvider</a></li><li><a href="global.html#BMI">BMI</a></li><li><a href="global.html#BMIController">BMIController</a></li><li><a href="global.html#calorieCounterController">calorieCounterController</a></li><li><a href="global.html#CalorieIntake">CalorieIntake</a></li><li><a href="global.html#DynamicRecipeGenerator">DynamicRecipeGenerator</a></li><li><a href="global.html#EditProfile">EditProfile</a></li><li><a href="global.html#exports">exports</a></li><li><a href="global.html#FAQ">FAQ</a></li><li><a href="global.html#ForgetPassword">ForgetPassword</a></li><li><a href="global.html#MonthlyBMI">MonthlyBMI</a></li><li><a href="global.html#MonthlyCalorie">MonthlyCalorie</a></li><li><a href="global.html#profilePageController">profilePageController</a></li><li><a href="global.html#recipeController">recipeController</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#SideBar">SideBar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UserProfile">UserProfile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Nov 13 2022 17:55:55 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

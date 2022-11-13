@@ -11,6 +11,11 @@ import AnalyticsIcon from "@mui/icons-material/Analytics";
 import { Link, useNavigate } from "react-router-dom";
 import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
 
+/**
+ * 
+ * @global SideBarUI
+ */
+
 function SideBar() {
   const [view, setView] = React.useState();
 

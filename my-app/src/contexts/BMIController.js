@@ -15,6 +15,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
+  /**
+   * @global
+   */
 
 const BMIController = React.createContext();
 

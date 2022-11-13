@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/Faq.js</title>
+    <title>JSDoc: Source: components/AccountFaq.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/Faq.js</h1>
+    <h1 class="page-title">Source: components/AccountFaq.js</h1>
 
     
 
@@ -27,18 +27,19 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import NavBar from "../components/Navbar";
-import "./styles.css";
-
+import AccountNavBar from "./AccountNavBar";
+import "../pages/styles.css";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 /**
- *
- * @returns {JSX} - FAQ page
+ * 
+ * @global FAQ when signed in 
  */
 
-function FAQ() {
+function AccountFaq() {
   return (
     &lt;div style={{ fontFamily: "Inter" }}>
-      &lt;NavBar />
+      &lt;AccountNavBar />
       &lt;div class="container">
         &lt;h2 class="faq-heading">Frequently asked questions&lt;/h2>
         &lt;p>Answers to frequently asked questions can be found here.&lt;/p>
@@ -91,13 +92,32 @@ function FAQ() {
         &lt;p class="faq-aftertext">
           If you cannot find answer to your question in our FAQ, you can always
           contact us at 1800-we-need-help. We will answer shortly!
+          &lt;Button
+            color="inherit"
+            component={Link}
+            to="/account"
+            style={{
+              display: "flex",
+              backgroundColor: "deepskyblue",
+              borderRadius: "25px",
+              color: "white",
+              //fontFamily: "'Courier New', Courier, monospace",
+              fontSize: "1rem",
+              alignItems: "center",
+              padding: "0.5rem 1rem",
+              border: "none",
+              margin: "1rem",
+            }}
+          >
+            Back
+          &lt;/Button>
         &lt;/p>
       &lt;/div>
     &lt;/div>
   );
 }
 
-export default FAQ;
+export default AccountFaq;
 </code></pre>
         </article>
     </section>

@@ -14,6 +14,9 @@ import {
   getDoc
 } from "firebase/firestore";
 import { db } from "../firebase";
+  /**
+   * @global
+   */
 
 
 const calorieCounterController = React.createContext();

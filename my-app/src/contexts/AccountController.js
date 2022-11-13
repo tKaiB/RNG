@@ -12,6 +12,9 @@ import {
 } from "firebase/auth";
 
 const UserContext = React.createContext();
+  /**
+   * @global Account Controller
+   */
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});

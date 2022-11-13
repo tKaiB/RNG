@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/AccountAboutus.js</title>
+    <title>JSDoc: Source: components/Sidebar.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/AccountAboutus.js</h1>
+    <h1 class="page-title">Source: components/Sidebar.js</h1>
 
     
 
@@ -26,68 +26,69 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import AccountNavBar from "../components/AccountNavBar";
-import "./styles.css";
-import SideBar from "../components/Sidebar";
-import { Grid } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+            <pre class="prettyprint source linenums"><code>import * as React from "react";
+import Grid from "@mui/material/Grid";
+import HomeIcon from "@mui/icons-material/Home";
+import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import List from "@mui/material/List";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import InputIcon from "@mui/icons-material/Input";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import { Link, useNavigate } from "react-router-dom";
+import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
+
 /**
- *
- * @returns {JSX} - FAQ page
+ * 
+ * @global SideBarUI
  */
-function AccountAboutus() {
+
+function SideBar() {
+  const [view, setView] = React.useState();
+
+  // const handleChange = (event, nextView) => {
+  //   setView(nextView);
+  // };
   return (
-    &lt;div style={{ fontFamily: "Inter" }}>
-      &lt;div>
-        &lt;AccountNavBar />
-      &lt;/div>
-      &lt;div class="about-section">
-        &lt;h1>About Us&lt;/h1>
-        &lt;p>
-          We are a group of students from the Nanyang Technological University
-          who are aiming to provide an application for health conscious people
-          to find recipes that suit their individual health needs as well as
-          healthier food choices available in Singapore for citizens.
-        &lt;/p>
-      &lt;/div>
-      &lt;div class="Our-Team">
-        &lt;h2>Our Team&lt;/h2>
-        &lt;p>JAIN SHIKHAR - Year 2 Computer Science Undergraduate&lt;/p>
-        &lt;p>LIM ZI SUAN - Year 2 Computer Science Undergraduate&lt;/p>
-        &lt;p>VIGNESH EZHIL - Year 2 Computer Science Undergraduate&lt;/p>
-        &lt;p>EVA LIM LITING - Year 3 Computer Science Undergraduate&lt;/p>
-        &lt;p>
-          REMELIA SHIRLLEY JOHN BENEDICT - Year 3 Computer Engineering
-          Undergraduate
-        &lt;/p>
-        &lt;p>Tan Kai Boon - Year 2 Computer Science Undergraduate&lt;/p>
-        &lt;Button
-          color="inherit"
-          component={Link}
-          to="/account"
-          style={{
-            display: "flex",
-            backgroundColor: "deepskyblue",
-            borderRadius: "25px",
-            color: "white",
-            //fontFamily: "'Courier New', Courier, monospace",
-            fontSize: "1rem",
-            alignItems: "center",
-            padding: "0.5rem 1rem",
-            border: "none",
-            margin: "1rem",
-          }}
-        >
-          Back
-        &lt;/Button>
-      &lt;/div>
-    &lt;/div>
+    &lt;Grid style={{ fontFamily: "Inter" }}>
+      &lt;ToggleButtonGroup
+        orientation="vertical"
+        value={view}
+        exclusive
+        // onChange={handleChange}
+        fullWidth
+      >
+        &lt;ToggleButton component={Link} to="/account" value="Home">
+          &lt;HomeIcon />
+          Home
+        &lt;/ToggleButton>
+        &lt;ToggleButton component={Link} to="/CalorieIntake" value="Calorie Intake">
+          &lt;InputIcon />
+          Calorie Intake
+        &lt;/ToggleButton>
+        &lt;ToggleButton component={Link} to="/monthlycaloriechart" value="Calorie Chart">
+          &lt;AnalyticsIcon />
+          Calorie Chart
+        &lt;/ToggleButton>
+        &lt;ToggleButton component={Link} to="/BmiInput" value="BMI Input">
+          &lt;InputIcon />
+          BMI Input
+        &lt;/ToggleButton>
+        &lt;ToggleButton component={Link} to="/monthlybmichart" value="BMI Chart">
+          &lt;AnalyticsIcon />
+          BMI Chart
+        &lt;/ToggleButton>
+        &lt;ToggleButton component={Link} to="/dynamic" value="DynamicRecipeGenerator">
+          &lt;FormatListNumberedIcon />
+          Recipe Generator
+        &lt;/ToggleButton>
+
+      &lt;/ToggleButtonGroup>
+    &lt;/Grid>
   );
 }
-
-export default AccountAboutus;
+export default SideBar;
 </code></pre>
         </article>
     </section>
